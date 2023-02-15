@@ -108,14 +108,17 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnClienteNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteNuevoActionPerformed
+        this.setVisible(false);
         new RegistrarCliente();
     }//GEN-LAST:event_btnClienteNuevoActionPerformed
 
     private void btnSoyClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSoyClienteActionPerformed
+        this.setVisible(false);
         new OperacionCliente();
     }//GEN-LAST:event_btnSoyClienteActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.setVisible(false);
         new RetirarSinCuenta();
     }//GEN-LAST:event_jButton1ActionPerformed
 
