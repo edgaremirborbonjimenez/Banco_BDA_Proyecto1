@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package presentacion.NuevoCliente;
+package presentacion;
 
-import presentacion.NuevoCliente.CrearContraseña;
+import presentacion.CrearContrasena;
 
 /**
  *
@@ -46,16 +46,16 @@ public class RegistrarCliente extends javax.swing.JFrame {
         btnRestaurar = new javax.swing.JButton();
         btnAceptar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jSpinner2 = new javax.swing.JSpinner();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
+        labelFechaNacimiento = new javax.swing.JLabel();
+        spinnerDia = new javax.swing.JSpinner();
+        labelDia = new javax.swing.JLabel();
+        labelMes = new javax.swing.JLabel();
+        spinnerMes = new javax.swing.JSpinner();
+        txtAno = new javax.swing.JTextField();
+        labelAno = new javax.swing.JLabel();
         labelDatosPersonales = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        labelTelefono = new javax.swing.JLabel();
+        txtTelefono = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registrar Cliente");
@@ -143,43 +143,43 @@ public class RegistrarCliente extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Fecha de Nacimiento");
+        labelFechaNacimiento.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        labelFechaNacimiento.setForeground(new java.awt.Color(255, 255, 255));
+        labelFechaNacimiento.setText("Fecha de Nacimiento");
 
-        jSpinner1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(1, 1, 31, 1));
+        spinnerDia.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        spinnerDia.setModel(new javax.swing.SpinnerNumberModel(1, 1, 31, 1));
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Día");
+        labelDia.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        labelDia.setForeground(new java.awt.Color(255, 255, 255));
+        labelDia.setText("Día");
 
-        jLabel3.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Mes");
+        labelMes.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        labelMes.setForeground(new java.awt.Color(255, 255, 255));
+        labelMes.setText("Mes");
 
-        jSpinner2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jSpinner2.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
-        jSpinner2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jSpinner2.setFocusable(false);
+        spinnerMes.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        spinnerMes.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
+        spinnerMes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        spinnerMes.setFocusable(false);
 
-        jTextField4.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jTextField4.setText("2002");
+        txtAno.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        txtAno.setText("2002");
 
-        jLabel4.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Año");
+        labelAno.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        labelAno.setForeground(new java.awt.Color(255, 255, 255));
+        labelAno.setText("Año");
 
         labelDatosPersonales.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         labelDatosPersonales.setForeground(new java.awt.Color(255, 255, 255));
         labelDatosPersonales.setText("Datos Personales");
 
-        jLabel5.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Telefono");
+        labelTelefono.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        labelTelefono.setForeground(new java.awt.Color(255, 255, 255));
+        labelTelefono.setText("Telefono");
 
-        jTextField1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jTextField1.setText("6441942558");
+        txtTelefono.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        txtTelefono.setText("6441942558");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -189,16 +189,16 @@ public class RegistrarCliente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelDomicilio)
-                    .addComponent(jLabel1)
+                    .addComponent(labelFechaNacimiento)
                     .addComponent(labelDatosPersonales)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelNombre)
-                            .addComponent(jLabel5))
+                            .addComponent(labelTelefono))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -210,17 +210,17 @@ public class RegistrarCliente extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(txtApellidoPaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(labelDia)
                         .addGap(18, 18, 18)
-                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(spinnerDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel3)
+                        .addComponent(labelMes)
                         .addGap(18, 18, 18)
-                        .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(spinnerMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel4)
+                        .addComponent(labelAno)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -262,18 +262,18 @@ public class RegistrarCliente extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelApellidoMaterno)
                     .addComponent(txtApellidoMaterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelTelefono)
+                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1)
+                .addComponent(labelFechaNacimiento)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelDia)
+                    .addComponent(spinnerDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelMes)
+                    .addComponent(spinnerMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelAno)
+                    .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(labelDomicilio)
                 .addGap(18, 18, 18)
@@ -317,7 +317,7 @@ public class RegistrarCliente extends javax.swing.JFrame {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         this.setVisible(false);
-        new CrearContraseña();
+        new CrearContrasena();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -334,29 +334,29 @@ public class RegistrarCliente extends javax.swing.JFrame {
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnRestaurar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JSpinner jSpinner2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JLabel labelAno;
     private javax.swing.JLabel labelApellidoMaterno;
     private javax.swing.JLabel labelApellidoPaterno;
     private javax.swing.JLabel labelCalle;
     private javax.swing.JLabel labelColonia;
     private javax.swing.JLabel labelDatosPersonales;
+    private javax.swing.JLabel labelDia;
     private javax.swing.JLabel labelDomicilio;
+    private javax.swing.JLabel labelFechaNacimiento;
+    private javax.swing.JLabel labelMes;
     private javax.swing.JLabel labelNombre;
     private javax.swing.JLabel labelNumero;
+    private javax.swing.JLabel labelTelefono;
+    private javax.swing.JSpinner spinnerDia;
+    private javax.swing.JSpinner spinnerMes;
+    private javax.swing.JTextField txtAno;
     private javax.swing.JTextField txtApellidoMaterno;
     private javax.swing.JTextField txtApellidoPaterno;
     private javax.swing.JTextField txtCalle;
     private javax.swing.JTextField txtColonia;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtNumero;
+    private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }

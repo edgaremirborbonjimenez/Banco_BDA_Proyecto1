@@ -4,7 +4,7 @@
 * 
 */ 
 
-package presentacion.SoyCliente;
+package presentacion;
 
 import presentacion.Menu;
 import javax.swing.JOptionPane;

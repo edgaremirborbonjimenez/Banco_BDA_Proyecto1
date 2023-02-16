@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package presentacion.NuevoCliente;
+package presentacion;
 
 /**
  *
  * @author Usuario
  */
-public class CrearContraseña extends javax.swing.JFrame {
+public class CrearContrasena extends javax.swing.JFrame {
 
     /**
      * Creates new form CrearContraseña
      */
-    public CrearContraseña() {
+    public CrearContrasena() {
         initComponents();
         this.setVisible(true);
     }

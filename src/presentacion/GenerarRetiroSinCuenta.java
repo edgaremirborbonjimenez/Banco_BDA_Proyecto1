@@ -4,7 +4,7 @@
 * 
 */ 
 
-package presentacion.SoyCliente;
+package presentacion;
 
 /**
  * Descripción de la clase: 
