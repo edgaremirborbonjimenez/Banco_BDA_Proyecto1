@@ -126,8 +126,6 @@ public class transferencia extends javax.swing.JFrame {
             new SesionIniciada();
         }else{
         this.setVisible(false);
-        Menu m = new Menu();
-        m.setVisible(true);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
