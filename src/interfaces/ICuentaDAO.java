@@ -1,5 +1,5 @@
 
-package interfazesImplementaciones;
+package interfaces;
 
 import dominio.Cuenta;
 import dominio.Movimiento;

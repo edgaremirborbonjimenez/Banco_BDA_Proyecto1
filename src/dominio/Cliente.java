@@ -22,7 +22,6 @@ public class Cliente {
     private LocalDate fechaNacimiento;
     private String celular;
     private String contrasena;
-    private int edad;
 
     public Cliente(Integer id, String nombre, String apellidoPaterno, 
             String apellidoMaterno, LocalDate fechaNacimiento, String celular, 
@@ -45,10 +44,6 @@ public class Cliente {
         this.apellidoMaterno = apellidoMaterno;
         this.fechaNacimiento = fechaNacimiento;
         this.celular = celular;
-    }
-    
-    public void calcularEdad(LocalDate fechaNacimiento){
-        
     }
     
     public Integer getId() {
