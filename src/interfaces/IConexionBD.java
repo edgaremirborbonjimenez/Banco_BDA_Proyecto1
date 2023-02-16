@@ -1,16 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
+/**
+* IConexionBD.java
+* 15-feb-2023 19:44:08
+*/ 
+
 package interfaces;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-
 /**
+ * Descripción de la interface: 
  *
- * @author Edgar Emir Borbon Jimenez 00000233184
+ * @author Daniel Armando Peña Garcia ID:229185
  */
 public interface IConexionBD {
-    Connection crearConexion() throws SQLException;
+
 }

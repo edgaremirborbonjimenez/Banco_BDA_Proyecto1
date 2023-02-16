@@ -2,16 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/trinu/Documents/GIT/BDA_Banco_Proyecto1/src/interfaces/Menu.java</file>
-            <file>file:/C:/Users/trinu/Documents/GIT/BDA_Banco_Proyecto1/src/interfaces/SoyCliente/OperacionCliente.java</file>
-            <file>file:/C:/Users/trinu/Documents/GIT/BDA_Banco_Proyecto1/src/interfaces/NuevoCliente/RegistrarCliente.java</file>
-            <file>file:/C:/Users/trinu/Documents/GIT/BDA_Banco_Proyecto1/src/interfaces/NuevoCliente/CrearContraseña.java</file>
-            <file>file:/C:/Users/trinu/Documents/GIT/BDA_Banco_Proyecto1/src/interfaces/RetirarSinCuenta.java</file>
-            <file>file:/C:/Users/trinu/Documents/GIT/BDA_Banco_Proyecto1/src/interfaces/SoyCliente/transferencia.java</file>
-            <file>file:/C:/Users/trinu/Documents/GIT/BDA_Banco_Proyecto1/src/interfaces/SoyCliente/GenerarRetiroSinCuenta.java</file>
-            <file>file:/C:/Users/trinu/Documents/GIT/BDA_Banco_Proyecto1/src/interfaces/SoyCliente/SesionIniciada.java</file>
-            <file>file:/C:/Users/trinu/Documents/GIT/BDA_Banco_Proyecto1/src/interfaces/SoyCliente/HistorialMovimientosCuenta.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
