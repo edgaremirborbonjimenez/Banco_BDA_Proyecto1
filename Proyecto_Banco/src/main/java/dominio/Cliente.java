@@ -11,7 +11,7 @@ import java.time.LocalDate;
 /**
  * Descripción de la clase: 
  * 
- * @author Daniel Armando Peña Garcia ID:229185
+ * @author Edgar Emir Borbon Jimenez
  */
 public class Cliente {
     
