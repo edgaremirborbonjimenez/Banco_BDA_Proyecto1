@@ -115,7 +115,7 @@ public class ClienteDAO implements IClienteDAO {
     }
 
     @Override
-    public int actualizarFechaNacimientoCliente(Integer id, String fechaNacimiento) throws PersistenciaException {
+    public int actualizarFechaNacimiento(Integer id, String fechaNacimiento) throws PersistenciaException {
         String update = "UPDATE CLIENTES "
                 + "SET fechaNacimiento = ?"
                 + "WHERE id = ?";
@@ -132,7 +132,7 @@ public class ClienteDAO implements IClienteDAO {
     }
 
     @Override
-    public int actualizarCelularCliente(Integer id, String celular) throws PersistenciaException {
+    public int actualizarCelular(Integer id, String celular) throws PersistenciaException {
         String update = "UPDATE CLIENTES "
                 + "SET celular = ?"
                 + "WHERE id = ?";
@@ -149,7 +149,7 @@ public class ClienteDAO implements IClienteDAO {
     }
 
     @Override
-    public int actualizarContrasenaCliente(Integer id, String contrasena) throws PersistenciaException {
+    public int actualizarContrasena(Integer id, String contrasena) throws PersistenciaException {
         String update = "UPDATE CLIENTES "
                 + "SET contraseña = ?"
                 + "WHERE id = ?";
