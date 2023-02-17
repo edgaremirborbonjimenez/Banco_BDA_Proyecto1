@@ -4,16 +4,21 @@
  */
 package presentacion;
 
+import java.awt.Frame;
+
 /**
  *
  * @author trinu
  */
 public class HistorialMovimientosCuenta extends javax.swing.JFrame {
 
+    Frame sesionIniciada;
+    
     /**
      * Creates new form HistorialMovimientosCuenta
      */
-    public HistorialMovimientosCuenta() {
+    public HistorialMovimientosCuenta(Frame sesionIniciada) {
+        this.sesionIniciada = sesionIniciada;
         initComponents();
         this.setVisible(true);
     }
@@ -143,7 +148,8 @@ public class HistorialMovimientosCuenta extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
+        sesionIniciada.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

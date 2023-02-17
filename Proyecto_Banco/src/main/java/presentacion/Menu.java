@@ -47,6 +47,7 @@ public class Menu extends javax.swing.JFrame {
 
         btnSoyCliente.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         btnSoyCliente.setText("Ingresar");
+        btnSoyCliente.setFocusPainted(false);
         btnSoyCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSoyClienteActionPerformed(evt);
@@ -78,12 +79,12 @@ public class Menu extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnSoyCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnClienteNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 280, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,12 +119,10 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnClienteNuevoActionPerformed
 
     private void btnSoyClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSoyClienteActionPerformed
-        this.setVisible(false);
-        new OperacionCliente();
+        OperacionCliente operacion = new OperacionCliente(this);
     }//GEN-LAST:event_btnSoyClienteActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.setVisible(false);
         new RetirarSinCuenta();
     }//GEN-LAST:event_jButton1ActionPerformed
 

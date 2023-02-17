@@ -6,7 +6,7 @@
 
 package presentacion;
 
-import presentacion.Menu;
+import java.awt.Frame;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,8 +16,11 @@ import javax.swing.JOptionPane;
  */
 public class transferencia extends javax.swing.JFrame {
 
+    Frame frame;
+    
     /** Creates new form transferencia */
-    public transferencia() {
+    public transferencia(Frame frame) {
+        this.frame = frame;
         initComponents();
         this.setVisible(true);
     }
@@ -122,8 +125,8 @@ public class transferencia extends javax.swing.JFrame {
         // TODO add your handling code here:
         int op= JOptionPane.showConfirmDialog(this, "Quiere hacer alguna otra operacion","Alerta" ,0);
         if (op==JOptionPane.YES_OPTION){
-            this.setVisible(false);
-            new SesionIniciada();
+            frame.setVisible(true);
+            dispose();
         }else{
         this.setVisible(false);
         }
@@ -131,9 +134,8 @@ public class transferencia extends javax.swing.JFrame {
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
-        SesionIniciada s = new SesionIniciada();
-        s.setVisible(true);
+        dispose();
+        frame.setVisible(true);
     }//GEN-LAST:event_btnAtrasActionPerformed
 
 
