@@ -4,7 +4,8 @@
  */
 package presentacion;
 
-import interfazesImplementaciones.*;
+import interfaces.*;
+import interfazesImplementaciones.IClienteDAO;
 
 /**
  *

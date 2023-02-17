@@ -8,6 +8,7 @@ import implementaciones.ConexionBD;
 import interfazesImplementaciones.*;
 import implementaciones.*;
 import presentacion.Menu;
+import interfaces.ICuentaDAO;
 
 /**
  *
@@ -20,7 +21,7 @@ public class main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        IConexionBD bd = new ConexionBD("jdbc:mysql://localhost/activitas_ecologicos", "root", "bone770115");
+        IConexionBD bd = new ConexionBD("jdbc:mysql://localhost/banco", "root", "bone770115");
         IClienteDAO clienteDao = new ClienteDAO(bd);
         ICuentaDAO cuentaDao = new CuentaDAO(bd);
         Menu menu = new Menu(clienteDao,cuentaDao);

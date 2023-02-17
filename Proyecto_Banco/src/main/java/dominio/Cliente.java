@@ -24,10 +24,6 @@ public class Cliente {
     private String contrasena;
     private int edad;
 
-    @Override
-    public String toString() {
-        return super.toString(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
-    }
     
 
     public Cliente(Integer id, String nombre, String apellidoPaterno, 
