@@ -15,30 +15,27 @@ import java.time.LocalDate;
 public class Transferencia extends Movimiento {
 
     private Integer id;
-    private String idCuentaSalida;
     private String idCuentaEntrada;
     private double monto;
 
     public Transferencia(Integer id, String idCuentaSalida,
-            String idCuentaEntrada, double monto, LocalDate fecha,
-            String idCuenta) {
+            String idCuentaEntrada, double monto, String fecha) {
         
-        super(idCuenta, fecha);
+        super(idCuentaSalida, fecha);
         
         this.id = id;
-        this.idCuentaSalida = idCuentaSalida;
         this.idCuentaEntrada = idCuentaEntrada;
         this.monto = monto;
     }
 
     public Transferencia(String idCuentaSalida, String idCuentaEntrada, 
-            double monto, String idCuenta, LocalDate fecha) {
-        super(idCuenta, fecha);
+            double monto, String fecha) {
+        super(idCuentaSalida, fecha);
         
-        this.idCuentaSalida = idCuentaSalida;
         this.idCuentaEntrada = idCuentaEntrada;
         this.monto = monto;
     }
+    
 
     public Integer getId() {
         return id;
@@ -48,13 +45,7 @@ public class Transferencia extends Movimiento {
         this.id = id;
     }
 
-    public String getIdCuentaSalida() {
-        return idCuentaSalida;
-    }
 
-    public void setIdCuentaSalida(String idCuentaSalida) {
-        this.idCuentaSalida = idCuentaSalida;
-    }
 
     public String getIdCuentaEntrada() {
         return idCuentaEntrada;

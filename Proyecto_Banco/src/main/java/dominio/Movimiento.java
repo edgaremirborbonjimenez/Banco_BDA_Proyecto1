@@ -16,12 +16,29 @@ import java.time.LocalDate;
 public class Movimiento {
     
     private String idCuenta;
-    private LocalDate fecha;
+    private String fecha;
 
-    public Movimiento(String idCuenta, LocalDate fecha) {
+    public Movimiento(String idCuenta, String fecha) {
         this.idCuenta = idCuenta;
         this.fecha = fecha;
     }
+
+    public String getIdCuenta() {
+        return idCuenta;
+    }
+
+    public void setIdCuenta(String idCuenta) {
+        this.idCuenta = idCuenta;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+    
     
     
     

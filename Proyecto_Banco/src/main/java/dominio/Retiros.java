@@ -17,15 +17,15 @@ public class Retiros extends Movimiento {
     private Integer id;
     private String idCuenta;
     private double monto;
-    private LocalDate fechaGenerada;
+    private String fechaGenerada;
     private String folio;
     private String contrasena;
     private String disponible;
-    private LocalDate fechaRetirado;
+    private String fechaRetirado;
 
     public Retiros(Integer id, String idCuenta, double monto, String folio,
-            String contrasena, String disponible, LocalDate fechaRetirado,
-            LocalDate fechaGenerada) {
+            String contrasena, String disponible, String fechaRetirado,
+            String fechaGenerada) {
 
         super(idCuenta, fechaRetirado);
         this.id = id;
@@ -39,8 +39,8 @@ public class Retiros extends Movimiento {
     }
 
     public Retiros(String idCuenta, double monto, String folio, 
-            String contrasena, String disponible, LocalDate fechaRetirado, 
-            LocalDate fechaGenerada) {
+            String contrasena, String disponible, String fechaRetirado, 
+            String fechaGenerada) {
         
         super(idCuenta, fechaRetirado);
         this.idCuenta = idCuenta;
@@ -76,11 +76,11 @@ public class Retiros extends Movimiento {
         this.monto = monto;
     }
 
-    public LocalDate getFechaGenerada() {
+    public String getFechaGenerada() {
         return fechaGenerada;
     }
 
-    public void setFechaGenerada(LocalDate fechaGenerada) {
+    public void setFechaGenerada(String fechaGenerada) {
         this.fechaGenerada = fechaGenerada;
     }
 
@@ -108,11 +108,11 @@ public class Retiros extends Movimiento {
         this.disponible = disponible;
     }
 
-    public LocalDate getFechaRetirado() {
+    public String getFechaRetirado() {
         return fechaRetirado;
     }
 
-    public void setFechaRetirado(LocalDate fechaRetirado) {
+    public void setFechaRetirado(String fechaRetirado) {
         this.fechaRetirado = fechaRetirado;
     }
 
