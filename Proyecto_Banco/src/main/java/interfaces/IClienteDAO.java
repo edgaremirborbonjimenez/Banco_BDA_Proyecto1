@@ -15,7 +15,10 @@ import excepciones.PersistenciaException;
 public interface IClienteDAO {
 
     Cliente registrarCliente(Cliente cliente) throws PersistenciaException;
-    Cliente iniciaCliente(Cliente cliente) throws PersistenciaException;
-    Cliente actualizarCliente(Cliente cliente) throws PersistenciaException;
+    Cliente iniciaCliente(String telefono, String contrasena) throws PersistenciaException;
+    Cliente actualizarNombreCliente(String nombre, String apellidoP, String apellidoM) throws PersistenciaException;
+    Cliente actualizarFechaNacimiento(String fechaNacimiento) throws PersistenciaException;
+    Cliente actualizarCelular(String celular) throws PersistenciaException;
+    Cliente actualizarContrasena(String contrasena) throws PersistenciaException;
     
 }

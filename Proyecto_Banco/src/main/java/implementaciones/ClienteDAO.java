@@ -41,7 +41,6 @@ public class ClienteDAO implements IClienteDAO {
 
         Cliente regresaCliente = null;
         try (
-                
                 Connection conexion = generadorConexiones.crearConexion(); PreparedStatement comando
                 = conexion.prepareStatement(insert,
                         Statement.RETURN_GENERATED_KEYS);) {
@@ -72,13 +71,98 @@ public class ClienteDAO implements IClienteDAO {
     }
 
     @Override
-    public Cliente iniciaCliente(Cliente cliente) throws PersistenciaException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Cliente iniciaCliente(String telefono, String contrasena) throws PersistenciaException {
+        String consulta = "SELECT *"
+                + " FROM clientes "
+                + "WHERE celular = ?";
+        try (
+                Connection conexion = generadorConexiones.crearConexion(); PreparedStatement comando = conexion.prepareStatement(consulta);) {
+            comando.setString(1, telefono);
+            ResultSet resultado = comando.executeQuery();
+            if (resultado.next()) {
+                Integer id = resultado.getInt("id");
+                String nombre = resultado.getString("nombre");
+                String apellidoP = resultado.getString("apellidoP");
+                String apellidoM = resultado.getString("apellidoM");
+                String fechaNacimiento = resultado.getString("fechaNacimiento");
+                Cliente cliente = new Cliente(id, nombre, apellidoP, apellidoM, fechaNacimiento, telefono, contrasena);
+                return cliente;
+            }
+            LOG.log(Level.WARNING, "Alguno de los datos está incorrecto");
+        } catch (SQLException e) {
+            LOG.log(Level.SEVERE, e.getMessage());
+        }
+        return null;
     }
 
     @Override
-    public Cliente actualizarCliente(Cliente cliente) throws PersistenciaException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public int actualizarNombreCliente(Integer id, String nombre, String apellidoP, String apellidoM) throws PersistenciaException {
+        String update = "UPDATE CLIENTES "
+                + "SET NOMBRE = ?, ApellidoP = ?, ApellidoM = ? "
+                + "WHERE id = ?";
+        try (
+                Connection conexion = generadorConexiones.crearConexion(); PreparedStatement comando = conexion.prepareStatement(update);) {
+            comando.setString(1, nombre);
+            comando.setString(2, apellidoP);
+            comando.setString(3, apellidoP);
+            comando.setInt(4, id);
+            int afectados = comando.executeUpdate();
+            return afectados;
+        } catch (SQLException e) {
+            LOG.log(Level.SEVERE, e.getMessage());
+        }
+        return 0;
+    }
+
+    @Override
+    public int actualizarFechaNacimientoCliente(Integer id, String fechaNacimiento) throws PersistenciaException {
+        String update = "UPDATE CLIENTES "
+                + "SET fechaNacimiento = ?"
+                + "WHERE id = ?";
+        try (
+                Connection conexion = generadorConexiones.crearConexion(); PreparedStatement comando = conexion.prepareStatement(update);) {
+            comando.setString(1, fechaNacimiento);
+            comando.setInt(2, id);
+            int afectados = comando.executeUpdate();
+            return afectados;
+        } catch (SQLException e) {
+            LOG.log(Level.SEVERE, e.getMessage());
+        }
+        return 0;
+    }
+
+    @Override
+    public int actualizarCelularCliente(Integer id, String celular) throws PersistenciaException {
+        String update = "UPDATE CLIENTES "
+                + "SET celular = ?"
+                + "WHERE id = ?";
+        try (
+                Connection conexion = generadorConexiones.crearConexion(); PreparedStatement comando = conexion.prepareStatement(update);) {
+            comando.setString(1, celular);
+            comando.setInt(2, id);
+            int afectados = comando.executeUpdate();
+            return afectados;
+        } catch (SQLException e) {
+            LOG.log(Level.SEVERE, e.getMessage());
+        }
+        return 0;
+    }
+
+    @Override
+    public int actualizarContrasenaCliente(Integer id, String contrasena) throws PersistenciaException {
+        String update = "UPDATE CLIENTES "
+                + "SET contraseña = ?"
+                + "WHERE id = ?";
+        try (
+                Connection conexion = generadorConexiones.crearConexion(); PreparedStatement comando = conexion.prepareStatement(update);) {
+            comando.setString(1, contrasena);
+            comando.setInt(2, id);
+            int afectados = comando.executeUpdate();
+            return afectados;
+        } catch (SQLException e) {
+            LOG.log(Level.SEVERE, e.getMessage());
+        }
+        return 0;
     }
 
 }

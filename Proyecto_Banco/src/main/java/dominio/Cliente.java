@@ -25,7 +25,7 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return super.toString(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+        return "Cliente{" + "id=" + id + ", nombre=" + nombre + ", apellidoPaterno=" + apellidoPaterno + ", apellidoMaterno=" + apellidoMaterno + ", fechaNacimiento=" + fechaNacimiento + ", celular=" + celular + ", contrasena=" + contrasena + ", edad=" + edad + '}';
     }
 
     public Cliente() {
@@ -54,6 +54,8 @@ public class Cliente {
         this.celular = celular;
         this.contrasena = contrasena;
     }
+    
+    
     
     public void calcularEdad(String fechaNacimiento){
         
