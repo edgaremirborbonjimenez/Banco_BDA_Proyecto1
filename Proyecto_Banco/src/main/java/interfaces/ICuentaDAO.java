@@ -1,5 +1,5 @@
 
-package interfaces;
+package interfazesImplementaciones;
 
 import dominio.Cuenta;
 import dominio.Movimiento;
@@ -15,7 +15,7 @@ import java.util.List;
 public interface ICuentaDAO {
 
     List<Cuenta> consultarCuentas() throws PersistenciaException;
-    Transferencia generarTranferencia(Cuenta cuentaUsuario,Cuenta cuentaDestino,double monto) throws PersistenciaException;
+    Transferencia tranferencia() throws PersistenciaException;
     Retiros generarRetiro() throws PersistenciaException;
     List<Movimiento> hisotrialMovimientos()throws PersistenciaException;
 }
