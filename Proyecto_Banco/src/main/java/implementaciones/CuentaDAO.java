@@ -8,8 +8,8 @@ import dominio.Movimiento;
 import dominio.Retiros;
 import dominio.Transferencia;
 import excepciones.PersistenciaException;
-import interfazesImplementaciones.IConexionBD;
-import interfazesImplementaciones.ICuentaDAO;
+import interfaces.IConexionBD;
+import interfaces.ICuentaDAO;
 import java.util.List;
 import java.util.logging.Logger;
 /**
