@@ -6,7 +6,6 @@
 package dominio;
 //importanciones
 
-import java.time.LocalDate;
 
 /**
  * Descripción de la clase: 
@@ -19,7 +18,7 @@ public class Cliente {
     private String nombre;
     private String apellidoPaterno;
     private String apellidoMaterno;
-    private LocalDate fechaNacimiento;
+    private String fechaNacimiento;
     private String celular;
     private String contrasena;
     private int edad;
@@ -28,10 +27,12 @@ public class Cliente {
     public String toString() {
         return super.toString(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
-    
 
+    public Cliente() {
+    }
+    
     public Cliente(Integer id, String nombre, String apellidoPaterno, 
-            String apellidoMaterno, LocalDate fechaNacimiento, String celular, 
+            String apellidoMaterno, String fechaNacimiento, String celular, 
             String contrasena) {
         this.id = id;
         this.nombre = nombre;
@@ -43,17 +44,18 @@ public class Cliente {
     }
 
     public Cliente(String nombre, String apellidoPaterno, 
-            String apellidoMaterno, LocalDate fechaNacimiento, 
-            String celular) {
+            String apellidoMaterno, String fechaNacimiento, 
+            String celular, String contrasena) {
         
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.fechaNacimiento = fechaNacimiento;
         this.celular = celular;
+        this.contrasena = contrasena;
     }
     
-    public void calcularEdad(LocalDate fechaNacimiento){
+    public void calcularEdad(String fechaNacimiento){
         
     }
     
@@ -89,11 +91,11 @@ public class Cliente {
         this.apellidoMaterno = apellidoMaterno;
     }
 
-    public LocalDate getFechaNacimiento() {
+    public String getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+    public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
