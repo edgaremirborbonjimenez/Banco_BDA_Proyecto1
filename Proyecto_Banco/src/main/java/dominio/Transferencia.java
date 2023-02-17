@@ -19,7 +19,7 @@ public class Transferencia extends Movimiento {
     private double monto;
 
     public Transferencia(Integer id, String idCuentaSalida,
-            String idCuentaEntrada, double monto, String fecha) {
+            String idCuentaEntrada, double monto, Long fecha) {
         
         super(idCuentaSalida, fecha);
         
@@ -29,7 +29,7 @@ public class Transferencia extends Movimiento {
     }
 
     public Transferencia(String idCuentaSalida, String idCuentaEntrada, 
-            double monto, String fecha) {
+            double monto, Long fecha) {
         super(idCuentaSalida, fecha);
         
         this.idCuentaEntrada = idCuentaEntrada;

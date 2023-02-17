@@ -16,9 +16,9 @@ import java.time.LocalDate;
 public class Movimiento {
     
     private String idCuenta;
-    private String fecha;
+    private Long fecha;
 
-    public Movimiento(String idCuenta, String fecha) {
+    public Movimiento(String idCuenta, Long fecha) {
         this.idCuenta = idCuenta;
         this.fecha = fecha;
     }
@@ -31,11 +31,11 @@ public class Movimiento {
         this.idCuenta = idCuenta;
     }
 
-    public String getFecha() {
+    public Long getFecha() {
         return fecha;
     }
 
-    public void setFecha(String fecha) {
+    public void setFecha(Long fecha) {
         this.fecha = fecha;
     }
     

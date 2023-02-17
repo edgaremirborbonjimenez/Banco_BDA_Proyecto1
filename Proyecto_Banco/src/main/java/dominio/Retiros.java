@@ -17,15 +17,15 @@ public class Retiros extends Movimiento {
     private Integer id;
     private String idCuenta;
     private double monto;
-    private String fechaGenerada;
-    private String folio;
+    private Long fechaGenerada;
+    private Integer folio;
     private String contrasena;
     private String disponible;
-    private String fechaRetirado;
+    private Long fechaRetirado;
 
-    public Retiros(Integer id, String idCuenta, double monto, String folio,
-            String contrasena, String disponible, String fechaRetirado,
-            String fechaGenerada) {
+    public Retiros(Integer id, String idCuenta, double monto, Integer folio,
+            String contrasena, String disponible, Long fechaRetirado,
+            Long fechaGenerada) {
 
         super(idCuenta, fechaRetirado);
         this.id = id;
@@ -38,9 +38,9 @@ public class Retiros extends Movimiento {
         this.fechaRetirado = fechaRetirado;
     }
 
-    public Retiros(String idCuenta, double monto, String folio, 
-            String contrasena, String disponible, String fechaRetirado, 
-            String fechaGenerada) {
+    public Retiros(String idCuenta, double monto, Integer folio, 
+            String contrasena, String disponible, Long fechaRetirado, 
+            Long fechaGenerada) {
         
         super(idCuenta, fechaRetirado);
         this.idCuenta = idCuenta;
@@ -76,19 +76,19 @@ public class Retiros extends Movimiento {
         this.monto = monto;
     }
 
-    public String getFechaGenerada() {
+    public Long getFechaGenerada() {
         return fechaGenerada;
     }
 
-    public void setFechaGenerada(String fechaGenerada) {
+    public void setFechaGenerada(Long fechaGenerada) {
         this.fechaGenerada = fechaGenerada;
     }
 
-    public String getFolio() {
+    public Integer getFolio() {
         return folio;
     }
 
-    public void setFolio(String folio) {
+    public void setFolio(Integer folio) {
         this.folio = folio;
     }
 
@@ -108,11 +108,11 @@ public class Retiros extends Movimiento {
         this.disponible = disponible;
     }
 
-    public String getFechaRetirado() {
+    public Long getFechaRetirado() {
         return fechaRetirado;
     }
 
-    public void setFechaRetirado(String fechaRetirado) {
+    public void setFechaRetirado(Long fechaRetirado) {
         this.fechaRetirado = fechaRetirado;
     }
 
