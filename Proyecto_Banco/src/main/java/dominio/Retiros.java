@@ -5,6 +5,7 @@
 package dominio;
 //importanciones
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 /**
@@ -17,15 +18,15 @@ public class Retiros extends Movimiento {
     private Integer id;
     private String idCuenta;
     private double monto;
-    private Long fechaGenerada;
+    private Date fechaGenerada;
     private Integer folio;
     private String contrasena;
     private String disponible;
-    private Long fechaRetirado;
+    private Date fechaRetirado;
 
     public Retiros(Integer id, String idCuenta, double monto, Integer folio,
-            String contrasena, String disponible, Long fechaRetirado,
-            Long fechaGenerada) {
+            String contrasena, String disponible, Date fechaRetirado,
+            Date fechaGenerada) {
 
         super(idCuenta, fechaRetirado);
         this.id = id;
@@ -39,8 +40,8 @@ public class Retiros extends Movimiento {
     }
 
     public Retiros(String idCuenta, double monto, Integer folio, 
-            String contrasena, String disponible, Long fechaRetirado, 
-            Long fechaGenerada) {
+            String contrasena, String disponible, Date fechaRetirado, 
+            Date fechaGenerada) {
         
         super(idCuenta, fechaRetirado);
         this.idCuenta = idCuenta;
@@ -76,11 +77,11 @@ public class Retiros extends Movimiento {
         this.monto = monto;
     }
 
-    public Long getFechaGenerada() {
+    public Date getFechaGenerada() {
         return fechaGenerada;
     }
 
-    public void setFechaGenerada(Long fechaGenerada) {
+    public void setFechaGenerada(Date fechaGenerada) {
         this.fechaGenerada = fechaGenerada;
     }
 
@@ -108,11 +109,11 @@ public class Retiros extends Movimiento {
         this.disponible = disponible;
     }
 
-    public Long getFechaRetirado() {
+    public Date getFechaRetirado() {
         return fechaRetirado;
     }
 
-    public void setFechaRetirado(Long fechaRetirado) {
+    public void setFechaRetirado(Date fechaRetirado) {
         this.fechaRetirado = fechaRetirado;
     }
 

@@ -5,6 +5,9 @@
 
 package dominio;
 //importanciones
+
+import java.sql.Date;
+
 /**
  * Descripción de la clase: 
  * 
@@ -12,7 +15,7 @@ package dominio;
  */
 public class Cuenta {
 private String id;
-private String fechaApertura;
+private Date fechaApertura;
 private double saldo;
 private Integer idCliente;
     //Constructor por omisión
@@ -20,7 +23,7 @@ private Integer idCliente;
 
     }
 
-    public Cuenta(String id, String fechaApertura, double saldo, Integer idCliente) {
+    public Cuenta(String id, Date fechaApertura, double saldo, Integer idCliente) {
         this.id = id;
         this.fechaApertura = fechaApertura;
         this.saldo = saldo;
@@ -35,11 +38,11 @@ private Integer idCliente;
         this.id = id;
     }
 
-    public String getFechaApertura() {
+    public Date getFechaApertura() {
         return fechaApertura;
     }
 
-    public void setFechaApertura(String fechaApertura) {
+    public void setFechaApertura(Date fechaApertura) {
         this.fechaApertura = fechaApertura;
     }
 

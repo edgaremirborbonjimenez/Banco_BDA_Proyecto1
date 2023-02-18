@@ -5,6 +5,7 @@
 package dominio;
 //importanciones
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 
@@ -16,9 +17,9 @@ import java.time.LocalDate;
 public class Movimiento {
     
     private String idCuenta;
-    private Long fecha;
+    private Date fecha;
 
-    public Movimiento(String idCuenta, Long fecha) {
+    public Movimiento(String idCuenta, Date fecha) {
         this.idCuenta = idCuenta;
         this.fecha = fecha;
     }
@@ -31,11 +32,11 @@ public class Movimiento {
         this.idCuenta = idCuenta;
     }
 
-    public Long getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(Long fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
     
