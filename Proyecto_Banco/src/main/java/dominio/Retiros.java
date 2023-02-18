@@ -16,7 +16,6 @@ import java.time.LocalDate;
 public class Retiros extends Movimiento {
 
     private Integer id;
-    private String idCuenta;
     private double monto;
     private Date fechaGenerada;
     private Integer folio;
@@ -24,13 +23,12 @@ public class Retiros extends Movimiento {
     private String disponible;
     private Date fechaRetirado;
 
-    public Retiros(Integer id, String idCuenta, double monto, Integer folio,
+    public Retiros(Integer id, Integer cuenta, double monto, Integer folio,
             String contrasena, String disponible, Date fechaRetirado,
             Date fechaGenerada) {
 
-        super(idCuenta, fechaRetirado);
+        super(cuenta, fechaRetirado);
         this.id = id;
-        this.idCuenta = idCuenta;
         this.monto = monto;
         this.fechaGenerada = fechaGenerada;
         this.folio = folio;
@@ -39,12 +37,11 @@ public class Retiros extends Movimiento {
         this.fechaRetirado = fechaRetirado;
     }
 
-    public Retiros(String idCuenta, double monto, Integer folio, 
+    public Retiros(Integer cuenta, double monto, Integer folio, 
             String contrasena, String disponible, Date fechaRetirado, 
             Date fechaGenerada) {
         
-        super(idCuenta, fechaRetirado);
-        this.idCuenta = idCuenta;
+        super(cuenta, fechaRetirado);
         this.monto = monto;
         this.fechaGenerada = fechaGenerada;
         this.folio = folio;
@@ -59,14 +56,6 @@ public class Retiros extends Movimiento {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getIdCuenta() {
-        return idCuenta;
-    }
-
-    public void setIdCuenta(String idCuenta) {
-        this.idCuenta = idCuenta;
     }
 
     public double getMonto() {
@@ -115,6 +104,11 @@ public class Retiros extends Movimiento {
 
     public void setFechaRetirado(Date fechaRetirado) {
         this.fechaRetirado = fechaRetirado;
+    }
+
+    @Override
+    public String toString() {
+        return "Retiros{" + "id=" + id + ", monto=" + monto + ", fechaGenerada=" + fechaGenerada + ", folio=" + folio + ", contrasena=" + contrasena + ", disponible=" + disponible + ", fechaRetirado=" + fechaRetirado + '}';
     }
 
 }

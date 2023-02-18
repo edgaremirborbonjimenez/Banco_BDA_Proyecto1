@@ -4,6 +4,7 @@
  */
 package ejecucion;
 
+import dominio.Cliente;
 import dominio.Cuenta;
 import excepciones.PersistenciaException;
 import implementaciones.ConexionBD;
@@ -13,6 +14,7 @@ import interfaces.IConexionBD;
 import interfaces.ICuentaDAO;
 import java.sql.Date;
 import presentacion.Menu;
+import dominio.*;
 
 /**
  *
@@ -25,13 +27,27 @@ public class main {
      */
     public static void main(String[] args) throws PersistenciaException {
         // TODO code application logic here
-        IConexionBD bd = new ConexionBD("jdbc:mysql://localhost/banco_bda", "root", "bone770115");
+        IConexionBD bd = new ConexionBD("jdbc:mysql://localhost/banco", "root", "bone770115");
         IClienteDAO clienteDao = new ClienteDAO(bd);
         ICuentaDAO cuentaDao = new CuentaDAO(bd);
         //Cliente cliente = new Cliente("Daniel", "Peña", "García", "2002-11-10", "6441942558", "14584Pen");
+                Cliente cliente = new Cliente(3,"Emir", "Borbon", "", null, "6421068907", "123456");
+                Cliente cliente2 = new Cliente(4,"Oscar", "Minjarez", "", null, "6421068907", "321321");
+
         //clienteDao.registrarCliente(cliente);
-                Cuenta cuenta = new Cuenta("232285e4-ac24-11ed-94ce-2cfda1e2a95b", new Date(2023, 02, 13), 800, 3);
-        cuentaDao.generarRetiro(cuenta, 100.0, "123456");
+        Cuenta cuenta= cuentaDao.generarCuenta(cliente,800.0);
+        System.out.println(cuenta);
+        
+        Cuenta cuenta2= cuentaDao.generarCuenta(cliente2,800.0);
+        System.out.println(cuenta2);
+        
+        Transferencia transferencia = cuentaDao.tranferencia(cuenta, cuenta2, 400.0);
+        System.out.println(transferencia);
+        
+        Retiros retiro = cuentaDao.generarRetiro(cuenta2, 200.0, "564654");
+        System.out.println(retiro);
+        
+        
         Menu menu = new Menu(clienteDao, cuentaDao);
         menu.setVisible(true);
     }
