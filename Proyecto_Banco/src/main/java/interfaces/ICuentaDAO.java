@@ -15,6 +15,7 @@ import java.util.List;
  */
 public interface ICuentaDAO {
 
+    Cuenta generarCuenta(Cliente cliente) throws PersistenciaException;
     List<Cuenta> consultarCuentas() throws PersistenciaException;
     Transferencia tranferencia(Cuenta cuentaUsario,Cuenta cuentaDestino,double monto) throws PersistenciaException;
     Retiros generarRetiro(Cuenta cuenta,double monto,String contrasena) throws PersistenciaException;

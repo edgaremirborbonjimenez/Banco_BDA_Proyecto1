@@ -37,6 +37,12 @@ public class CuentaDAO implements ICuentaDAO {
     public CuentaDAO(IConexionBD generadorConexiones) {
         this.generadorConexiones = generadorConexiones;
     }
+    
+    @Override
+    public Cuenta generarCuenta(Cliente cliente) throws PersistenciaException{
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+}
 
     @Override
     public List<Cuenta> consultarCuentas() throws PersistenciaException {
@@ -124,6 +130,9 @@ public class CuentaDAO implements ICuentaDAO {
                         cuentaUsuario.getId(), cuentaDestino.getId(),
                         monto,
                         null);
+            }else{
+            comandoRollback.execute();
+            throw new PersistenciaException("No se pudo generar la transaccion");
             }
             comandoCommit.execute();
 

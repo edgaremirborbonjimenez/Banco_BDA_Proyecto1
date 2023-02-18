@@ -30,8 +30,8 @@ public class main {
         ICuentaDAO cuentaDao = new CuentaDAO(bd);
         //Cliente cliente = new Cliente("Daniel", "Peña", "García", "2002-11-10", "6441942558", "14584Pen");
         //clienteDao.registrarCliente(cliente);
-                Cuenta cuenta = new Cuenta("232285e4-ac24-11ed-94ce-2cfda1e2a95b", new Date(2023, 02, 13), 800, 3);
-        cuentaDao.generarRetiro(cuenta, 100.0, "123456");
+                //Cuenta cuenta = new Cuenta("232285e4-ac24-11ed-94ce-2cfda1e2a95b", new Date(2023, 02, 13), 800, 3);
+        //cuentaDao.generarRetiro(cuenta, 100.0, "123456");
         Menu menu = new Menu(clienteDao, cuentaDao);
         menu.setVisible(true);
     }
