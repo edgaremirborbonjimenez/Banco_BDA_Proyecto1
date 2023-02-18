@@ -4,16 +4,21 @@
  */
 package presentacion;
 
+import java.awt.Frame;
+
 /**
  *
  * @author Usuario
  */
 public class CrearContrasena extends javax.swing.JFrame {
 
+    Frame registrarCliente;
+    
     /**
      * Creates new form CrearContraseña
      */
-    public CrearContrasena() {
+    public CrearContrasena(Frame registrarCliente) {
+        this.registrarCliente = registrarCliente;
         initComponents();
         this.setVisible(true);
     }
@@ -35,14 +40,16 @@ public class CrearContrasena extends javax.swing.JFrame {
         txtConfirmar = new javax.swing.JPasswordField();
         checkConfirmar = new javax.swing.JCheckBox();
         btnSiguiente = new javax.swing.JButton();
+        btnRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
-        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel1.setBackground(new java.awt.Color(153, 153, 153));
         jPanel1.setForeground(new java.awt.Color(102, 102, 102));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Nueva Contraseña");
 
         txtContraseña.setText("123456789");
@@ -52,7 +59,9 @@ public class CrearContrasena extends javax.swing.JFrame {
             }
         });
 
-        checkVisible.setForeground(new java.awt.Color(255, 255, 255));
+        checkVisible.setBackground(new java.awt.Color(153, 153, 153));
+        checkVisible.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        checkVisible.setForeground(new java.awt.Color(0, 0, 0));
         checkVisible.setText("Visible");
         checkVisible.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -61,12 +70,14 @@ public class CrearContrasena extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Confirmacion");
 
         txtConfirmar.setText("123456789");
 
-        checkConfirmar.setForeground(new java.awt.Color(255, 255, 255));
+        checkConfirmar.setBackground(new java.awt.Color(153, 153, 153));
+        checkConfirmar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        checkConfirmar.setForeground(new java.awt.Color(0, 0, 0));
         checkConfirmar.setText("Visible");
         checkConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,10 +86,18 @@ public class CrearContrasena extends javax.swing.JFrame {
         });
 
         btnSiguiente.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnSiguiente.setText("Siguiente");
+        btnSiguiente.setText("Crear");
         btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSiguienteActionPerformed(evt);
+            }
+        });
+
+        btnRegresar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
             }
         });
 
@@ -92,17 +111,20 @@ public class CrearContrasena extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtContraseña, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                    .addComponent(txtConfirmar))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSiguiente)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtContraseña, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
-                            .addComponent(txtConfirmar))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(checkVisible)
-                            .addComponent(checkConfirmar))))
+                    .addComponent(checkVisible)
+                    .addComponent(checkConfirmar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnSiguiente)
+                .addGap(62, 62, 62))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,9 +139,11 @@ public class CrearContrasena extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(txtConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(checkConfirmar))
-                .addGap(18, 18, 18)
-                .addComponent(btnSiguiente)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRegresar)
+                    .addComponent(btnSiguiente))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -158,12 +182,19 @@ public class CrearContrasena extends javax.swing.JFrame {
     }//GEN-LAST:event_checkConfirmarActionPerformed
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
+        
+        registrarCliente.dispose();
+        this.dispose();
     }//GEN-LAST:event_btnSiguienteActionPerformed
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        registrarCliente.setEnabled(true);
+        dispose();
+    }//GEN-LAST:event_btnRegresarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnRegresar;
     private javax.swing.JButton btnSiguiente;
     private javax.swing.JCheckBox checkConfirmar;
     private javax.swing.JCheckBox checkVisible;

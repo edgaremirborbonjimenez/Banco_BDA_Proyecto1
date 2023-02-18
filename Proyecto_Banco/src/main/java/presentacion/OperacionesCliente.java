@@ -48,6 +48,7 @@ public class OperacionesCliente extends javax.swing.JFrame {
         btnModificarDatos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         setResizable(false);
 
         labelNombreCuenta.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -120,28 +121,26 @@ public class OperacionesCliente extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(labelBienvenido)
-                                    .addComponent(labelSeleccionaTuCuenta))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(labelNombreCuenta)
-                                    .addComponent(boxNumeroCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnCerrarSesion)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnSalir)))
-                        .addGap(102, 102, 102)
+                            .addComponent(labelBienvenido)
+                            .addComponent(labelSeleccionaTuCuenta))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnTransferencia)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(labelMontoEnLaCuenta)
-                                .addGap(18, 18, 18)
-                                .addComponent(labelMonto))
-                            .addComponent(btnGenerarRetiro)
-                            .addComponent(btnHistorialMovimientos)))
+                            .addComponent(labelNombreCuenta)
+                            .addComponent(boxNumeroCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnCerrarSesion)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSalir))
                     .addComponent(btnModificarDatos))
+                .addGap(102, 102, 102)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnGenerarRetiro)
+                    .addComponent(btnTransferencia)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(labelMontoEnLaCuenta)
+                        .addGap(18, 18, 18)
+                        .addComponent(labelMonto))
+                    .addComponent(btnHistorialMovimientos))
                 .addContainerGap(11, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -163,10 +162,10 @@ public class OperacionesCliente extends javax.swing.JFrame {
                         .addGap(6, 6, 6)
                         .addComponent(btnTransferencia)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnModificarDatos)
                     .addComponent(btnGenerarRetiro))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -193,12 +192,12 @@ public class OperacionesCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTransferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransferenciaActionPerformed
-        this.setVisible(false);
-        transferencia transferencia = new transferencia(this);
+        this.setEnabled(false);
+        Transferencia transferencia = new Transferencia(this);
     }//GEN-LAST:event_btnTransferenciaActionPerformed
 
     private void btnGenerarRetiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarRetiroActionPerformed
-        this.setVisible(false);
+        this.setEnabled(false);
         GenerarRetiroSinCuenta generarRetiroSinCuenta = new GenerarRetiroSinCuenta(this);
     }//GEN-LAST:event_btnGenerarRetiroActionPerformed
 

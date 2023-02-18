@@ -28,7 +28,7 @@ public class main {
         ICuentaDAO cuentaDao = new CuentaDAO(bd);
         //Cliente cliente = new Cliente("Daniel", "Peña", "García", "2002-11-10", "6441942558", "14584Pen");
         //clienteDao.registrarCliente(cliente);
-        Menu menu = new Menu(clienteDao,cuentaDao);
+        Menu menu = new Menu(clienteDao, cuentaDao);
         menu.setVisible(true);
     }
 
