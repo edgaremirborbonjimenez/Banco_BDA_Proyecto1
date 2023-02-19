@@ -5,6 +5,7 @@
 package dominio;
 //importanciones
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 /**
@@ -15,24 +16,24 @@ import java.time.LocalDate;
 public class Transferencia extends Movimiento {
 
     private Integer id;
-    private String idCuentaEntrada;
+    private Integer cuentaEntrada;
     private double monto;
 
-    public Transferencia(Integer id, String idCuentaSalida,
-            String idCuentaEntrada, double monto, Long fecha) {
+    public Transferencia(Integer id, Integer cuentaSalida,
+            Integer cuentaEntrada, double monto, Date fecha) {
         
-        super(idCuentaSalida, fecha);
+        super(cuentaSalida, fecha);
         
         this.id = id;
-        this.idCuentaEntrada = idCuentaEntrada;
+        this.cuentaEntrada = cuentaEntrada;
         this.monto = monto;
     }
 
-    public Transferencia(String idCuentaSalida, String idCuentaEntrada, 
-            double monto, Long fecha) {
-        super(idCuentaSalida, fecha);
+    public Transferencia(Integer cuentaSalida, Integer cuentaEntrada, 
+            double monto, Date fecha) {
+        super(cuentaSalida, fecha);
         
-        this.idCuentaEntrada = idCuentaEntrada;
+        this.cuentaEntrada = cuentaEntrada;
         this.monto = monto;
     }
     
@@ -47,12 +48,12 @@ public class Transferencia extends Movimiento {
 
 
 
-    public String getIdCuentaEntrada() {
-        return idCuentaEntrada;
+    public Integer getCuentaEntrada() {
+        return cuentaEntrada;
     }
 
-    public void setIdCuentaEntrada(String idCuentaEntrada) {
-        this.idCuentaEntrada = idCuentaEntrada;
+    public void setCuentaEntrada(Integer cuentaEntrada) {
+        this.cuentaEntrada = cuentaEntrada;
     }
 
     public double getMonto() {
@@ -61,6 +62,11 @@ public class Transferencia extends Movimiento {
 
     public void setMonto(double monto) {
         this.monto = monto;
+    }
+
+    @Override
+    public String toString() {
+        return "Transferencia{" + "id=" + id + ", cuentaEntrada=" + cuentaEntrada + ", monto=" + monto + '}';
     }
     
 }

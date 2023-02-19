@@ -5,6 +5,7 @@
 package dominio;
 //importanciones
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 
@@ -15,28 +16,33 @@ import java.time.LocalDate;
  */
 public class Movimiento {
     
-    private String idCuenta;
-    private Long fecha;
+    private Integer cuenta;
+    private Date fecha;
 
-    public Movimiento(String idCuenta, Long fecha) {
-        this.idCuenta = idCuenta;
+    public Movimiento(Integer cuenta, Date fecha) {
+        this.cuenta = cuenta;
         this.fecha = fecha;
     }
 
-    public String getIdCuenta() {
-        return idCuenta;
+    public Integer getCuenta() {
+        return cuenta;
     }
 
-    public void setIdCuenta(String idCuenta) {
-        this.idCuenta = idCuenta;
+    public void setCuenta(Integer cuenta) {
+        this.cuenta = cuenta;
     }
 
-    public Long getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(Long fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    @Override
+    public String toString() {
+        return "Movimiento{" + "cuenta=" + cuenta + ", fecha=" + fecha + '}';
     }
     
     
