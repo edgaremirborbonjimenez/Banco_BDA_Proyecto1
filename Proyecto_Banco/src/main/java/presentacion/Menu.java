@@ -4,8 +4,13 @@
  */
 package presentacion;
 
+import dominio.Cliente;
+import excepciones.PersistenciaException;
 import interfaces.IClienteDAO;
 import interfaces.ICuentaDAO;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -58,6 +63,11 @@ public class Menu extends javax.swing.JFrame {
         labelIniciarSesion.setText("Iniciar Sesión");
 
         txtTelefono.setBackground(new java.awt.Color(255, 255, 255));
+        txtTelefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTelefonoActionPerformed(evt);
+            }
+        });
 
         txtContrasena.setBackground(new java.awt.Color(255, 255, 255));
         txtContrasena.addActionListener(new java.awt.event.ActionListener() {
@@ -178,8 +188,24 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_txtContrasenaActionPerformed
 
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
-        this.setEnabled(false);
-        OperacionesCliente operacionesCliente = new OperacionesCliente(this);
+        String celular = txtTelefono.getText();
+        String contrasena = txtContrasena.getText();
+        Cliente cliente = null;
+        try {
+            cliente = clienteDAO.iniciaCliente(celular);
+        } catch (PersistenciaException ex) {
+            Logger.getLogger("Error: " + ex.getMessage());
+        }
+        
+        if (cliente == null) {
+            JOptionPane.showMessageDialog(null, "No hay ningún usuario\n"
+                    + "Con ese número", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (cliente.getContrasena().equals(txtContrasena.getText())) {
+            System.out.println(cliente.toString());
+            OperacionesCliente operacionesCliente = new OperacionesCliente(this, cliente);
+        } else {
+            JOptionPane.showMessageDialog(null, "Contraseña Incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
@@ -187,6 +213,13 @@ public class Menu extends javax.swing.JFrame {
         RegistrarCliente registrarCliente = new RegistrarCliente(this);
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
+    private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTelefonoActionPerformed
+
+    public boolean verificaContrasena(String contrasenaGuardada) {
+        return txtContrasena.getText() == contrasenaGuardada;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIniciarSesion;

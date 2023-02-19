@@ -6,6 +6,7 @@
 
 package presentacion;
 
+import dominio.Cliente;
 import java.awt.Frame;
 
 /**
@@ -16,10 +17,16 @@ import java.awt.Frame;
 public class OperacionesCliente extends javax.swing.JFrame {
     
     Frame menu;
+    Cliente cliente;
 
-    /** Creates new form sesiónIniciada */
-    public OperacionesCliente(Frame menu) {
+    /** Creates new form sesiónIniciada
+     * 
+     * @param menu
+     * @param cliente
+     **/
+    public OperacionesCliente(Frame menu, Cliente cliente) {
         this.menu = menu;
+        this.cliente = cliente;
         initComponents();
         this.setVisible(true);
     }
@@ -52,7 +59,7 @@ public class OperacionesCliente extends javax.swing.JFrame {
         setResizable(false);
 
         labelNombreCuenta.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        labelNombreCuenta.setText("Daniel Peña García");
+        labelNombreCuenta.setText(cliente.getNombre() + " " + cliente.getApellidoPaterno());
 
         labelBienvenido.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         labelBienvenido.setText("Bienvenido: ");
@@ -129,7 +136,7 @@ public class OperacionesCliente extends javax.swing.JFrame {
                             .addComponent(boxNumeroCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnCerrarSesion)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(btnSalir))
                     .addComponent(btnModificarDatos))
                 .addGap(102, 102, 102)
@@ -161,18 +168,19 @@ public class OperacionesCliente extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(btnTransferencia)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnModificarDatos)
-                    .addComponent(btnGenerarRetiro))
-                .addGap(19, 19, 19)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnGenerarRetiro)
+                    .addComponent(btnModificarDatos))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(btnHistorialMovimientos, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCerrarSesion))
-                        .addGap(0, 5, Short.MAX_VALUE))
-                    .addComponent(btnHistorialMovimientos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnCerrarSesion)
+                            .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
 

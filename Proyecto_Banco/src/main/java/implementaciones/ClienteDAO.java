@@ -9,6 +9,7 @@ import excepciones.PersistenciaException;
 import interfaces.IClienteDAO;
 import interfaces.IConexionBD;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -47,7 +48,7 @@ public class ClienteDAO implements IClienteDAO {
             comando.setString(1, cliente.getNombre());
             comando.setString(2, cliente.getApellidoPaterno());
             comando.setString(3, cliente.getApellidoMaterno());
-            comando.setString(4, cliente.getFechaNacimiento());
+            comando.setString(4, cliente.getFechaNacimiento().toString());
             comando.setString(5, cliente.getCelular());
             comando.setString(6, cliente.getContrasena());
             comando.executeUpdate();
@@ -71,7 +72,7 @@ public class ClienteDAO implements IClienteDAO {
     }
 
     @Override
-    public Cliente iniciaCliente(String telefono, String contrasena) throws PersistenciaException {
+    public Cliente iniciaCliente(String telefono) throws PersistenciaException {
         String consulta = "SELECT *"
                 + " FROM clientes "
                 + "WHERE celular = ?";
@@ -85,7 +86,8 @@ public class ClienteDAO implements IClienteDAO {
                 String apellidoP = resultado.getString("apellidoP");
                 String apellidoM = resultado.getString("apellidoM");
                 String fechaNacimiento = resultado.getString("fechaNacimiento");
-                Cliente cliente = new Cliente(id, nombre, apellidoP, apellidoM, fechaNacimiento, telefono, contrasena);
+                String contrasenaExtraida = resultado.getString("contraseña");
+                Cliente cliente = new Cliente(id, nombre, apellidoP, apellidoM, Date.valueOf(fechaNacimiento), telefono, contrasenaExtraida);
                 return cliente;
             }
             LOG.log(Level.WARNING, "Alguno de los datos está incorrecto");

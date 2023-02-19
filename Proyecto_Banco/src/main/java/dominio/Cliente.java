@@ -6,6 +6,9 @@
 package dominio;
 //importanciones
 
+import java.sql.Date;
+
+
 
 /**
  * Descripción de la clase: 
@@ -18,7 +21,7 @@ public class Cliente {
     private String nombre;
     private String apellidoPaterno;
     private String apellidoMaterno;
-    private String fechaNacimiento;
+    private Date fechaNacimiento;
     private String celular;
     private String contrasena;
     private int edad;
@@ -32,7 +35,7 @@ public class Cliente {
     }
     
     public Cliente(Integer id, String nombre, String apellidoPaterno, 
-            String apellidoMaterno, String fechaNacimiento, String celular, 
+            String apellidoMaterno, Date fechaNacimiento, String celular, 
             String contrasena) {
         this.id = id;
         this.nombre = nombre;
@@ -44,7 +47,7 @@ public class Cliente {
     }
 
     public Cliente(String nombre, String apellidoPaterno, 
-            String apellidoMaterno, String fechaNacimiento, 
+            String apellidoMaterno, Date fechaNacimiento, 
             String celular, String contrasena) {
         
         this.nombre = nombre;
@@ -93,11 +96,11 @@ public class Cliente {
         this.apellidoMaterno = apellidoMaterno;
     }
 
-    public String getFechaNacimiento() {
+    public Date getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(String fechaNacimiento) {
+    public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
