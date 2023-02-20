@@ -183,13 +183,8 @@ public class Menu extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContrasenaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtContrasenaActionPerformed
-
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
         String celular = txtTelefono.getText();
-        String contrasena = txtContrasena.getText();
         Cliente cliente = null;
         try {
             cliente = clienteDAO.iniciaCliente(celular);
@@ -201,8 +196,7 @@ public class Menu extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No hay ningún usuario\n"
                     + "Con ese número", "Error", JOptionPane.ERROR_MESSAGE);
         } else if (cliente.getContrasena().equals(txtContrasena.getText())) {
-            System.out.println(cliente.toString());
-            OperacionesCliente operacionesCliente = new OperacionesCliente(this, cliente);
+            OperacionesCliente operacionesCliente = new OperacionesCliente(this, cliente, clienteDAO, cuentaDAO);
         } else {
             JOptionPane.showMessageDialog(null, "Contraseña Incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -216,6 +210,10 @@ public class Menu extends javax.swing.JFrame {
     private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTelefonoActionPerformed
+
+    private void txtContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContrasenaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtContrasenaActionPerformed
 
     public boolean verificaContrasena(String contrasenaGuardada) {
         return txtContrasena.getText() == contrasenaGuardada;

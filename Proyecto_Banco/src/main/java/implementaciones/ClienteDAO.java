@@ -72,22 +72,23 @@ public class ClienteDAO implements IClienteDAO {
     }
 
     @Override
-    public Cliente iniciaCliente(String telefono) throws PersistenciaException {
+    public Cliente iniciaCliente(String celular) throws PersistenciaException {
         String consulta = "SELECT *"
                 + " FROM clientes "
                 + "WHERE celular = ?";
         try (
-                Connection conexion = generadorConexiones.crearConexion(); PreparedStatement comando = conexion.prepareStatement(consulta);) {
-            comando.setString(1, telefono);
+                Connection conexion = generadorConexiones.crearConexion(); PreparedStatement comando = conexion.prepareStatement(consulta);
+                ) {
+            comando.setString(1, celular);
             ResultSet resultado = comando.executeQuery();
             if (resultado.next()) {
                 Integer id = resultado.getInt("id");
                 String nombre = resultado.getString("nombre");
                 String apellidoP = resultado.getString("apellidoP");
                 String apellidoM = resultado.getString("apellidoM");
-                String fechaNacimiento = resultado.getString("fechaNacimiento");
-                String contrasenaExtraida = resultado.getString("contraseña");
-                Cliente cliente = new Cliente(id, nombre, apellidoP, apellidoM, Date.valueOf(fechaNacimiento), telefono, contrasenaExtraida);
+                Date fechaNacimiento = resultado.getDate("fechaNacimiento");
+                String contrasenaExtraida = resultado.getString("contrasena");
+                Cliente cliente = new Cliente(id, nombre, apellidoP, apellidoM, fechaNacimiento, celular, contrasenaExtraida);
                 return cliente;
             }
             LOG.log(Level.WARNING, "Alguno de los datos está incorrecto");

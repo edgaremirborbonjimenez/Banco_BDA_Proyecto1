@@ -7,7 +7,14 @@
 package presentacion;
 
 import dominio.Cliente;
+import dominio.Cuenta;
+import excepciones.PersistenciaException;
+import interfaces.IClienteDAO;
+import interfaces.ICuentaDAO;
 import java.awt.Frame;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  * Descripción de la clase: 
@@ -17,19 +24,33 @@ import java.awt.Frame;
 public class OperacionesCliente extends javax.swing.JFrame {
     
     Frame menu;
-    Cliente cliente;
+    Cliente cliente = null;
+    IClienteDAO clienteDAO;
+    ICuentaDAO cuentaDAO;
+    DefaultComboBoxModel listaCuentas;
 
-    /** Creates new form sesiónIniciada
+    /**
      * 
      * @param menu
      * @param cliente
-     **/
-    public OperacionesCliente(Frame menu, Cliente cliente) {
+     * @param clienteDAO
+     * @param cuentaDAO 
+     */
+    public OperacionesCliente(Frame menu, Cliente cliente, IClienteDAO clienteDAO, ICuentaDAO cuentaDAO) {
         this.menu = menu;
         this.cliente = cliente;
+        this.clienteDAO = clienteDAO;
+        this.cuentaDAO = cuentaDAO;
         initComponents();
         this.setVisible(true);
+        try {
+            listaCuentas = cuentaDAO.listaCuentas(cliente);
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(OperacionesCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+    
+    
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -65,7 +86,11 @@ public class OperacionesCliente extends javax.swing.JFrame {
         labelBienvenido.setText("Bienvenido: ");
 
         boxNumeroCuenta.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        boxNumeroCuenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "000001", "000002", "000003" }));
+        boxNumeroCuenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxNumeroCuentaActionPerformed(evt);
+            }
+        });
 
         labelSeleccionaTuCuenta.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         labelSeleccionaTuCuenta.setText("Selecciona tu Cuenta");
@@ -223,6 +248,10 @@ public class OperacionesCliente extends javax.swing.JFrame {
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void boxNumeroCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxNumeroCuentaActionPerformed
+
+    }//GEN-LAST:event_boxNumeroCuentaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

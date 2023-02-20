@@ -23,6 +23,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.Date;
+import java.util.LinkedList;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -39,29 +41,26 @@ public class CuentaDAO implements ICuentaDAO {
     }
 
     @Override
-    public Cuenta generarCuenta(Cliente cliente,double montoInicial) throws PersistenciaException {
+    public Cuenta generarCuenta(Cliente cliente, double montoInicial) throws PersistenciaException {
         try (
-                 Connection con = this.generadorConexiones.crearConexion();
-                PreparedStatement commInsertCuenta = con.prepareStatement("insert into cuentas(saldo,idCliente) value (?,?)",
-                        Statement.RETURN_GENERATED_KEYS);
-                PreparedStatement commSelect = con.prepareStatement("Select* from cuentas where id = ?");
-            ) {
-            
+                Connection con = this.generadorConexiones.crearConexion(); PreparedStatement commInsertCuenta = con.prepareStatement("insert into cuentas(saldo,idCliente) value (?,?)",
+                Statement.RETURN_GENERATED_KEYS); PreparedStatement commSelect = con.prepareStatement("Select* from cuentas where id = ?");) {
+
             commInsertCuenta.setDouble(1, montoInicial);
             commInsertCuenta.setDouble(2, cliente.getId());
 
             commInsertCuenta.executeUpdate();
             ResultSet resultado = commInsertCuenta.getGeneratedKeys();
             Integer id = null;
-           // Cuenta cuenta = null;
+            // Cuenta cuenta = null;
             if (resultado.next()) {
                 id = resultado.getInt(1);
-            }else{
-            throw new PersistenciaException("No se pudo generar la cuenta");
+            } else {
+                throw new PersistenciaException("No se pudo generar la cuenta");
             }
             commSelect.setInt(1, id);
-            resultado= commSelect.executeQuery();
-            Cuenta cuenta=null;
+            resultado = commSelect.executeQuery();
+            Cuenta cuenta = null;
             if (resultado.next()) {
                 cuenta = new Cuenta(id,
                         resultado.getString("numCuenta"),
@@ -70,8 +69,7 @@ public class CuentaDAO implements ICuentaDAO {
                         resultado.getInt("idCliente"));
             }
             return cuenta;
-            
-            
+
         } catch (SQLException e) {
             LOG.log(Level.SEVERE, "No se pudo generar la cuenta: " + e.getMessage());
             throw new PersistenciaException("No se pudo generar la cuenta");
@@ -88,16 +86,8 @@ public class CuentaDAO implements ICuentaDAO {
         BigDecimal saldo = new BigDecimal(0.0);
         BigDecimal mont = new BigDecimal(monto);
         try (
-                 Connection con = this.generadorConexiones.crearConexion();
-                PreparedStatement comandoStart = con.prepareStatement("START transaction");
-                PreparedStatement comandoSelect = con.prepareStatement("select* from cuentas where numCuenta = ?");
-                PreparedStatement comandoUpdate2 = con.prepareStatement("update cuentas set saldo=saldo-? where numCuenta=?");
-                PreparedStatement comandoUpdate = con.prepareStatement("update cuentas set saldo=saldo+? where numCuenta=?");
-                PreparedStatement comandoSelect2 = con.prepareStatement("select* from cuentas where numCuenta = ?");
-                PreparedStatement comandoInsertTran = con.prepareStatement("insert into transferencias(idCuentaUsuario,idCuentaDestino,monto) value(?,?,?)",
-                Statement.RETURN_GENERATED_KEYS);
-                PreparedStatement commSelectTran = con.prepareStatement("Select* from transferencias where id =?");
-                PreparedStatement comandoCommit = con.prepareStatement("COMMIT");  PreparedStatement comandoRollback = con.prepareStatement("ROLLBACK");) {
+                Connection con = this.generadorConexiones.crearConexion(); PreparedStatement comandoStart = con.prepareStatement("START transaction"); PreparedStatement comandoSelect = con.prepareStatement("select* from cuentas where numCuenta = ?"); PreparedStatement comandoUpdate2 = con.prepareStatement("update cuentas set saldo=saldo-? where numCuenta=?"); PreparedStatement comandoUpdate = con.prepareStatement("update cuentas set saldo=saldo+? where numCuenta=?"); PreparedStatement comandoSelect2 = con.prepareStatement("select* from cuentas where numCuenta = ?"); PreparedStatement comandoInsertTran = con.prepareStatement("insert into transferencias(idCuentaUsuario,idCuentaDestino,monto) value(?,?,?)",
+                Statement.RETURN_GENERATED_KEYS); PreparedStatement commSelectTran = con.prepareStatement("Select* from transferencias where id =?"); PreparedStatement comandoCommit = con.prepareStatement("COMMIT"); PreparedStatement comandoRollback = con.prepareStatement("ROLLBACK");) {
 
             comandoStart.execute();
             comandoSelect.setString(1, cuentaUsuario.getNumCuenta());
@@ -167,13 +157,14 @@ public class CuentaDAO implements ICuentaDAO {
             resultador = commSelectTran.executeQuery();
             Transferencia transferencia = null;
             if (resultador.next()) {
-                
-            }transferencia = new Transferencia(id
-                    , resultador.getInt("idCuentaUsuario"),
+
+            }
+            transferencia = new Transferencia(id,
+                     resultador.getInt("idCuentaUsuario"),
                     resultador.getInt("idCuentaDestino"),
                     monto,
                     new Date(resultador.getTimestamp("fecha").getTime()));
-            
+
             comandoCommit.execute();
 
             return transferencia;
@@ -191,13 +182,7 @@ public class CuentaDAO implements ICuentaDAO {
         int folio;
         BigDecimal mont = new BigDecimal(monto);
         try (
-                 Connection con = this.generadorConexiones.crearConexion();
-                PreparedStatement commStart = con.prepareStatement("start transaction");
-                PreparedStatement commCommit = con.prepareStatement("COMMIT");
-                PreparedStatement commRollback = con.prepareStatement("ROLLBACK");
-                PreparedStatement commSelect = con.prepareStatement("select* from cuentas where numCuenta =?");
-                PreparedStatement commSelect2 = con.prepareStatement("select* from retiros where id =?");
-                PreparedStatement commInsertRetiro = con.prepareStatement("insert into retiros(idCuenta,monto,folio,contrasena,disponible) value(?,?,?,?,?)",
+                Connection con = this.generadorConexiones.crearConexion(); PreparedStatement commStart = con.prepareStatement("start transaction"); PreparedStatement commCommit = con.prepareStatement("COMMIT"); PreparedStatement commRollback = con.prepareStatement("ROLLBACK"); PreparedStatement commSelect = con.prepareStatement("select* from cuentas where numCuenta =?"); PreparedStatement commSelect2 = con.prepareStatement("select* from retiros where id =?"); PreparedStatement commInsertRetiro = con.prepareStatement("insert into retiros(idCuenta,monto,folio,contrasena,disponible) value(?,?,?,?,?)",
                 Statement.RETURN_GENERATED_KEYS);) {
 
             commStart.execute();
@@ -234,17 +219,17 @@ public class CuentaDAO implements ICuentaDAO {
             resultado = commSelect2.executeQuery();
             Retiros retiro = null;
             if (resultado.next()) {
-                retiro = new Retiros(id
-                        , resultado.getInt("idCuenta"),
+                retiro = new Retiros(id,
+                         resultado.getInt("idCuenta"),
                         monto,
                         resultado.getInt("folio"),
                         resultado.getString("contrasena"),
                         resultado.getString("disponible").toString(),
                         null,
                         new Date(resultado.getTimestamp("fecha").getTime()));
-            System.out.println("Aqui!!!!!!!!!!!!!");
+                System.out.println("Aqui!!!!!!!!!!!!!");
             }
-            
+
             commCommit.execute();
             return retiro;
 
@@ -258,6 +243,35 @@ public class CuentaDAO implements ICuentaDAO {
     @Override
     public List<Movimiento> hisotrialMovimientos() throws PersistenciaException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public DefaultComboBoxModel<Cuenta> listaCuentas(Cliente cliente) throws PersistenciaException {
+        
+        List<Cuenta> listaCuentas = new LinkedList<>();
+        String consulta = "SELECT * FROM Cuentas "
+                + "WHERE id_cliente = ?";
+        
+        try (
+                Connection conexion = generadorConexiones.crearConexion(); PreparedStatement comando = conexion.prepareStatement(consulta);
+                ){
+            comando.setInt(1, cliente.getId());
+            ResultSet resultado = comando.executeQuery();
+            
+            while(resultado.next()){
+                Integer id = resultado.getInt("id");
+                String numCuenta = resultado.getString("numCuenta");
+                Date fechaApertura = resultado.getDate("fechaApertura");
+                BigDecimal saldo = resultado.getBigDecimal("saldo");
+                Integer id_cliente = resultado.getInt("idcliente");
+                Cuenta cuenta = new Cuenta(id, numCuenta, fechaApertura, saldo, id_cliente);
+                listaCuentas.add(cuenta);
+            }
+            
+        } catch (SQLException e) {
+            
+        }
+        return null;
     }
 
 }
