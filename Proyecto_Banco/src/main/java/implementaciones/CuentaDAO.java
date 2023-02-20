@@ -46,11 +46,10 @@ public class CuentaDAO implements ICuentaDAO {
     @Override
     public Cuenta generarCuenta(Cliente cliente, double montoInicial) throws PersistenciaException {
         try (
-                 Connection con = this.generadorConexiones.crearConexion();  PreparedStatement commInsertCuenta = con.prepareStatement("insert into cuentas(saldo,idCliente) value (?,?)",
+                 Connection con = this.generadorConexiones.crearConexion();  PreparedStatement commInsertCuenta = con.prepareStatement("insert into cuentas(idCliente) value (?)",
                 Statement.RETURN_GENERATED_KEYS);  PreparedStatement commSelect = con.prepareStatement("Select* from cuentas where id = ?");) {
 
-            commInsertCuenta.setDouble(1, montoInicial);
-            commInsertCuenta.setDouble(2, cliente.getId());
+            commInsertCuenta.setDouble(1, cliente.getId());
 
             commInsertCuenta.executeUpdate();
             ResultSet resultado = commInsertCuenta.getGeneratedKeys();

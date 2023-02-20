@@ -87,13 +87,14 @@ public class ClienteDAO implements IClienteDAO {
                 String apellidoP = resultado.getString("apellidoP");
                 String apellidoM = resultado.getString("apellidoM");
                 Date fechaNacimiento = resultado.getDate("fechaNacimiento");
-                String contrasenaExtraida = resultado.getString("contrasena");
-                Cliente cliente = new Cliente(id, nombre, apellidoP, apellidoM, fechaNacimiento, celular, contrasenaExtraida);
+                String contrasena = resultado.getString("Contrasena");
+                Cliente cliente = new Cliente(id, nombre, apellidoP, apellidoM, fechaNacimiento, celular, contrasena);
                 return cliente;
             }
             LOG.log(Level.WARNING, "Alguno de los datos está incorrecto");
         } catch (SQLException e) {
             LOG.log(Level.SEVERE, e.getMessage());
+            System.out.println("Aqui");
         }
         return null;
     }

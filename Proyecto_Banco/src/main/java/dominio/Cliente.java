@@ -33,10 +33,8 @@ public class Cliente {
 
     public Cliente() {
     }
-    
-    public Cliente(Integer id, String nombre, String apellidoPaterno, 
-            String apellidoMaterno, Date fechaNacimiento, String celular, 
-            String contrasena) {
+
+    public Cliente(Integer id, String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaNacimiento, String celular, String contrasena) {
         this.id = id;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
@@ -46,10 +44,7 @@ public class Cliente {
         this.contrasena = contrasena;
     }
 
-    public Cliente(String nombre, String apellidoPaterno, 
-            String apellidoMaterno, Date fechaNacimiento, 
-            String celular, String contrasena) {
-        
+    public Cliente(String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaNacimiento, String celular, String contrasena) {
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;

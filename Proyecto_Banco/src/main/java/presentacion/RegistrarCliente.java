@@ -61,8 +61,10 @@ public class RegistrarCliente extends javax.swing.JFrame {
         txtTelefono = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jPasswordField2 = new javax.swing.JPasswordField();
+        passContrasena = new javax.swing.JPasswordField();
+        passConfirmarContrasena = new javax.swing.JPasswordField();
+        checkVerConstrasena = new javax.swing.JCheckBox();
+        checkVerConfirmacionContrasena = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registrar Cliente");
@@ -189,9 +191,17 @@ public class RegistrarCliente extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Confirmar Contraseña:");
 
-        jPasswordField1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        passContrasena.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
-        jPasswordField2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        passConfirmarContrasena.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+
+        checkVerConstrasena.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        checkVerConstrasena.setForeground(new java.awt.Color(255, 255, 255));
+        checkVerConstrasena.setText("Visible");
+
+        checkVerConfirmacionContrasena.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        checkVerConfirmacionContrasena.setForeground(new java.awt.Color(255, 255, 255));
+        checkVerConfirmacionContrasena.setText("Visible");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -223,8 +233,12 @@ public class RegistrarCliente extends javax.swing.JFrame {
                                     .addComponent(jLabel1))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jPasswordField1)
-                                    .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(passContrasena)
+                                    .addComponent(passConfirmarContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(checkVerConstrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(checkVerConfirmacionContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(labelCalle)
                                 .addGap(18, 18, 18)
@@ -257,11 +271,11 @@ public class RegistrarCliente extends javax.swing.JFrame {
                                         .addComponent(txtApellidoPaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(btnRestaurar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -304,16 +318,18 @@ public class RegistrarCliente extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(passContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(checkVerConstrasena))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(passConfirmarContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(checkVerConfirmacionContrasena))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAceptar)
                     .addComponent(btnCancelar)
-                    .addComponent(btnRestaurar))
+                    .addComponent(btnRestaurar)
+                    .addComponent(btnAceptar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -341,8 +357,10 @@ public class RegistrarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNumeroActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        this.setEnabled(false);
-        CrearContrasena crearContrasena = new CrearContrasena(this);
+        String nombre = txtNombre.getText();
+        String apellidoP = txtApellidoPaterno.getText();
+        String apellidoM = txtApellidoMaterno.getText();
+        
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -361,17 +379,21 @@ public class RegistrarCliente extends javax.swing.JFrame {
         this.txtTelefono.setText("");
     }//GEN-LAST:event_btnRestaurarActionPerformed
 
+    public String cifrado(){
+        
+        return "";
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnRestaurar;
+    private javax.swing.JCheckBox checkVerConfirmacionContrasena;
+    private javax.swing.JCheckBox checkVerConstrasena;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JLabel labelAno;
     private javax.swing.JLabel labelApellidoMaterno;
     private javax.swing.JLabel labelApellidoPaterno;
@@ -385,6 +407,8 @@ public class RegistrarCliente extends javax.swing.JFrame {
     private javax.swing.JLabel labelNombre;
     private javax.swing.JLabel labelNumero;
     private javax.swing.JLabel labelTelefono;
+    private javax.swing.JPasswordField passConfirmarContrasena;
+    private javax.swing.JPasswordField passContrasena;
     private javax.swing.JSpinner spinnerDia;
     private javax.swing.JSpinner spinnerMes;
     private javax.swing.JTextField txtAno;
