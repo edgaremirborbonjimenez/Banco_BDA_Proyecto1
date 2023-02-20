@@ -6,6 +6,7 @@ package dominio;
 //importanciones
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 
 
@@ -17,9 +18,9 @@ import java.time.LocalDate;
 public class Movimiento {
     
     private Integer cuenta;
-    private Date fecha;
+    private Timestamp fecha;
 
-    public Movimiento(Integer cuenta, Date fecha) {
+    public Movimiento(Integer cuenta, Timestamp fecha) {
         this.cuenta = cuenta;
         this.fecha = fecha;
     }
@@ -32,11 +33,11 @@ public class Movimiento {
         this.cuenta = cuenta;
     }
 
-    public Date getFecha() {
+    public Timestamp getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(Timestamp fecha) {
         this.fecha = fecha;
     }
 
@@ -44,8 +45,6 @@ public class Movimiento {
     public String toString() {
         return "Movimiento{" + "cuenta=" + cuenta + ", fecha=" + fecha + '}';
     }
-    
-    
     
     
     

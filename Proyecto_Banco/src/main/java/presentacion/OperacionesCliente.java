@@ -237,7 +237,9 @@ public class OperacionesCliente extends javax.swing.JFrame {
     private void btnHistorialMovimientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialMovimientosActionPerformed
         // TODO add your handling code here:
         this.setEnabled(false);
-        HistorialMovimientosCuenta historialMovimientosCuenta = new HistorialMovimientosCuenta(this);
+        //Necesito la Cuenta del usuario
+        Cuenta cuenta = new Cuenta(14, "'edf01606-afdb-11ed-8ad0-141877c424a4'", null, null, null);
+        HistorialMovimientosCuenta historialMovimientosCuenta = new HistorialMovimientosCuenta(this,cuenta,this.cuentaDAO);
     }//GEN-LAST:event_btnHistorialMovimientosActionPerformed
 
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed

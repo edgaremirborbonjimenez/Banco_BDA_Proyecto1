@@ -6,6 +6,7 @@ package dominio;
 //importanciones
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 
 /**
@@ -20,7 +21,7 @@ public class Transferencia extends Movimiento {
     private double monto;
 
     public Transferencia(Integer id, Integer cuentaSalida,
-            Integer cuentaEntrada, double monto, Date fecha) {
+            Integer cuentaEntrada, double monto, Timestamp fecha) {
         
         super(cuentaSalida, fecha);
         
@@ -30,12 +31,14 @@ public class Transferencia extends Movimiento {
     }
 
     public Transferencia(Integer cuentaSalida, Integer cuentaEntrada, 
-            double monto, Date fecha) {
+            double monto, Timestamp fecha) {
         super(cuentaSalida, fecha);
         
         this.cuentaEntrada = cuentaEntrada;
         this.monto = monto;
     }
+
+    
     
 
     public Integer getId() {

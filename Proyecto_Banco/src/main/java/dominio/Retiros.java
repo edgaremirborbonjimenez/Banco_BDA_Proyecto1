@@ -6,6 +6,7 @@ package dominio;
 //importanciones
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 
 /**
@@ -17,15 +18,15 @@ public class Retiros extends Movimiento {
 
     private Integer id;
     private double monto;
-    private Date fechaGenerada;
+    private Timestamp fechaGenerada;
     private Integer folio;
     private String contrasena;
     private String disponible;
-    private Date fechaRetirado;
+    private Timestamp fechaRetirado;
 
     public Retiros(Integer id, Integer cuenta, double monto, Integer folio,
-            String contrasena, String disponible, Date fechaRetirado,
-            Date fechaGenerada) {
+            String contrasena, String disponible, Timestamp fechaRetirado,
+            Timestamp fechaGenerada) {
 
         super(cuenta, fechaRetirado);
         this.id = id;
@@ -38,8 +39,8 @@ public class Retiros extends Movimiento {
     }
 
     public Retiros(Integer cuenta, double monto, Integer folio, 
-            String contrasena, String disponible, Date fechaRetirado, 
-            Date fechaGenerada) {
+            String contrasena, String disponible, Timestamp fechaRetirado, 
+            Timestamp fechaGenerada) {
         
         super(cuenta, fechaRetirado);
         this.monto = monto;
@@ -49,6 +50,9 @@ public class Retiros extends Movimiento {
         this.disponible = disponible;
         this.fechaRetirado = fechaRetirado;
     }
+
+
+    
 
     public Integer getId() {
         return id;
@@ -66,11 +70,11 @@ public class Retiros extends Movimiento {
         this.monto = monto;
     }
 
-    public Date getFechaGenerada() {
+    public Timestamp getFechaGenerada() {
         return fechaGenerada;
     }
 
-    public void setFechaGenerada(Date fechaGenerada) {
+    public void setFechaGenerada(Timestamp fechaGenerada) {
         this.fechaGenerada = fechaGenerada;
     }
 
@@ -98,11 +102,11 @@ public class Retiros extends Movimiento {
         this.disponible = disponible;
     }
 
-    public Date getFechaRetirado() {
+    public Timestamp getFechaRetirado() {
         return fechaRetirado;
     }
 
-    public void setFechaRetirado(Date fechaRetirado) {
+    public void setFechaRetirado(Timestamp fechaRetirado) {
         this.fechaRetirado = fechaRetirado;
     }
 

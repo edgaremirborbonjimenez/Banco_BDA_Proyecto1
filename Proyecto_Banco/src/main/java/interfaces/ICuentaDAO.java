@@ -4,6 +4,7 @@ package interfaces;
 import dominio.Cliente;
 import dominio.Cuenta;
 import dominio.Movimiento;
+import dominio.MovimientoHistorial;
 import dominio.Retiros;
 import dominio.Transferencia;
 import excepciones.PersistenciaException;
@@ -20,6 +21,6 @@ public interface ICuentaDAO {
     List<Cuenta> consultarCuentas() throws PersistenciaException;
     Transferencia tranferencia(Cuenta cuentaUsario,Cuenta cuentaDestino,double monto) throws PersistenciaException;
     Retiros generarRetiro(Cuenta cuenta,double monto,String contrasena) throws PersistenciaException;
-    List<Movimiento> hisotrialMovimientos()throws PersistenciaException;
+    List<MovimientoHistorial> hisotrialMovimientos(Cuenta cuenta)throws PersistenciaException;
     DefaultComboBoxModel<Cuenta> listaCuentas(Cliente cliente) throws PersistenciaException;
 }
