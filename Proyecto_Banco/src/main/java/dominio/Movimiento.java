@@ -7,20 +7,19 @@ package dominio;
 
 import java.sql.Timestamp;
 
-
 /**
  *
  * @author Edgar Emir Borbon Jimenez 00000233184
  * @author Daniel Armando Peña García 000000229185
  */
 public class Movimiento {
-    
+
     private Integer cuenta;
     private Timestamp fecha;
 
     /**
      * Constructor
-     * 
+     *
      * @param cuenta Cuenta del movimiento
      * @param fecha fecha en la que se realizó el movimiento
      */
@@ -29,11 +28,10 @@ public class Movimiento {
         this.fecha = fecha;
     }
 
-        /**
+    /**
      * Regresa la cuenta del movimiento
-     * 
+     *
      * @return La cuenta del movimiento
-     * @return 
      */
     public Integer getCuenta() {
         return cuenta;
@@ -41,9 +39,8 @@ public class Movimiento {
 
     /**
      * Establece la cuenta del movimiento
-     * 
+     *
      * @param cuenta La cuenta del movimiento
-     * @param cuenta 
      */
     public void setCuenta(Integer cuenta) {
         this.cuenta = cuenta;
@@ -51,9 +48,8 @@ public class Movimiento {
 
     /**
      * Regresa la fecha del movimiento
-     * 
+     *
      * @return La fecha del movimiento
-     * @return 
      */
     public Timestamp getFecha() {
         return fecha;
@@ -61,9 +57,8 @@ public class Movimiento {
 
     /**
      * Establece la fecha del movimiento
-     * 
+     *
      * @param fecha Fecha del movimiento
-     * @param fecha 
      */
     public void setFecha(Timestamp fecha) {
         this.fecha = fecha;
@@ -71,7 +66,7 @@ public class Movimiento {
 
     /**
      * Regresa cadena de atributos del movimiento
-     * 
+     *
      * @return Cadena de atributos del movimiento
      */
     @Override

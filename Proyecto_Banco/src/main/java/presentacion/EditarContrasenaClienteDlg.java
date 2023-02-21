@@ -12,8 +12,11 @@ import java.awt.Frame;
 import javax.swing.JOptionPane;
 
 /**
+ * Formulario que se encarga de editar la contrasena del cliente
  *
  * @author Edgar Emir Borbon Jimenez 00000233184
+ * @author Daniel Armando Peña García 000000229185
+ *
  */
 public class EditarContrasenaClienteDlg extends javax.swing.JFrame {
 
@@ -23,17 +26,25 @@ public class EditarContrasenaClienteDlg extends javax.swing.JFrame {
     Encriptador e = new Encriptador();
 
     /**
-     * Creates new form EditarContrasenaCliente
+     * Contructor
+     *
+     * @param editarDatosCliente ventana en la que fue invocado el formulario
+     * @param clienteDAO control del clienteDAO
+     * @param cliente cliente al que se le editara
      */
     public EditarContrasenaClienteDlg(Frame editarDatosCliente, IClienteDAO clienteDAO, Cliente cliente) {
         this.editarDatosCliente = editarDatosCliente;
         this.clienteDAO = clienteDAO;
         this.cliente = cliente;
         initComponents();
-        editarDatosCliente.setEnabled(false);
         this.setVisible(true);
     }
 
+    /**
+     * Metodo que se encarga de recolectar los datos del formulario
+     *
+     * @return un String con la contrasena
+     */
     private String capturarDatos() {
         String con1 = txtCon1.getText();
         String con2 = txtCon1.getText();
@@ -44,6 +55,11 @@ public class EditarContrasenaClienteDlg extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Se encarga de llevar acabo la actualizacion
+     *
+     * @return true si se hizo con exito, false en caso contrario
+     */
     private boolean actualizar() {
 
         String con = capturarDatos();
@@ -150,21 +166,28 @@ public class EditarContrasenaClienteDlg extends javax.swing.JFrame {
 
     private void txtCon2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCon2ActionPerformed
         // TODO add your handling code here:
-        editarDatosCliente.setVisible(true);
-        dispose();
     }//GEN-LAST:event_txtCon2ActionPerformed
 
+    /**
+     * Boton que se encarga de regresar a la ventana anterior
+     *
+     * @param evt ...
+     */
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         editarDatosCliente.setVisible(true);
         dispose();
 
     }//GEN-LAST:event_btnAtrasActionPerformed
-
+    /**
+     * Boton que ejecuta la actualizacion
+     *
+     * @param evt ...
+     */
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         // TODO add your handling code here:
         if (actualizar()) {
             JOptionPane.showMessageDialog(this, "Actualizacion exitosa", "Actualizacion", JOptionPane.INFORMATION_MESSAGE);
-            editarDatosCliente.setEnabled(true);
+            editarDatosCliente.setVisible(true);
             dispose();
         }
     }//GEN-LAST:event_btnActualizarActionPerformed

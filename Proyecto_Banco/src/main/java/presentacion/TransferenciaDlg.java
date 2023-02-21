@@ -15,9 +15,10 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- * Descripción de la clase:
+ * Formulario que transfiere
  *
- * @author Daniel Armando Peña Garcia ID:229185
+ * @author Edgar Emir Borbon Jimenez 00000233184
+ * @author Daniel Armando Peña García 000000229185
  */
 public class TransferenciaDlg extends javax.swing.JFrame {
 
@@ -26,7 +27,11 @@ public class TransferenciaDlg extends javax.swing.JFrame {
     Cuenta cuenta;
 
     /**
-     * Creates new form transferencia
+     * Contructor
+     *
+     * @param operacionCliente ventana por la que fue invocada
+     * @param cuenta cuenta del cliente
+     * @param cuentaDAO control cuentaDAO
      */
     public TransferenciaDlg(Frame operacionCliente, Cuenta cuenta, ICuentaDAO cuentaDAO) {
         this.operacionCliente = operacionCliente;
@@ -34,6 +39,28 @@ public class TransferenciaDlg extends javax.swing.JFrame {
         this.cuenta = cuenta;
         initComponents();
         this.setVisible(true);
+    }
+
+    private void transfiere() {
+        String numCuentaRecibe = txtNumeroCuenta.getText();
+        double monto = Double.parseDouble(txtMonto.getText());
+        Transferencia transferencia = null;
+        try {
+            Cuenta cuentaRecibe = cuentaDAO.consultarCuenta(numCuentaRecibe);
+            transferencia = cuentaDAO.tranferencia(this.cuenta, cuentaRecibe, monto);
+
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(TransferenciaDlg.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (transferencia == null) {
+            JOptionPane.showMessageDialog(null, "Transferencia sin éxito", "Error", JOptionPane.ERROR_MESSAGE);
+            operacionCliente.setVisible(true);
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Transferencia exitosa", "Transferencia", JOptionPane.PLAIN_MESSAGE);
+            operacionCliente.setVisible(true);
+            dispose();
+        }
     }
 
     /**
@@ -134,30 +161,19 @@ public class TransferenciaDlg extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     *Ejectua la transferencia
+     * @param evt
+     */
     private void btnTransferirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransferirActionPerformed
         // TODO add your handling code here:
-        String numCuentaRecibe = txtNumeroCuenta.getText();
-        double monto = Double.parseDouble(txtMonto.getText());
-        Transferencia transferencia = null;
-        try {
-            Cuenta cuentaRecibe = cuentaDAO.consultarCuenta(numCuentaRecibe);
-            transferencia = cuentaDAO.tranferencia(this.cuenta, cuentaRecibe, monto);
-            
-        } catch (PersistenciaException ex) {
-            Logger.getLogger(TransferenciaDlg.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if (transferencia == null) {
-                JOptionPane.showMessageDialog(null, "Transferencia sin éxito", "Error", JOptionPane.ERROR_MESSAGE);
-                operacionCliente.setVisible(true);
-                dispose();
-            }else{
-                JOptionPane.showMessageDialog(null, "Transferencia exitosa", "Transferencia", JOptionPane.PLAIN_MESSAGE);
-                operacionCliente.setVisible(true);
-                dispose();
-            }
-
+        transfiere();
     }//GEN-LAST:event_btnTransferirActionPerformed
 
+    /**
+     * Regresa a la ventana anterior
+     * @param evt
+     */
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         operacionCliente.setVisible(true);
         dispose();

@@ -17,8 +17,9 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- * Descripción de la clase:
+ * Formulario que se encarga de generar un retiro
  *
+ * @author Edgar Emir Borbon Jimenez 00000233184
  * @author Daniel Armando Peña Garcia ID:229185
  */
 public class GenerarRetiroSinCuentaDlg extends javax.swing.JFrame {
@@ -29,7 +30,11 @@ public class GenerarRetiroSinCuentaDlg extends javax.swing.JFrame {
     Retiros retiro = null;
 
     /**
-     * Creates new form RetiroSinCuenta
+     * Contructor
+     *
+     * @param operacionCliente ventana por la que fue invocada
+     * @param cuenta cuenata a generar retiro
+     * @param cuentaDAO control cuentaDAO
      */
     public GenerarRetiroSinCuentaDlg(Frame operacionCliente, Cuenta cuenta, ICuentaDAO cuentaDAO) {
         this.operacionCliente = operacionCliente;
@@ -147,26 +152,51 @@ public class GenerarRetiroSinCuentaDlg extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnGenerarRetiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarRetiroActionPerformed
+    /**
+     * Metodo que se encarga de crear el retiro
+     *
+     * @return true si se pudo, false en caso contrario
+     */
+    private boolean crear() {
         double monto = Double.parseDouble(txtMonto.getText());
         String contrasena = encriptar();
         try {
             retiro = cuentaDAO.generarRetiro(cuenta, monto, contrasena);
-            JOptionPane.showMessageDialog(this, "El folio que se genero es: "+retiro.getFolio(), "Folio generado", JOptionPane.INFORMATION_MESSAGE);
-            operacionCliente.setVisible(true);
-            dispose();
+            JOptionPane.showMessageDialog(this, "El folio que se genero es: " + retiro.getFolio(), "Folio generado", JOptionPane.INFORMATION_MESSAGE);
+            return true;
         } catch (PersistenciaException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "No se pudo generar un retiro", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return false;
+    }
+
+    /**
+     * Ejecuta el crear retiro
+     *
+     * @param evt ...
+     */
+    private void btnGenerarRetiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarRetiroActionPerformed
+        if (crear()) {
             operacionCliente.setVisible(true);
             dispose();
         }
     }//GEN-LAST:event_btnGenerarRetiroActionPerformed
 
+    /**
+     * Regresa a la ventana anterior
+     *
+     * @param evt ...
+     */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         operacionCliente.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    /**
+     * Encripta la contrasena del retiro
+     *
+     * @return String con la contrasena encriptada
+     */
     private String encriptar() {
         char[] arrayPass = passContrasena.getPassword();
         Encriptador encriptador = new Encriptador();

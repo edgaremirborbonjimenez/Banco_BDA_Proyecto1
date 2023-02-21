@@ -17,8 +17,10 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
+ * Formulario que registra a un nuevo cliente
  *
- * @author Usuario
+ * @author Edgar Emir Borbon Jimenez 00000233184
+ * @author Daniel Armando Peña García 000000229185
  */
 public class RegistrarClienteDlg extends javax.swing.JFrame {
 
@@ -28,7 +30,11 @@ public class RegistrarClienteDlg extends javax.swing.JFrame {
     private final IClienteDAO clientesDAO;
 
     /**
-     * Creates new form RegistrarCliente
+     * Contructor
+     *
+     * @param menu ventana por la que fue invocado
+     * @param direccionesDAO control direccionesDAO
+     * @param clienteDAO control clienteDAO
      */
     public RegistrarClienteDlg(Frame menu, IDireccionesDAO direccionesDAO, IClienteDAO clienteDAO) {
         this.menu = menu;
@@ -36,6 +42,48 @@ public class RegistrarClienteDlg extends javax.swing.JFrame {
         this.clientesDAO = clienteDAO;
         initComponents();
         this.setVisible(true);
+    }
+
+    /**
+     * Se encarga de registrar al nuevo cliente
+     */
+    private void registrar() {
+        char[] confirmar = passConfirmarContrasena.getPassword();
+        String passConfirmar = new String(confirmar);
+        char[] contrasena = passContrasena.getPassword();
+        String passContrasena = new String(contrasena);
+        System.out.println("Confirmar: " + passConfirmar + " Contraseña: " + passContrasena);
+        if (passConfirmar.equals(passContrasena)) {
+            String nombre = txtNombre.getText();
+            String apellidoP = txtApellidoPaterno.getText();
+            String apellidoM = txtApellidoMaterno.getText();
+            int diaNacimiento = Integer.parseInt(spinnerDia.getValue().toString());
+            int mesNacimiento = Integer.parseInt(spinnerMes.getValue().toString());
+            int anhioNacimiento = Integer.parseInt(txtAno.getText());
+            Date fechaNacimiento = new Date(anhioNacimiento, mesNacimiento, diaNacimiento);
+            String calle = txtCalle.getText();
+            String colonia = txtColonia.getText();
+            String numero = txtNumero.getText();
+            String celular = txtCelular.getText();
+            String contrasenaEncriptada = encriptar();
+
+            try {
+                Direcciones direccion = new Direcciones(calle, colonia, numero);
+                Direcciones direcciones = direccionesDAO.insertarDireccion(direccion);
+                cliente = new Cliente(nombre, apellidoP, apellidoM, fechaNacimiento, celular, contrasenaEncriptada, direcciones.getId());
+                Cliente nuevoCliente = clientesDAO.registrarCliente(cliente);
+            } catch (PersistenciaException ex) {
+                Logger.getLogger(RegistrarClienteDlg.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            menu.setVisible(true);
+            dispose();
+        } else if (txtCelular.getText().length() != 10) {
+            JOptionPane.showMessageDialog(null, "El número celular debe ser\n"
+                    + "de 10 carácteres", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Contraseñas no coinciden", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
     }
 
     /**
@@ -398,52 +446,31 @@ public class RegistrarClienteDlg extends javax.swing.JFrame {
     private void txtNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNumeroActionPerformed
-
+    /**
+     * Ejecuta el registro
+     *
+     * @param evt...
+     */
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        char[] confirmar = passConfirmarContrasena.getPassword();
-        String passConfirmar = new String(confirmar);
-        char[] contrasena = passContrasena.getPassword();
-        String passContrasena = new String(contrasena);
-        System.out.println("Confirmar: " + passConfirmar + " Contraseña: " + passContrasena);
-        if (passConfirmar.equals(passContrasena)) {
-            String nombre = txtNombre.getText();
-            String apellidoP = txtApellidoPaterno.getText();
-            String apellidoM = txtApellidoMaterno.getText();
-            int diaNacimiento = Integer.parseInt(spinnerDia.getValue().toString());
-            int mesNacimiento = Integer.parseInt(spinnerMes.getValue().toString());
-            int anhioNacimiento = Integer.parseInt(txtAno.getText());
-            Date fechaNacimiento = new Date(anhioNacimiento, mesNacimiento, diaNacimiento);
-            String calle = txtCalle.getText();
-            String colonia = txtColonia.getText();
-            String numero = txtNumero.getText();
-            String celular = txtCelular.getText();
-            String contrasenaEncriptada = encriptar();
 
-            try {
-                Direcciones direccion = new Direcciones(calle, colonia, numero);
-                Direcciones direcciones = direccionesDAO.insertarDireccion(direccion);
-                cliente = new Cliente(nombre, apellidoP, apellidoM, fechaNacimiento, celular, contrasenaEncriptada, direcciones.getId());
-                Cliente nuevoCliente = clientesDAO.registrarCliente(cliente);
-            } catch (PersistenciaException ex) {
-                Logger.getLogger(RegistrarClienteDlg.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            menu.setVisible(true);
-            dispose();
-        }else if(txtCelular.getText().length() != 10){
-            JOptionPane.showMessageDialog(null, "El número celular debe ser\n"
-                    + "de 10 carácteres", "Error", JOptionPane.ERROR_MESSAGE);
-        }else {
-            JOptionPane.showMessageDialog(null, "Contraseñas no coinciden", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-
+        registrar();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
+    /**
+     * Regresa a la ventana anterior
+     *
+     * @param evt ...
+     */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         menu.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    /**
+     * Vacia los campos
+     *
+     * @param evt ...
+     */
     private void btnRestaurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestaurarActionPerformed
         this.txtAno.setText("");
         this.txtApellidoMaterno.setText("");
@@ -455,6 +482,11 @@ public class RegistrarClienteDlg extends javax.swing.JFrame {
         this.txtCelular.setText("");
     }//GEN-LAST:event_btnRestaurarActionPerformed
 
+    /**
+     * Muestra o esconde el texto de la contrasena
+     *
+     * @param evt ...
+     */
     private void checkVerConstrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkVerConstrasenaActionPerformed
         if (checkVerConstrasena.isSelected()) {
             passContrasena.setEchoChar((char) 0);
@@ -462,7 +494,11 @@ public class RegistrarClienteDlg extends javax.swing.JFrame {
             passContrasena.setEchoChar('•');
         }
     }//GEN-LAST:event_checkVerConstrasenaActionPerformed
-
+    /**
+     * Muestra o esconde el texto de la contrasena de confirmacion
+     *
+     * @param evt ...
+     */
     private void checkVerConfirmacionContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkVerConfirmacionContrasenaActionPerformed
         if (checkVerConfirmacionContrasena.isSelected()) {
             passConfirmarContrasena.setEchoChar((char) 0);
@@ -486,6 +522,10 @@ public class RegistrarClienteDlg extends javax.swing.JFrame {
         }*/
     }//GEN-LAST:event_passConfirmarContrasenaKeyTyped
 
+    /**
+     * Encipta la contrasena
+     * @return La contrasena encriptada
+     */
     private String encriptar() {
         char[] arrayPass = passConfirmarContrasena.getPassword();
         Encriptador encriptador = new Encriptador();

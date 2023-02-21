@@ -35,7 +35,7 @@ CREATE TABLE `clientes` (
   UNIQUE KEY `celular_UNIQUE` (`celular`),
   KEY `idDireccion` (`idDireccion`),
   CONSTRAINT `clientes_ibfk_1` FOREIGN KEY (`idDireccion`) REFERENCES `direcciones` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +44,7 @@ CREATE TABLE `clientes` (
 
 LOCK TABLES `clientes` WRITE;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
-INSERT INTO `clientes` VALUES (3,'Emir','Borbon','','2003-10-02','6421068907','123',1),(5,'Daniel Armando','Peña','García','3902-12-10','6441942558','25695Qfo',3),(6,'Alejandro','Emir','Minjarez','3901-02-01','1234567891','2345',4);
+INSERT INTO `clientes` VALUES (3,'Emir','Borbon','','2003-10-02','6421068907','123',1),(5,'Daniel Armando','Peña','García','3902-12-10','6441942558','25695Qfo',3),(6,'Alejandro','Emir','Minjarez','3901-02-01','1234567891','2345',4),(7,'Edgar Emir','Borbon','Jimenez','3903-02-01','6400000000','765765',5);
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -82,7 +82,7 @@ CREATE TABLE `cuentas` (
   PRIMARY KEY (`id`),
   KEY `idCliente` (`idCliente`),
   CONSTRAINT `cuentas_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `clientes` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,8 +91,36 @@ CREATE TABLE `cuentas` (
 
 LOCK TABLES `cuentas` WRITE;
 /*!40000 ALTER TABLE `cuentas` DISABLE KEYS */;
-INSERT INTO `cuentas` VALUES (14,'edf01606-afdb-11ed-8ad0-141877c424a4','2023-02-18',416.00,3),(15,'ee0eac5a-afdb-11ed-8ad0-141877c424a4','2023-02-18',800.00,4),(16,'9122025398','2023-02-21',384.00,2),(17,'9082813495','2023-02-21',0.00,6);
+INSERT INTO `cuentas` VALUES (14,'edf01606-afdb-11ed-8ad0-141877c424a4','2023-02-18',100.00,3),(15,'ee0eac5a-afdb-11ed-8ad0-141877c424a4','2023-02-18',1000.00,4),(16,'9122025398','2023-02-21',1000.00,2),(17,'9082813495','2023-02-21',1000.00,6),(18,'1602627460','2023-02-21',1700.00,7),(19,'3528961515','2023-02-21',0.00,3),(20,'5420902674','2023-02-21',5000.00,3);
 /*!40000 ALTER TABLE `cuentas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `depositos`
+--
+
+DROP TABLE IF EXISTS `depositos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `depositos` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `idCuenta` int NOT NULL,
+  `fecha` datetime DEFAULT (curtime()),
+  `monto` decimal(13,2) NOT NULL DEFAULT (0.0),
+  PRIMARY KEY (`id`),
+  KEY `idCuenta` (`idCuenta`),
+  CONSTRAINT `depositos_ibfk_1` FOREIGN KEY (`idCuenta`) REFERENCES `cuentas` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `depositos`
+--
+
+LOCK TABLES `depositos` WRITE;
+/*!40000 ALTER TABLE `depositos` DISABLE KEYS */;
+INSERT INTO `depositos` VALUES (1,18,'2023-02-21 05:02:01',100.00),(2,18,'2023-02-21 05:21:25',100.00),(3,14,'2023-02-21 05:31:05',200.00);
+/*!40000 ALTER TABLE `depositos` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -108,7 +136,7 @@ CREATE TABLE `direcciones` (
   `colonia` varchar(20) NOT NULL,
   `numeroExterior` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -117,7 +145,7 @@ CREATE TABLE `direcciones` (
 
 LOCK TABLES `direcciones` WRITE;
 /*!40000 ALTER TABLE `direcciones` DISABLE KEYS */;
-INSERT INTO `direcciones` VALUES (2,'Heriberto aja','Indeur','#30'),(3,'Jardines','Casa Blanca','2906'),(4,'Mi','Casa','0001');
+INSERT INTO `direcciones` VALUES (2,'Heriberto aja','Indeur','#30'),(3,'Jardines','Casa Blanca','2906'),(4,'Mi','Casa','0001'),(5,'Heriberto Aja','Indeur','30');
 /*!40000 ALTER TABLE `direcciones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -140,7 +168,7 @@ CREATE TABLE `retiros` (
   PRIMARY KEY (`id`),
   KEY `idCuenta` (`idCuenta`),
   CONSTRAINT `retiros_ibfk_1` FOREIGN KEY (`idCuenta`) REFERENCES `cuentas` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -149,7 +177,7 @@ CREATE TABLE `retiros` (
 
 LOCK TABLES `retiros` WRITE;
 /*!40000 ALTER TABLE `retiros` DISABLE KEYS */;
-INSERT INTO `retiros` VALUES (2,15,200.00,'2023-02-18 15:31:04','817268635','564654','retirado',NULL),(3,15,200.00,'2023-02-20 21:28:37','654654','654654','retirado','2023-02-20 21:30:05'),(4,14,50.00,'2023-02-21 00:36:13','443402582','234567','pendiente',NULL),(5,14,50.00,'2023-02-21 00:37:14','278759778','qqqqq','pendiente',NULL),(6,14,50.00,'2023-02-21 00:37:54','912392580','Aq1%$','pendiente',NULL);
+INSERT INTO `retiros` VALUES (2,15,200.00,'2023-02-18 15:31:04','817268635','564654','retirado',NULL),(3,15,200.00,'2023-02-20 21:28:37','654654','654654','retirado','2023-02-20 21:30:05'),(4,14,50.00,'2023-02-21 00:36:13','443402582','234567','pendiente',NULL),(5,14,50.00,'2023-02-21 00:37:14','278759778','qqqqq','pendiente',NULL),(6,14,50.00,'2023-02-21 00:37:54','912392580','Aq1%$','pendiente',NULL),(7,18,500.00,'2023-02-21 03:51:38','843836944','765765','retirado','2023-02-21 03:53:36'),(8,18,500.00,'2023-02-21 03:56:21','93198293','765765','retirado','2023-02-21 03:59:47'),(9,14,500.00,'2023-02-21 05:31:24','176959086','765765','retirado','2023-02-21 05:31:53');
 /*!40000 ALTER TABLE `retiros` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -171,7 +199,7 @@ CREATE TABLE `transferencias` (
   KEY `idCuentaDestino` (`idCuentaDestino`),
   CONSTRAINT `transferencias_ibfk_1` FOREIGN KEY (`idCuentaUsuario`) REFERENCES `cuentas` (`id`),
   CONSTRAINT `transferencias_ibfk_2` FOREIGN KEY (`idCuentaDestino`) REFERENCES `cuentas` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -180,7 +208,7 @@ CREATE TABLE `transferencias` (
 
 LOCK TABLES `transferencias` WRITE;
 /*!40000 ALTER TABLE `transferencias` DISABLE KEYS */;
-INSERT INTO `transferencias` VALUES (5,14,15,400.00,'2023-02-18 15:31:04'),(6,14,16,50.00,'2023-02-21 00:16:04'),(7,14,16,50.00,'2023-02-21 00:18:34'),(8,14,16,100.00,'2023-02-21 00:21:52'),(9,14,16,100.00,'2023-02-21 00:22:00'),(10,14,16,54.00,'2023-02-21 00:41:18'),(11,14,16,30.00,'2023-02-21 00:49:24');
+INSERT INTO `transferencias` VALUES (5,14,15,400.00,'2023-02-18 15:31:04'),(6,14,16,50.00,'2023-02-21 00:16:04'),(7,14,16,50.00,'2023-02-21 00:18:34'),(8,14,16,100.00,'2023-02-21 00:21:52'),(9,14,16,100.00,'2023-02-21 00:22:00'),(10,14,16,54.00,'2023-02-21 00:41:18'),(11,14,16,30.00,'2023-02-21 00:49:24'),(12,14,18,600.00,'2023-02-21 05:32:56');
 /*!40000 ALTER TABLE `transferencias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -201,4 +229,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-02-21  3:09:00
+-- Dump completed on 2023-02-21  5:55:41

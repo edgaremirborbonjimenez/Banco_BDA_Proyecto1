@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Formulario que contiene lo necesario para depositar
  * @author Edgar Emir Borbon Jimenez 00000233184
  * @author Daniel Armando Peña García 000000229185
  */
@@ -28,7 +28,11 @@ public class DepositarDlg extends javax.swing.JFrame {
     Frame frame;
 
     /**
-     * Creates new form DepositarDlg
+     * Contructor
+     * @param frame panel del que fue llamado
+     * @param cuenta Cuenta del usuario a la que se le depsitara
+     * @param cuentaDAO objeto cuentaDAO que contiene el control del CuentaDAO
+     * @param depositosDAO objeto depositoDAO que contiene el control del DepositoDAO
      */
     public DepositarDlg(Frame frame, Cuenta cuenta, ICuentaDAO cuentaDAO, IDepositoDAO depositosDAO) {
         this.frame = frame;
@@ -38,6 +42,26 @@ public class DepositarDlg extends javax.swing.JFrame {
         initComponents();
         frame.setEnabled(false);
         this.setVisible(true);
+    }
+    
+    /**
+     * Metodo que se encarga de llevar acabo el deposito
+     */
+    private void depositar(){
+            double monto = Double.parseDouble(txtMonto.getText());
+        Deposito deposito = null;
+        try {
+            deposito = depositoDAO.ingresarDeposito(cuenta, monto);
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(DepositarDlg.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (deposito == null) {
+            JOptionPane.showMessageDialog(null, "No se pudo realizar el deposito", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Deposito Exitoso");
+            frame.setEnabled(true);
+            dispose();
+        }
     }
 
     /**
@@ -142,25 +166,21 @@ public class DepositarDlg extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMontoActionPerformed
 
+    /**
+     * Boton que contiene el funcionamiento de hacer el deposito
+     * @param evt ..
+     */
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         // TODO add your handling code here:
-        double monto = Double.parseDouble(txtMonto.getText());
-        Deposito deposito = null;
-        try {
-            deposito = depositoDAO.ingresarDeposito(cuenta, monto);
-        } catch (PersistenciaException ex) {
-            Logger.getLogger(DepositarDlg.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if (deposito == null) {
-            JOptionPane.showMessageDialog(null, "No se pudo realizar el deposito", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, "Deposito Exitoso");
-            frame.setEnabled(true);
-            dispose();
-        }
+        depositar();
+
 
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
+    /**
+     * Botbon que permite regresar a la ventana anterios
+     * @param evt ..
+     */
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         frame.setEnabled(true);
         dispose();

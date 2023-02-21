@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package implementaciones;
 
 import dominio.Cliente;
@@ -262,7 +258,6 @@ public class CuentaDAO implements ICuentaDAO {
                         resultado.getString("disponible").toString(),
                         null,
                         resultado.getTimestamp("fecha"));
-                System.out.println("Aqui!!!!!!!!!!!!!");
             }
 
             commCommit.execute();

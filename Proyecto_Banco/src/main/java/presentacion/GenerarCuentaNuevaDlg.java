@@ -12,9 +12,10 @@ import java.awt.Frame;
 import javax.swing.JOptionPane;
 
 /**
+ * Formulario que s enecarga de generar una cuenta nueva
  *
  * @author Edgar Emir Borbon Jimenez 00000233184
- * @author Daniel Armando Peña García 000000229185 
+ * @author Daniel Armando Peña García 000000229185
  */
 public class GenerarCuentaNuevaDlg extends javax.swing.JFrame {
 
@@ -24,10 +25,11 @@ public class GenerarCuentaNuevaDlg extends javax.swing.JFrame {
     Cuenta cuenta;
 
     /**
-     * 
-     * @param operacionesCliente
-     * @param cuentaDAO
-     * @param cliente 
+     * Contructor
+     *
+     * @param operacionesCliente ventana por la que fue invocada
+     * @param cuentaDAO control cuentaDAO
+     * @param cliente cliente al que se le creara una cuenta nueva
      */
     public GenerarCuentaNuevaDlg(Frame operacionesCliente, ICuentaDAO cuentaDAO, Cliente cliente) {
         this.operacionesCliente = operacionesCliente;
@@ -38,8 +40,9 @@ public class GenerarCuentaNuevaDlg extends javax.swing.JFrame {
     }
 
     /**
-     * 
-     * @return 
+     * Se encarga de recolectar los datos del formulario y validarlos
+     *
+     * @return el saldo inicial de la cuenta
      */
     public Double recolecarDatos() {
         String monto = this.txtMonto.getText();
@@ -53,8 +56,9 @@ public class GenerarCuentaNuevaDlg extends javax.swing.JFrame {
     }
 
     /**
-     * 
-     * @return 
+     * Crea la cuenta
+     *
+     * @return true si se pudo, false en caso contrario
      */
     private boolean generar() {
         Double saldo = recolecarDatos();
@@ -152,8 +156,8 @@ public class GenerarCuentaNuevaDlg extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * 
-     * @param evt 
+     *Boton qu ejecuta la creacion de la cuenta
+     * @param evt...
      */
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         // TODO add your handling code here:
@@ -165,8 +169,8 @@ public class GenerarCuentaNuevaDlg extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCrearActionPerformed
 
     /**
-     * 
-     * @param evt 
+     * Boton que regresa a la ventana anterior
+     * @param evt ...
      */
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         // TODO add your handling code here:

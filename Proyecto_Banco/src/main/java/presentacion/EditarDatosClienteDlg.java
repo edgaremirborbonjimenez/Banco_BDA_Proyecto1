@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package presentacion;
 
 import dominio.Cliente;
@@ -9,24 +5,30 @@ import interfaces.IClienteDAO;
 import java.awt.Frame;
 
 /**
+ * Formulario que se encarga de contener las opciones de editar datos del
+ * cliente
  *
  * @author Edgar Emir Borbon Jimenez 00000233184
+ * @author Daniel Armando Peña García 000000229185
  */
 public class EditarDatosClienteDlg extends javax.swing.JFrame {
 
     Frame operacionesCliente;
     Cliente cliente;
-    IClienteDAO  clienteDAO;
+    IClienteDAO clienteDAO;
 
     /**
-     * Creates new form EditarDatosCliente
+     * Contructor
+     *
+     * @param operacionesCliente ventana por la que fue invocado
+     * @param cliente cliente al que se le actualizara
+     * @param clienteDAO control de clienteDAO
      */
-    public EditarDatosClienteDlg(Frame operacionesCliente,Cliente cliente,IClienteDAO clienteDAO) {
+    public EditarDatosClienteDlg(Frame operacionesCliente, Cliente cliente, IClienteDAO clienteDAO) {
         this.operacionesCliente = operacionesCliente;
-        this.cliente=cliente;
-        this.clienteDAO=clienteDAO;
+        this.cliente = cliente;
+        this.clienteDAO = clienteDAO;
         initComponents();
-        operacionesCliente.setEnabled(false);
         this.setVisible(true);
     }
 
@@ -133,26 +135,51 @@ public class EditarDatosClienteDlg extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Boton que abre la ventana EditarFechaNacimiento
+     *
+     * @param evt..
+     */
     private void btnFechaNacimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFechaNacimientoActionPerformed
         this.setVisible(false);
         EditarFechaNacimientoDlg editarNacimiento = new EditarFechaNacimientoDlg(this, cliente, clienteDAO);
     }//GEN-LAST:event_btnFechaNacimientoActionPerformed
 
+    /**
+     * Boton que abre la ventana EditarContrasena
+     *
+     * @param evt...
+     */
     private void btnPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPasswordActionPerformed
         this.setVisible(false);
         EditarContrasenaClienteDlg editarContrasena = new EditarContrasenaClienteDlg(this, clienteDAO, cliente);
     }//GEN-LAST:event_btnPasswordActionPerformed
 
+    /**
+     * Boton que abre la ventana EditarNombre
+     *
+     * @param evt...
+     */
     private void btnNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNombreActionPerformed
         this.setVisible(false);
-        EditarNombreClienteDlg editarNombre = new EditarNombreClienteDlg(this,clienteDAO,cliente);
+        EditarNombreClienteDlg editarNombre = new EditarNombreClienteDlg(this, clienteDAO, cliente);
     }//GEN-LAST:event_btnNombreActionPerformed
 
+    /**
+     * Boton que abre la ventana EditarCelular
+     *
+     * @param evt ...
+     */
     private void btnCelularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCelularActionPerformed
         this.setVisible(false);
         EditarCelularClienteDlg editarCelular = new EditarCelularClienteDlg(this, cliente, clienteDAO);
     }//GEN-LAST:event_btnCelularActionPerformed
 
+    /**
+     * Boton que regresa a la ventana anterior
+     *
+     * @param evt...
+     */
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         // TODO add your handling code here:
         operacionesCliente.setVisible(true);
