@@ -14,6 +14,7 @@ import java.awt.Frame;
 import java.math.BigDecimal;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  * Descripción de la clase:
@@ -151,11 +152,12 @@ public class GenerarRetiroSinCuenta extends javax.swing.JFrame {
         String contrasena = encriptar();
         try {
             retiro = cuentaDAO.generarRetiro(cuenta, monto, contrasena);
+            JOptionPane.showMessageDialog(this, "El folio que se genero es: "+retiro.getFolio(), "Folio generado", JOptionPane.INFORMATION_MESSAGE);
             operacionCliente.setEnabled(true);
             operacionCliente.setVisible(true);
             dispose();
         } catch (PersistenciaException ex) {
-            Logger.getLogger(GenerarRetiroSinCuenta.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnGenerarRetiroActionPerformed
 

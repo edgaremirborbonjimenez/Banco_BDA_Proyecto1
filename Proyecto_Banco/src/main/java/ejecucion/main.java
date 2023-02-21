@@ -15,6 +15,7 @@ import interfaces.ICuentaDAO;
 import java.sql.Date;
 import presentacion.Menu;
 import dominio.*;
+import interfaces.IDepositoDAO;
 import interfaces.IDireccionesDAO;
 
 /**
@@ -32,9 +33,10 @@ public class main {
         IClienteDAO clienteDao = new ClienteDAO(bd);
         ICuentaDAO cuentaDao = new CuentaDAO(bd);
         IDireccionesDAO direccionDAO = new DireccionDAO(bd);
+        IDepositoDAO depositoDAO = new DepositoDAO(bd);
         //Cliente cliente = new Cliente("Daniel", "Peña", "García", "2002-11-10", "6441942558", "14584Pen");
    
-        Menu menu = new Menu(clienteDao, cuentaDao, direccionDAO);
+        Menu menu = new Menu(clienteDao, cuentaDao, direccionDAO, depositoDAO);
         menu.setVisible(true);
     }
 

@@ -39,7 +39,10 @@ public class DepositoDAO implements IDepositoDAO {
                 + "VALUES(?,?)";
         String select = "SELECT * FROM DEPOSITOS WHERE id = ?";
         try (
-                Connection conexion = generadorConexiones.crearConexion(); PreparedStatement crear = conexion.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS); PreparedStatement consulta = conexion.prepareStatement(select);) {
+                Connection conexion = generadorConexiones.crearConexion();
+                PreparedStatement crear = conexion.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+                PreparedStatement consulta = conexion.prepareStatement(select);
+            ) {
             crear.setInt(1, cuenta.getId());
             crear.setDouble(2, monto);
             crear.executeUpdate();

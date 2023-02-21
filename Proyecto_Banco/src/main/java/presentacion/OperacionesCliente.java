@@ -299,7 +299,7 @@ public class OperacionesCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnModificarDatosActionPerformed
 
     private void btnDepositarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDepositarActionPerformed
-        DepositarDlg depositar = new DepositarDlg(this, cuenta, cuentaDAO depositoDAO);
+        DepositarDlg despositar = new DepositarDlg(this, cuenta, cuentaDAO, depositoDAO);
     }//GEN-LAST:event_btnDepositarActionPerformed
 
     private void llenarComboBox(){

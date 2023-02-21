@@ -94,12 +94,11 @@ public class ClienteDAO implements IClienteDAO {
                 Cliente cliente = new Cliente(id, nombre, apellidoP, apellidoM, fechaNacimiento, celular, contrasena, direccion);
                 return cliente;
             }
-            LOG.log(Level.WARNING, "Alguno de los datos está incorrecto");
+            return null;
         } catch (SQLException e) {
             LOG.log(Level.SEVERE, e.getMessage());
-            System.out.println("Aqui");
+            throw new PersistenciaException("Error no se pudo iniciar Sesion");
         }
-        return null;
     }
 
     @Override
@@ -117,8 +116,8 @@ public class ClienteDAO implements IClienteDAO {
             return afectados;
         } catch (SQLException e) {
             LOG.log(Level.SEVERE, e.getMessage());
+            throw new PersistenciaException("Error no se pudo actualizar el nombre");
         }
-        return 0;
     }
 
     @Override
@@ -134,8 +133,8 @@ public class ClienteDAO implements IClienteDAO {
             return afectados;
         } catch (SQLException e) {
             LOG.log(Level.SEVERE, e.getMessage());
+            throw new PersistenciaException("No se pudo actualziar la fecha de nacimiento");
         }
-        return 0;
     }
 
     @Override
@@ -151,8 +150,8 @@ public class ClienteDAO implements IClienteDAO {
             return afectados;
         } catch (SQLException e) {
             LOG.log(Level.SEVERE, e.getMessage());
+            throw new PersistenciaException("No se pudo actualizar el celular");
         }
-        return 0;
     }
 
     @Override
@@ -168,8 +167,8 @@ public class ClienteDAO implements IClienteDAO {
             return afectados;
         } catch (SQLException e) {
             LOG.log(Level.SEVERE, e.getMessage());
+            throw new PersistenciaException("No se pudo actualizar la contrasena");
         }
-        return 0;
     }
 
 }
