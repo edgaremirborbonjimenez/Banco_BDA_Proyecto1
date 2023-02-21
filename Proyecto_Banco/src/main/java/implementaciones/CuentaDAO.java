@@ -299,34 +299,6 @@ public class CuentaDAO implements ICuentaDAO {
     }
 
     @Override
-    public DefaultComboBoxModel<Cuenta> listaCuentas(Cliente cliente) throws PersistenciaException {
-
-        List<Cuenta> listaCuentas = new LinkedList<>();
-        String consulta = "SELECT * FROM Cuentas "
-                + "WHERE id_cliente = ?";
-
-        try (
-                 Connection conexion = generadorConexiones.crearConexion();  PreparedStatement comando = conexion.prepareStatement(consulta);) {
-            comando.setInt(1, cliente.getId());
-            ResultSet resultado = comando.executeQuery();
-
-            while (resultado.next()) {
-                Integer id = resultado.getInt("id");
-                String numCuenta = resultado.getString("numCuenta");
-                Date fechaApertura = resultado.getDate("fechaApertura");
-                BigDecimal saldo = resultado.getBigDecimal("saldo");
-                Integer id_cliente = resultado.getInt("idcliente");
-                Cuenta cuenta = new Cuenta(id, numCuenta, fechaApertura, saldo, id_cliente);
-                listaCuentas.add(cuenta);
-            }
-
-        } catch (SQLException e) {
-
-        }
-        return null;
-    }
-
-    @Override
     public boolean procederRetiro(Integer folio, String contrasena) throws PersistenciaException {
         try (
                  Connection con = this.generadorConexiones.crearConexion();
@@ -390,6 +362,55 @@ public class CuentaDAO implements ICuentaDAO {
             throw new PersistenciaException("No se pudo proceder el retiro");
         }
 
+    }
+    
+    @Override
+    public LinkedList<String> listaCuentas(Cliente cliente) throws PersistenciaException {
+
+        LinkedList<String> listaCuentas = new LinkedList<>();
+        String consulta = "SELECT numCuenta FROM Cuentas "
+                + "WHERE idCliente = ?";
+
+        try (
+                Connection conexion = generadorConexiones.crearConexion(); PreparedStatement comando = conexion.prepareStatement(consulta);) {
+            comando.setInt(1, cliente.getId());
+            ResultSet resultado = comando.executeQuery();
+
+            while (resultado.next()) {
+                String numCuenta = resultado.getString("numCuenta");
+                listaCuentas.add(numCuenta);
+                
+            }
+            return listaCuentas;
+        } catch (SQLException e) {
+            LOG.log(Level.SEVERE, "No se pudo consultar el historial de movimientos: " + e.getMessage());
+        }
+        return null;
+    }
+
+    @Override
+    public Cuenta consultarCuenta(String numCuenta) {
+        String consulta = "SELECT * FROM Cuentas "
+                + "WHERE numCuenta = ?";
+        try (
+                Connection conexion = generadorConexiones.crearConexion(); PreparedStatement comando = conexion.prepareStatement(consulta);) {
+            comando.setString(1, numCuenta);
+            Cuenta cuenta = null;
+            ResultSet resultado = comando.executeQuery();
+            if (resultado.next()) {
+                Integer id = resultado.getInt("id");
+                String numCuentaExtraida = resultado.getString("numCuenta");
+                Date fechaApertura = resultado.getDate("fechaApertura");
+                BigDecimal saldo = resultado.getBigDecimal("saldo");
+                Integer idCliente = resultado.getInt("idCliente");
+                cuenta = new Cuenta(id, numCuenta, fechaApertura, saldo, idCliente);
+                return cuenta;
+            }
+            LOG.log(Level.WARNING, "Se insertó el cliente pero no se generó id");
+        } catch (SQLException e) {
+            LOG.log(Level.SEVERE, e.getMessage());
+        }
+        return null;
     }
 
 }

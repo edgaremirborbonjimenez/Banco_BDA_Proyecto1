@@ -8,7 +8,6 @@ import dominio.Cliente;
 import excepciones.PersistenciaException;
 import interfaces.IClienteDAO;
 import interfaces.ICuentaDAO;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 

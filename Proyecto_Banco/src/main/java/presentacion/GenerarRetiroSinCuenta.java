@@ -6,7 +6,14 @@
 
 package presentacion;
 
+import dominio.Cuenta;
+import dominio.Retiros;
+import excepciones.PersistenciaException;
+import interfaces.ICuentaDAO;
 import java.awt.Frame;
+import java.math.BigDecimal;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Descripción de la clase: 
@@ -16,10 +23,15 @@ import java.awt.Frame;
 public class GenerarRetiroSinCuenta extends javax.swing.JFrame {
 
     Frame operacionCliente;
+    Cuenta cuenta;
+    private final ICuentaDAO cuentaDAO;
+    Retiros retiro = null;
     
     /** Creates new form RetiroSinCuenta */
-    public GenerarRetiroSinCuenta(Frame operacionCliente) {
+    public GenerarRetiroSinCuenta(Frame operacionCliente, Cuenta cuenta, ICuentaDAO cuentaDAO) {
         this.operacionCliente = operacionCliente;
+        this.cuentaDAO = cuentaDAO;
+        this.cuenta = cuenta;
         initComponents();
         this.setVisible(true);
     }
@@ -39,9 +51,7 @@ public class GenerarRetiroSinCuenta extends javax.swing.JFrame {
         label$ = new javax.swing.JLabel();
         btnGenerarRetiro = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        labelFolio = new javax.swing.JLabel();
         labelContrasena = new javax.swing.JLabel();
-        txtFolio = new javax.swing.JTextField();
         txtContrasena = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -72,14 +82,8 @@ public class GenerarRetiroSinCuenta extends javax.swing.JFrame {
             }
         });
 
-        labelFolio.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        labelFolio.setText("Folio: ");
-
         labelContrasena.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         labelContrasena.setText("Contraseña: ");
-
-        txtFolio.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        txtFolio.setText("000000001");
 
         txtContrasena.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtContrasena.setText("123456789");
@@ -90,30 +94,22 @@ public class GenerarRetiroSinCuenta extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(labelFolio)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(labelContrasena)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtContrasena))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(labelContrasena)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtContrasena))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnCancelar)
-                                .addGap(199, 199, 199))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(labelMonto)
-                                .addGap(18, 18, 18)
-                                .addComponent(label$)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtFolio, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                                    .addComponent(txtMonto))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
-                        .addComponent(btnGenerarRetiro)))
-                .addContainerGap())
+                        .addComponent(btnCancelar)
+                        .addGap(44, 44, 44)
+                        .addComponent(btnGenerarRetiro))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(labelMonto)
+                        .addGap(18, 18, 18)
+                        .addComponent(label$)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,26 +121,20 @@ public class GenerarRetiroSinCuenta extends javax.swing.JFrame {
                     .addComponent(labelMonto))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelFolio)
-                    .addComponent(txtFolio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelContrasena)
                     .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnGenerarRetiro)
-                    .addComponent(btnCancelar))
-                .addContainerGap())
+                    .addComponent(btnCancelar)
+                    .addComponent(btnGenerarRetiro))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,7 +146,13 @@ public class GenerarRetiroSinCuenta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGenerarRetiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarRetiroActionPerformed
-        // TODO add your handling code here:
+        double monto = Double.parseDouble(txtMonto.getText());
+        String contrasena = txtContrasena.getText();
+        try {
+            retiro = cuentaDAO.generarRetiro(cuenta, monto, contrasena);
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(GenerarRetiroSinCuenta.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnGenerarRetiroActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -171,10 +167,8 @@ public class GenerarRetiroSinCuenta extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel label$;
     private javax.swing.JLabel labelContrasena;
-    private javax.swing.JLabel labelFolio;
     private javax.swing.JLabel labelMonto;
     private javax.swing.JTextField txtContrasena;
-    private javax.swing.JTextField txtFolio;
     private javax.swing.JTextField txtMonto;
     // End of variables declaration//GEN-END:variables
 

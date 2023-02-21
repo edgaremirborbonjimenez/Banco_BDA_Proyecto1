@@ -3,12 +3,11 @@ package interfaces;
 
 import dominio.Cliente;
 import dominio.Cuenta;
-import dominio.Movimiento;
 import dominio.MovimientoHistorial;
 import dominio.Retiros;
 import dominio.Transferencia;
 import excepciones.PersistenciaException;
-import java.time.LocalDateTime;
+import java.util.LinkedList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 
@@ -23,6 +22,7 @@ public interface ICuentaDAO {
     Transferencia tranferencia(Cuenta cuentaUsario,Cuenta cuentaDestino,double monto) throws PersistenciaException;
     Retiros generarRetiro(Cuenta cuenta,double monto,String contrasena) throws PersistenciaException;
     List<MovimientoHistorial> hisotrialMovimientos(Cuenta cuenta)throws PersistenciaException;
-    DefaultComboBoxModel<Cuenta> listaCuentas(Cliente cliente) throws PersistenciaException;
     boolean procederRetiro(Integer folio,String contrasena)throws PersistenciaException;
+    LinkedList<String> listaCuentas(Cliente cliente) throws PersistenciaException;
+    Cuenta consultarCuenta(String numCuenta) throws PersistenciaException;
 }

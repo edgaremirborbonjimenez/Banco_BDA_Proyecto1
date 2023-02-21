@@ -12,9 +12,9 @@ import excepciones.PersistenciaException;
 import interfaces.IClienteDAO;
 import interfaces.ICuentaDAO;
 import java.awt.Frame;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DefaultComboBoxModel;
 
 /**
  * Descripción de la clase: 
@@ -27,7 +27,8 @@ public class OperacionesCliente extends javax.swing.JFrame {
     Cliente cliente = null;
     IClienteDAO clienteDAO;
     ICuentaDAO cuentaDAO;
-    DefaultComboBoxModel listaCuentas;
+    Cuenta cuenta;
+    LinkedList<String> listaCuentas;
 
     /**
      * 
@@ -43,11 +44,8 @@ public class OperacionesCliente extends javax.swing.JFrame {
         this.cuentaDAO = cuentaDAO;
         initComponents();
         this.setVisible(true);
-        try {
-            listaCuentas = cuentaDAO.listaCuentas(cliente);
-        } catch (PersistenciaException ex) {
-            Logger.getLogger(OperacionesCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        llenarComboBox();
+        consultarItemSelectComboBox();
     }
     
     
@@ -231,14 +229,12 @@ public class OperacionesCliente extends javax.swing.JFrame {
 
     private void btnGenerarRetiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarRetiroActionPerformed
         this.setEnabled(false);
-        GenerarRetiroSinCuenta generarRetiroSinCuenta = new GenerarRetiroSinCuenta(this);
+        GenerarRetiroSinCuenta generarRetiroSinCuenta = new GenerarRetiroSinCuenta(this, cuenta, cuentaDAO);
     }//GEN-LAST:event_btnGenerarRetiroActionPerformed
 
     private void btnHistorialMovimientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialMovimientosActionPerformed
         // TODO add your handling code here:
         this.setEnabled(false);
-        //Necesito la Cuenta del usuario
-        Cuenta cuenta = new Cuenta(15, "ee0eac5a-afdb-11ed-8ad0-141877c424a4", null, null, null);
         HistorialMovimientosCuenta historialMovimientosCuenta = new HistorialMovimientosCuenta(this,cuenta,this.cuentaDAO);
     }//GEN-LAST:event_btnHistorialMovimientosActionPerformed
 
@@ -252,9 +248,30 @@ public class OperacionesCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void boxNumeroCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxNumeroCuentaActionPerformed
-
+        consultarItemSelectComboBox();
     }//GEN-LAST:event_boxNumeroCuentaActionPerformed
 
+    private void llenarComboBox(){
+        try {
+            listaCuentas = cuentaDAO.listaCuentas(cliente);
+            System.out.println(listaCuentas.get(0));
+            for (int i = 0; i < listaCuentas.size(); i++) {
+                boxNumeroCuenta.addItem(listaCuentas.get(i));
+            }
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(OperacionesCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void consultarItemSelectComboBox(){
+        String select = String.valueOf(boxNumeroCuenta.getSelectedItem());
+        try {
+            cuenta = cuentaDAO.consultarCuenta(select);
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(OperacionesCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        labelMonto.setText("$" + cuenta.getSaldo());
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> boxNumeroCuenta;
