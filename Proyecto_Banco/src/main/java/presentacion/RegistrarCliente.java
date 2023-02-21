@@ -4,7 +4,17 @@
  */
 package presentacion;
 
+import dominio.Cliente;
+import dominio.Direcciones;
+import encriptador.Encriptador;
+import excepciones.PersistenciaException;
+import interfaces.IClienteDAO;
+import interfaces.IDireccionesDAO;
 import java.awt.Frame;
+import java.sql.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,12 +23,17 @@ import java.awt.Frame;
 public class RegistrarCliente extends javax.swing.JFrame {
 
     Frame menu;
-    
+    Cliente cliente = null;
+    private final IDireccionesDAO direccionesDAO;
+    private final IClienteDAO clientesDAO;
+
     /**
      * Creates new form RegistrarCliente
      */
-    public RegistrarCliente(Frame menu) {
+    public RegistrarCliente(Frame menu, IDireccionesDAO direccionesDAO, IClienteDAO clienteDAO) {
         this.menu = menu;
+        this.direccionesDAO = direccionesDAO;
+        this.clientesDAO = clienteDAO;
         initComponents();
         this.setVisible(true);
     }
@@ -57,14 +72,15 @@ public class RegistrarCliente extends javax.swing.JFrame {
         txtAno = new javax.swing.JTextField();
         labelAno = new javax.swing.JLabel();
         labelDatosPersonales = new javax.swing.JLabel();
-        labelTelefono = new javax.swing.JLabel();
-        txtTelefono = new javax.swing.JTextField();
+        labelCelular = new javax.swing.JLabel();
+        txtCelular = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         passContrasena = new javax.swing.JPasswordField();
         passConfirmarContrasena = new javax.swing.JPasswordField();
         checkVerConstrasena = new javax.swing.JCheckBox();
         checkVerConfirmacionContrasena = new javax.swing.JCheckBox();
+        labelError = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registrar Cliente");
@@ -177,11 +193,11 @@ public class RegistrarCliente extends javax.swing.JFrame {
         labelDatosPersonales.setForeground(new java.awt.Color(255, 255, 255));
         labelDatosPersonales.setText("Datos Personales");
 
-        labelTelefono.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        labelTelefono.setForeground(new java.awt.Color(255, 255, 255));
-        labelTelefono.setText("Telefono");
+        labelCelular.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        labelCelular.setForeground(new java.awt.Color(255, 255, 255));
+        labelCelular.setText("Celular");
 
-        txtTelefono.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        txtCelular.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -194,14 +210,38 @@ public class RegistrarCliente extends javax.swing.JFrame {
         passContrasena.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         passConfirmarContrasena.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        passConfirmarContrasena.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passConfirmarContrasenaActionPerformed(evt);
+            }
+        });
+        passConfirmarContrasena.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                passConfirmarContrasenaKeyTyped(evt);
+            }
+        });
 
+        checkVerConstrasena.setBackground(new java.awt.Color(102, 102, 102));
         checkVerConstrasena.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         checkVerConstrasena.setForeground(new java.awt.Color(255, 255, 255));
         checkVerConstrasena.setText("Visible");
+        checkVerConstrasena.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkVerConstrasenaActionPerformed(evt);
+            }
+        });
 
+        checkVerConfirmacionContrasena.setBackground(new java.awt.Color(102, 102, 102));
         checkVerConfirmacionContrasena.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         checkVerConfirmacionContrasena.setForeground(new java.awt.Color(255, 255, 255));
         checkVerConfirmacionContrasena.setText("Visible");
+        checkVerConfirmacionContrasena.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkVerConfirmacionContrasenaActionPerformed(evt);
+            }
+        });
+
+        labelError.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -228,18 +268,6 @@ public class RegistrarCliente extends javax.swing.JFrame {
                             .addComponent(labelDatosPersonales)
                             .addComponent(labelDomicilio)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel1))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(passContrasena)
-                                    .addComponent(passConfirmarContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(checkVerConstrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(checkVerConfirmacionContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(labelCalle)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtCalle, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -254,11 +282,11 @@ public class RegistrarCliente extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(labelNombre)
-                                    .addComponent(labelTelefono))
+                                    .addComponent(labelCelular))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -268,8 +296,22 @@ public class RegistrarCliente extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(labelApellidoPaterno)
                                         .addGap(18, 18, 18)
-                                        .addComponent(txtApellidoPaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(txtApellidoPaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(labelError, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(passContrasena)
+                                        .addComponent(passConfirmarContrasena, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(checkVerConstrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(checkVerConfirmacionContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(12, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -293,8 +335,8 @@ public class RegistrarCliente extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelApellidoMaterno)
                     .addComponent(txtApellidoMaterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelTelefono)
-                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelCelular)
+                    .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(labelFechaNacimiento)
                 .addGap(18, 18, 18)
@@ -325,12 +367,14 @@ public class RegistrarCliente extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(passConfirmarContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(checkVerConfirmacionContrasena))
-                .addGap(35, 35, 35)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelError, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar)
                     .addComponent(btnRestaurar)
                     .addComponent(btnAceptar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -357,10 +401,43 @@ public class RegistrarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNumeroActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        String nombre = txtNombre.getText();
-        String apellidoP = txtApellidoPaterno.getText();
-        String apellidoM = txtApellidoMaterno.getText();
-        
+        char[] confirmar = passConfirmarContrasena.getPassword();
+        String passConfirmar = new String(confirmar);
+        char[] contrasena = passContrasena.getPassword();
+        String passContrasena = new String(contrasena);
+        System.out.println("Confirmar: " + passConfirmar + " Contraseña: " + passContrasena);
+        if (passConfirmar.equals(passContrasena)) {
+            String nombre = txtNombre.getText();
+            String apellidoP = txtApellidoPaterno.getText();
+            String apellidoM = txtApellidoMaterno.getText();
+            int diaNacimiento = Integer.parseInt(spinnerDia.getValue().toString());
+            int mesNacimiento = Integer.parseInt(spinnerMes.getValue().toString());
+            int anhioNacimiento = Integer.parseInt(txtAno.getText());
+            Date fechaNacimiento = new Date(anhioNacimiento, mesNacimiento, diaNacimiento);
+            String calle = txtCalle.getText();
+            String colonia = txtColonia.getText();
+            String numero = txtNumero.getText();
+            String celular = txtCelular.getText();
+            String contrasenaEncriptada = encriptar();
+
+            try {
+                Direcciones direccion = new Direcciones(calle, colonia, numero);
+                Direcciones direcciones = direccionesDAO.insertarDireccion(direccion);
+                cliente = new Cliente(nombre, apellidoP, apellidoM, fechaNacimiento, celular, contrasenaEncriptada, direcciones.getId());
+                Cliente nuevoCliente = clientesDAO.registrarCliente(cliente);
+            } catch (PersistenciaException ex) {
+                Logger.getLogger(RegistrarCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            menu.setEnabled(true);
+            dispose();
+        }else if(txtCelular.getText().length() != 10){
+            JOptionPane.showMessageDialog(null, "El número celular debe ser\n"
+                    + "de 10 carácteres", "Error", JOptionPane.ERROR_MESSAGE);
+        }else {
+            JOptionPane.showMessageDialog(null, "Contraseñas no coinciden", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -376,12 +453,45 @@ public class RegistrarCliente extends javax.swing.JFrame {
         this.txtColonia.setText("");
         this.txtNombre.setText("");
         this.txtNumero.setText("");
-        this.txtTelefono.setText("");
+        this.txtCelular.setText("");
     }//GEN-LAST:event_btnRestaurarActionPerformed
 
-    public String cifrado(){
-        
-        return "";
+    private void checkVerConstrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkVerConstrasenaActionPerformed
+        if (checkVerConstrasena.isSelected()) {
+            passContrasena.setEchoChar((char) 0);
+        } else {
+            passContrasena.setEchoChar('•');
+        }
+    }//GEN-LAST:event_checkVerConstrasenaActionPerformed
+
+    private void checkVerConfirmacionContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkVerConfirmacionContrasenaActionPerformed
+        if (checkVerConfirmacionContrasena.isSelected()) {
+            passConfirmarContrasena.setEchoChar((char) 0);
+        } else {
+            passConfirmarContrasena.setEchoChar('•');
+        }    }//GEN-LAST:event_checkVerConfirmacionContrasenaActionPerformed
+
+    private void passConfirmarContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passConfirmarContrasenaActionPerformed
+
+    }//GEN-LAST:event_passConfirmarContrasenaActionPerformed
+
+    private void passConfirmarContrasenaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passConfirmarContrasenaKeyTyped
+        /*char[] confirmar = passConfirmarContrasena.getPassword();
+        String passConfirmar = new String(confirmar);
+        char[] contrasena = passContrasena.getPassword();
+        String passContrasena = new String(contrasena);
+        if(passConfirmar != passContrasena){
+            labelError.setText("Contraseñas no coinciden");
+        }else{
+            labelError.setText("Contraseñas coinciden");
+        }*/
+    }//GEN-LAST:event_passConfirmarContrasenaKeyTyped
+
+    private String encriptar() {
+        char[] arrayPass = passConfirmarContrasena.getPassword();
+        Encriptador encriptador = new Encriptador();
+        String passCadena = new String(arrayPass);
+        return encriptador.encriptar(passCadena);
     }
 
 
@@ -398,15 +508,16 @@ public class RegistrarCliente extends javax.swing.JFrame {
     private javax.swing.JLabel labelApellidoMaterno;
     private javax.swing.JLabel labelApellidoPaterno;
     private javax.swing.JLabel labelCalle;
+    private javax.swing.JLabel labelCelular;
     private javax.swing.JLabel labelColonia;
     private javax.swing.JLabel labelDatosPersonales;
     private javax.swing.JLabel labelDia;
     private javax.swing.JLabel labelDomicilio;
+    private javax.swing.JLabel labelError;
     private javax.swing.JLabel labelFechaNacimiento;
     private javax.swing.JLabel labelMes;
     private javax.swing.JLabel labelNombre;
     private javax.swing.JLabel labelNumero;
-    private javax.swing.JLabel labelTelefono;
     private javax.swing.JPasswordField passConfirmarContrasena;
     private javax.swing.JPasswordField passContrasena;
     private javax.swing.JSpinner spinnerDia;
@@ -415,9 +526,9 @@ public class RegistrarCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtApellidoMaterno;
     private javax.swing.JTextField txtApellidoPaterno;
     private javax.swing.JTextField txtCalle;
+    private javax.swing.JTextField txtCelular;
     private javax.swing.JTextField txtColonia;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtNumero;
-    private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }

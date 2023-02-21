@@ -46,6 +46,7 @@ public class OperacionesCliente extends javax.swing.JFrame {
         this.setVisible(true);
         llenarComboBox();
         consultarItemSelectComboBox();
+        
     }
     
     
@@ -72,6 +73,7 @@ public class OperacionesCliente extends javax.swing.JFrame {
         btnHistorialMovimientos = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         btnModificarDatos = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -142,6 +144,13 @@ public class OperacionesCliente extends javax.swing.JFrame {
         btnModificarDatos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnModificarDatos.setText("Modificar Datos Personales");
 
+        jButton1.setText("Actualizar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -151,60 +160,60 @@ public class OperacionesCliente extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelBienvenido)
-                            .addComponent(labelSeleccionaTuCuenta))
-                        .addGap(18, 18, 18)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(labelSeleccionaTuCuenta)
+                                    .addComponent(labelBienvenido))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(labelNombreCuenta)
+                                    .addComponent(boxNumeroCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnModificarDatos)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnCerrarSesion)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnSalir)))
+                        .addGap(102, 102, 102)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelNombreCuenta)
-                            .addComponent(boxNumeroCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnCerrarSesion)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSalir))
-                    .addComponent(btnModificarDatos))
-                .addGap(102, 102, 102)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnGenerarRetiro)
-                    .addComponent(btnTransferencia)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(labelMontoEnLaCuenta)
-                        .addGap(18, 18, 18)
-                        .addComponent(labelMonto))
-                    .addComponent(btnHistorialMovimientos))
-                .addContainerGap(11, Short.MAX_VALUE))
+                            .addComponent(btnHistorialMovimientos)
+                            .addComponent(btnTransferencia)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(labelMontoEnLaCuenta)
+                                .addGap(18, 18, 18)
+                                .addComponent(labelMonto))
+                            .addComponent(btnGenerarRetiro))
+                        .addGap(0, 57, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addContainerGap()
+                .addComponent(jButton1)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelBienvenido)
                     .addComponent(labelNombreCuenta)
+                    .addComponent(labelBienvenido)
                     .addComponent(labelMontoEnLaCuenta)
                     .addComponent(labelMonto))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(boxNumeroCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelSeleccionaTuCuenta)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(btnTransferencia)))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnGenerarRetiro)
-                    .addComponent(btnModificarDatos))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(btnHistorialMovimientos, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnCerrarSesion)
-                            .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap())
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(boxNumeroCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelSeleccionaTuCuenta)
+                    .addComponent(btnGenerarRetiro))
+                .addGap(19, 19, 19)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnModificarDatos)
+                    .addComponent(btnTransferencia))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnHistorialMovimientos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCerrarSesion))
+                .addGap(15, 15, 15))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -224,7 +233,8 @@ public class OperacionesCliente extends javax.swing.JFrame {
 
     private void btnTransferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransferenciaActionPerformed
         this.setEnabled(false);
-        Transferencia transferencia = new Transferencia(this);
+        boolean actualiza = false;
+        TransferenciaDlg transferencia = new TransferenciaDlg(this, cuenta, cuentaDAO, actualiza);
     }//GEN-LAST:event_btnTransferenciaActionPerformed
 
     private void btnGenerarRetiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarRetiroActionPerformed
@@ -235,7 +245,7 @@ public class OperacionesCliente extends javax.swing.JFrame {
     private void btnHistorialMovimientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialMovimientosActionPerformed
         // TODO add your handling code here:
         this.setEnabled(false);
-        HistorialMovimientosCuenta historialMovimientosCuenta = new HistorialMovimientosCuenta(this,cuenta,this.cuentaDAO);
+        HistorialMovimientosCuenta historialMovimientosCuenta = new HistorialMovimientosCuenta(this,cuenta, cuentaDAO);
     }//GEN-LAST:event_btnHistorialMovimientosActionPerformed
 
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
@@ -251,10 +261,13 @@ public class OperacionesCliente extends javax.swing.JFrame {
         consultarItemSelectComboBox();
     }//GEN-LAST:event_boxNumeroCuentaActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        consultarItemSelectComboBox();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     private void llenarComboBox(){
         try {
             listaCuentas = cuentaDAO.listaCuentas(cliente);
-            System.out.println(listaCuentas.get(0));
             for (int i = 0; i < listaCuentas.size(); i++) {
                 boxNumeroCuenta.addItem(listaCuentas.get(i));
             }
@@ -281,6 +294,7 @@ public class OperacionesCliente extends javax.swing.JFrame {
     private javax.swing.JButton btnModificarDatos;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnTransferencia;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelBienvenido;
     private javax.swing.JLabel labelMonto;
