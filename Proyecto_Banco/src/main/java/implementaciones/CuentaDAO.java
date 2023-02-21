@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package implementaciones;
 
 import dominio.Cliente;
@@ -54,7 +58,7 @@ public class CuentaDAO implements ICuentaDAO {
      * @throws PersistenciaException En caso de que haya un error
      */
     @Override
-    public Cuenta ingresarCuenta(Cliente cliente, double montoInicial) throws PersistenciaException {
+    public Cuenta generarCuenta(Cliente cliente, double montoInicial) throws PersistenciaException {
         try (
                 Connection con = this.generadorConexiones.crearConexion(); PreparedStatement commInsertCuenta = con.prepareStatement("insert into cuentas(idCliente,saldo) value (?,?)",
                 Statement.RETURN_GENERATED_KEYS); PreparedStatement commSelect = con.prepareStatement("Select* from cuentas where id = ?");) {
@@ -258,6 +262,7 @@ public class CuentaDAO implements ICuentaDAO {
                         resultado.getString("disponible").toString(),
                         null,
                         resultado.getTimestamp("fecha"));
+                System.out.println("Aqui!!!!!!!!!!!!!");
             }
 
             commCommit.execute();

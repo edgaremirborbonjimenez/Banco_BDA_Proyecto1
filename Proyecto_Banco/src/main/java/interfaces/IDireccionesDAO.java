@@ -16,5 +16,12 @@ import excepciones.PersistenciaException;
  */
 public interface IDireccionesDAO {
     
+    /**
+     * Ingresa en la BD una direccion
+     * 
+     * @param direccion Direccion
+     * @return Un objeto de tipo Direccion
+     * @throws PersistenciaException En caso de que haya algun error
+     */
     Direcciones insertarDireccion(Direcciones direccion) throws PersistenciaException;
 }

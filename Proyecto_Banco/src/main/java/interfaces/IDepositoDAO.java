@@ -16,5 +16,13 @@ import excepciones.PersistenciaException;
  */
 public interface IDepositoDAO {
 
+    /**
+     * Ingresa un deposito en la BD a una cuenta en especifica.
+     *
+     * @param cuenta Cuenta a la que se le hará un deposito
+     * @param monto Monto del deposito
+     * @return Un objeto de tipo Deposito
+     * @throws PersistenciaException En caso de que haya un error
+     */
     Deposito ingresarDeposito(Cuenta cuenta, double monto) throws PersistenciaException;
 }
