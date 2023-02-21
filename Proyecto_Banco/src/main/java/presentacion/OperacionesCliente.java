@@ -11,6 +11,7 @@ import dominio.Cuenta;
 import excepciones.PersistenciaException;
 import interfaces.IClienteDAO;
 import interfaces.ICuentaDAO;
+import interfaces.IDepositoDAO;
 import java.awt.Frame;
 import java.util.LinkedList;
 import java.util.logging.Level;
@@ -27,6 +28,7 @@ public class OperacionesCliente extends javax.swing.JFrame {
     Cliente cliente = null;
     IClienteDAO clienteDAO;
     ICuentaDAO cuentaDAO;
+    IDepositoDAO depositoDAO;
     Cuenta cuenta;
     LinkedList<String> listaCuentas;
 
@@ -37,11 +39,12 @@ public class OperacionesCliente extends javax.swing.JFrame {
      * @param clienteDAO
      * @param cuentaDAO 
      */
-    public OperacionesCliente(Frame menu, Cliente cliente, IClienteDAO clienteDAO, ICuentaDAO cuentaDAO) {
+    public OperacionesCliente(Frame menu, Cliente cliente, IClienteDAO clienteDAO, ICuentaDAO cuentaDAO, IDepositoDAO depositoDAO) {
         this.menu = menu;
         this.cliente = cliente;
         this.clienteDAO = clienteDAO;
         this.cuentaDAO = cuentaDAO;
+        this.depositoDAO = depositoDAO;
         initComponents();
         this.setVisible(true);
         llenarComboBox();
@@ -135,6 +138,11 @@ public class OperacionesCliente extends javax.swing.JFrame {
 
         btnDepositar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnDepositar.setText("Depositar");
+        btnDepositar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDepositarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -289,6 +297,10 @@ public class OperacionesCliente extends javax.swing.JFrame {
         this.setVisible(false);
         EditarDatosCliente editarDatos = new EditarDatosCliente(this, cliente, clienteDAO);
     }//GEN-LAST:event_btnModificarDatosActionPerformed
+
+    private void btnDepositarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDepositarActionPerformed
+        DepositarDlg depositar = new DepositarDlg(this, cuenta, cuentaDAO depositoDAO);
+    }//GEN-LAST:event_btnDepositarActionPerformed
 
     private void llenarComboBox(){
         try {

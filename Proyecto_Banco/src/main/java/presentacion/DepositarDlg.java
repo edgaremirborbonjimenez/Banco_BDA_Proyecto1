@@ -6,15 +6,34 @@
 
 package presentacion;
 
+import dominio.Cuenta;
+import dominio.Deposito;
+import excepciones.PersistenciaException;
+import interfaces.ICuentaDAO;
+import interfaces.IDepositoDAO;
+import java.awt.Frame;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  * Descripción de la clase: 
  * 
  * @author Daniel Armando Peña Garcia ID:229185
  */
 public class DepositarDlg extends javax.swing.JFrame {
+    
+    private final IDepositoDAO depositoDAO;
+    Cuenta cuenta;
+    ICuentaDAO cuentaDAO;
+    Frame frame;
 
     /** Creates new form DepositarDlg */
-    public DepositarDlg() {
+    public DepositarDlg(Frame frame, Cuenta cuenta, ICuentaDAO cuentaDAO, IDepositoDAO depositosDAO) {
+        this.frame = frame;
+        this.depositoDAO = depositosDAO;
+        this.cuenta = cuenta;
+        this.cuentaDAO = cuentaDAO;
         initComponents();
     }
 
@@ -44,12 +63,27 @@ public class DepositarDlg extends javax.swing.JFrame {
         label$.setText("$");
 
         txtMonto.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtMonto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMontoActionPerformed(evt);
+            }
+        });
 
         btnAtras.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnAtras.setText("Atras");
+        btnAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasActionPerformed(evt);
+            }
+        });
 
         btnConfirmar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnConfirmar.setText("Confirmar");
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -100,6 +134,30 @@ public class DepositarDlg extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtMontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMontoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMontoActionPerformed
+
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnConfirmarActionPerformed
+
+    private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
+        double monto = Double.parseDouble(txtMonto.getText());
+        Deposito deposito = null;
+        try {
+            deposito = depositoDAO.ingresarDeposito(cuenta, monto);
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(DepositarDlg.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(deposito == null){
+            JOptionPane.showMessageDialog(null, "No se pudo realizar el deposito", "Error", JOptionPane.ERROR_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, "Deposito Exitoso");
+        }
+        
+    }//GEN-LAST:event_btnAtrasActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtras;

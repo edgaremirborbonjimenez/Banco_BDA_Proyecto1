@@ -5,6 +5,7 @@
 
 package interfaces;
 
+import dominio.Cuenta;
 import dominio.Deposito;
 import excepciones.PersistenciaException;
 
@@ -15,6 +16,6 @@ import excepciones.PersistenciaException;
  */
 public interface IDepositoDAO {
 
-    Deposito ingresarDeposito(String monto) throws PersistenciaException;
+    Deposito ingresarDeposito(Cuenta cuenta, double monto) throws PersistenciaException;
     Deposito consultarDeposito(Deposito deposito) throws PersistenciaException;
 }

@@ -6,7 +6,6 @@
 package dominio;
 //importanciones
 
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 /**
@@ -17,10 +16,10 @@ import java.sql.Timestamp;
 public class Deposito extends Movimiento{
 
     Integer id;
-    BigDecimal monto;
+    double monto;
     Timestamp fecha;
 
-    public Deposito(Integer id, Integer cuenta, Timestamp fecha, BigDecimal monto) {
+    public Deposito(Integer id, Integer cuenta, Timestamp fecha, double monto) {
         super(cuenta, fecha);
         this.monto = monto;
         this.fecha = fecha;
@@ -35,11 +34,11 @@ public class Deposito extends Movimiento{
         this.id = id;
     }
 
-    public BigDecimal getMonto() {
+    public double getMonto() {
         return monto;
     }
 
-    public void setMonto(BigDecimal monto) {
+    public void setMonto(double monto) {
         this.monto = monto;
     }
 

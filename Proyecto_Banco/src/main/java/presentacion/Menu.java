@@ -9,6 +9,7 @@ import encriptador.Encriptador;
 import excepciones.PersistenciaException;
 import interfaces.IClienteDAO;
 import interfaces.ICuentaDAO;
+import interfaces.IDepositoDAO;
 import interfaces.IDireccionesDAO;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -22,14 +23,16 @@ public class Menu extends javax.swing.JFrame {
     private final IClienteDAO clienteDAO;
     private final ICuentaDAO cuentaDAO;
     private final IDireccionesDAO direccionesDAO;
+    private final IDepositoDAO depositoDAO;
 
     /**
      * Creates new form Menu
      */
-    public Menu(IClienteDAO clienteDAO, ICuentaDAO cuentaDAO, IDireccionesDAO direccionesDAO) {
+    public Menu(IClienteDAO clienteDAO, ICuentaDAO cuentaDAO, IDireccionesDAO direccionesDAO, IDepositoDAO depositoDAO) {
         this.cuentaDAO = cuentaDAO;
         this.clienteDAO = clienteDAO;
         this.direccionesDAO = direccionesDAO;
+        this.depositoDAO = depositoDAO;
         initComponents();
     }
 
@@ -207,7 +210,7 @@ public class Menu extends javax.swing.JFrame {
                     + "Con ese número", "Error", JOptionPane.ERROR_MESSAGE);
         } else if (contrasenaDesencriptada.equals(contrasenaOptenida)) {
             this.setVisible(false);
-            OperacionesCliente operacionesCliente = new OperacionesCliente(this, cliente, clienteDAO, cuentaDAO);
+            OperacionesCliente operacionesCliente = new OperacionesCliente(this, cliente, clienteDAO, cuentaDAO, depositoDAO);
         } else {
             JOptionPane.showMessageDialog(null, "Contraseña Incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -242,7 +245,6 @@ public class Menu extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_btnRetirarActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIniciarSesion;

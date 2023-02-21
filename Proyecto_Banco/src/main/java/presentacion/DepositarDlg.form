@@ -104,6 +104,9 @@
               <Font name="Segoe UI" size="18" style="1"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtMontoActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnAtras">
           <Properties>
@@ -112,6 +115,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Atras"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAtrasActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnConfirmar">
           <Properties>
@@ -120,6 +126,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Confirmar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConfirmarActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
