@@ -17,8 +17,7 @@ import javax.swing.DefaultComboBoxModel;
  */
 public interface ICuentaDAO {
 
-    Cuenta generarCuenta(Cliente cliente, double montoInicial) throws PersistenciaException;
-    List<Cuenta> consultarCuentas() throws PersistenciaException;
+    Cuenta ingresarCuenta(Cliente cliente, double montoInicial) throws PersistenciaException;
     Transferencia tranferencia(Cuenta cuentaUsario,Cuenta cuentaDestino,double monto) throws PersistenciaException;
     Retiros generarRetiro(Cuenta cuenta,double monto,String contrasena) throws PersistenciaException;
     List<MovimientoHistorial> hisotrialMovimientos(Cuenta cuenta)throws PersistenciaException;
