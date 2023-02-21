@@ -18,6 +18,7 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  * Descripción de la clase:
@@ -39,9 +40,11 @@ public class DepositoDAO implements IDepositoDAO {
                 + "VALUES(?,?)";
         String select = "SELECT * FROM DEPOSITOS WHERE id = ?";
         try (
-                Connection conexion = generadorConexiones.crearConexion();
-                PreparedStatement crear = conexion.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
-                PreparedStatement consulta = conexion.prepareStatement(select);
+                Connection con = generadorConexiones.crearConexion();
+                PreparedStatement crear = con.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+                PreparedStatement consulta = con.prepareStatement(select);
+                PreparedStatement comandoUpdate = con.prepareStatement("update cuentas set saldo=saldo+? "
+                        + "where id=?");
             ) {
             crear.setInt(1, cuenta.getId());
             crear.setDouble(2, monto);
@@ -57,14 +60,19 @@ public class DepositoDAO implements IDepositoDAO {
             if (resultadoConsulta.next()) {
                 Timestamp fecha = resultadoConsulta.getTimestamp("fecha");
                 deposito = new Deposito(id, cuenta.getId(), fecha, monto);
-                return deposito;
             }
-            LOG.log(Level.WARNING, "Se añadió el deposito, pero no generó id");
+            comandoUpdate.setDouble(1, monto);
+            comandoUpdate.setInt(2, cuenta.getId());
+            int num= comandoUpdate.executeUpdate();
+            if (num==0) {
+                throw new PersistenciaException("No se pudo hacer el deposito");
+            }
+            
+            return deposito;
         } catch (SQLException e) {
             LOG.log(Level.SEVERE, "No se pudo proceder la transferencia: " + e.getMessage());
-            throw new PersistenciaException("Error: " + e.getMessage());
+            throw new PersistenciaException("No se pudo hace el deposito");
         }
-        return null;
     }
 
     @Override

@@ -89,8 +89,21 @@ public class CuentaDAO implements ICuentaDAO {
         BigDecimal saldo = new BigDecimal(0.0);
         BigDecimal mont = new BigDecimal(monto);
         try (
-                 Connection con = this.generadorConexiones.crearConexion();  PreparedStatement comandoStart = con.prepareStatement("START transaction");  PreparedStatement comandoSelect = con.prepareStatement("select* from cuentas where numCuenta = ?");  PreparedStatement comandoUpdate2 = con.prepareStatement("update cuentas set saldo=saldo-? where numCuenta=?");  PreparedStatement comandoUpdate = con.prepareStatement("update cuentas set saldo=saldo+? where numCuenta=?");  PreparedStatement comandoSelect2 = con.prepareStatement("select* from cuentas where numCuenta = ?");  PreparedStatement comandoInsertTran = con.prepareStatement("insert into transferencias(idCuentaUsuario,idCuentaDestino,monto) value(?,?,?)",
-                Statement.RETURN_GENERATED_KEYS);  PreparedStatement commSelectTran = con.prepareStatement("Select* from transferencias where id =?");  PreparedStatement comandoCommit = con.prepareStatement("COMMIT");  PreparedStatement comandoRollback = con.prepareStatement("ROLLBACK");) {
+                 Connection con = this.generadorConexiones.crearConexion();
+                PreparedStatement comandoStart = con.prepareStatement("START transaction");
+                PreparedStatement comandoSelect = con.prepareStatement("select* from cuentas where numCuenta = ?");
+                PreparedStatement comandoUpdate2 = con.prepareStatement("update cuentas set saldo=saldo-? "
+                        + "where numCuenta=?");
+                PreparedStatement comandoUpdate = con.prepareStatement(
+                        "update cuentas set saldo=saldo+? where numCuenta=?");
+                PreparedStatement comandoSelect2 = con.prepareStatement("select* from cuentas where numCuenta = ?");
+                PreparedStatement comandoInsertTran = con.prepareStatement(
+                        "insert into transferencias(idCuentaUsuario,idCuentaDestino,monto) value(?,?,?)",
+                Statement.RETURN_GENERATED_KEYS);
+                PreparedStatement commSelectTran = con.prepareStatement("Select* from transferencias where id =?");
+                PreparedStatement comandoCommit = con.prepareStatement("COMMIT");
+                PreparedStatement comandoRollback = con.prepareStatement("ROLLBACK");
+            ) {
 
             comandoStart.execute();
             comandoSelect.setString(1, cuentaUsuario.getNumCuenta());
