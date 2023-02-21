@@ -141,6 +141,7 @@ public class EditarDatosCliente extends javax.swing.JFrame {
 
     private void btnPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPasswordActionPerformed
         // TODO add your handling code here:
+        EditarContrasenaCliente editarContrasena = new EditarContrasenaCliente(this, clienteDAO, cliente);
     }//GEN-LAST:event_btnPasswordActionPerformed
 
     private void btnNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNombreActionPerformed
