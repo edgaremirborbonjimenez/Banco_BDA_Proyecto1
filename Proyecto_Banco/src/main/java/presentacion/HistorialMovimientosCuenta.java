@@ -86,10 +86,7 @@ public class HistorialMovimientosCuenta extends javax.swing.JFrame {
 
         tblHistorial.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Tipo Movimiento", "Numero de Cuenta", "Monto", "Fecha y Hora"

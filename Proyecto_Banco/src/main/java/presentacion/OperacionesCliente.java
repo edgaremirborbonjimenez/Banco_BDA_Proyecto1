@@ -238,7 +238,7 @@ public class OperacionesCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setEnabled(false);
         //Necesito la Cuenta del usuario
-        Cuenta cuenta = new Cuenta(14, "'edf01606-afdb-11ed-8ad0-141877c424a4'", null, null, null);
+        Cuenta cuenta = new Cuenta(15, "ee0eac5a-afdb-11ed-8ad0-141877c424a4", null, null, null);
         HistorialMovimientosCuenta historialMovimientosCuenta = new HistorialMovimientosCuenta(this,cuenta,this.cuentaDAO);
     }//GEN-LAST:event_btnHistorialMovimientosActionPerformed
 
