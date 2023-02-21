@@ -12,7 +12,7 @@ import java.awt.Frame;
  *
  * @author Edgar Emir Borbon Jimenez 00000233184
  */
-public class EditarDatosCliente extends javax.swing.JFrame {
+public class EditarDatosClienteDlg extends javax.swing.JFrame {
 
     Frame operacionesCliente;
     Cliente cliente;
@@ -21,7 +21,7 @@ public class EditarDatosCliente extends javax.swing.JFrame {
     /**
      * Creates new form EditarDatosCliente
      */
-    public EditarDatosCliente(Frame operacionesCliente,Cliente cliente,IClienteDAO clienteDAO) {
+    public EditarDatosClienteDlg(Frame operacionesCliente,Cliente cliente,IClienteDAO clienteDAO) {
         this.operacionesCliente = operacionesCliente;
         this.cliente=cliente;
         this.clienteDAO=clienteDAO;
@@ -134,28 +134,28 @@ public class EditarDatosCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnFechaNacimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFechaNacimientoActionPerformed
-        // TODO add your handling code here:
-        EditarFechaNacimiento editarNacimiento = new EditarFechaNacimiento(this, cliente, clienteDAO);
+        this.setVisible(false);
+        EditarFechaNacimientoDlg editarNacimiento = new EditarFechaNacimientoDlg(this, cliente, clienteDAO);
     }//GEN-LAST:event_btnFechaNacimientoActionPerformed
 
     private void btnPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPasswordActionPerformed
-        // TODO add your handling code here:
-        EditarContrasenaCliente editarContrasena = new EditarContrasenaCliente(this, clienteDAO, cliente);
+        this.setVisible(false);
+        EditarContrasenaClienteDlg editarContrasena = new EditarContrasenaClienteDlg(this, clienteDAO, cliente);
     }//GEN-LAST:event_btnPasswordActionPerformed
 
     private void btnNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNombreActionPerformed
-        // TODO add your handling code here:
-        EditarNombreCliente editarNombre = new EditarNombreCliente(this,clienteDAO,cliente);
+        this.setVisible(false);
+        EditarNombreClienteDlg editarNombre = new EditarNombreClienteDlg(this,clienteDAO,cliente);
     }//GEN-LAST:event_btnNombreActionPerformed
 
     private void btnCelularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCelularActionPerformed
-        // TODO add your handling code here:
-        EditarCelularCliente editarCelular = new EditarCelularCliente(this, cliente, clienteDAO);
+        this.setVisible(false);
+        EditarCelularClienteDlg editarCelular = new EditarCelularClienteDlg(this, cliente, clienteDAO);
     }//GEN-LAST:event_btnCelularActionPerformed
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         // TODO add your handling code here:
-        operacionesCliente.setEnabled(true);
+        operacionesCliente.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnAtrasActionPerformed
 

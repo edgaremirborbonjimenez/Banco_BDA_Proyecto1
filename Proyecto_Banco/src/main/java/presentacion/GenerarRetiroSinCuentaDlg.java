@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
  *
  * @author Daniel Armando Peña Garcia ID:229185
  */
-public class GenerarRetiroSinCuenta extends javax.swing.JFrame {
+public class GenerarRetiroSinCuentaDlg extends javax.swing.JFrame {
 
     Frame operacionCliente;
     Cuenta cuenta;
@@ -31,7 +31,7 @@ public class GenerarRetiroSinCuenta extends javax.swing.JFrame {
     /**
      * Creates new form RetiroSinCuenta
      */
-    public GenerarRetiroSinCuenta(Frame operacionCliente, Cuenta cuenta, ICuentaDAO cuentaDAO) {
+    public GenerarRetiroSinCuentaDlg(Frame operacionCliente, Cuenta cuenta, ICuentaDAO cuentaDAO) {
         this.operacionCliente = operacionCliente;
         this.cuentaDAO = cuentaDAO;
         this.cuenta = cuenta;
@@ -153,16 +153,16 @@ public class GenerarRetiroSinCuenta extends javax.swing.JFrame {
         try {
             retiro = cuentaDAO.generarRetiro(cuenta, monto, contrasena);
             JOptionPane.showMessageDialog(this, "El folio que se genero es: "+retiro.getFolio(), "Folio generado", JOptionPane.INFORMATION_MESSAGE);
-            operacionCliente.setEnabled(true);
             operacionCliente.setVisible(true);
             dispose();
         } catch (PersistenciaException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            operacionCliente.setVisible(true);
+            dispose();
         }
     }//GEN-LAST:event_btnGenerarRetiroActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        operacionCliente.setEnabled(true);
         operacionCliente.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed

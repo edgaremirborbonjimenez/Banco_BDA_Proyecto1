@@ -22,7 +22,7 @@ import java.util.logging.Logger;
  * 
  * @author Daniel Armando Peña Garcia ID:229185
  */
-public class OperacionesCliente extends javax.swing.JFrame {
+public class OperacionesClienteDlg extends javax.swing.JFrame {
     
     Frame menu;
     Cliente cliente = null;
@@ -39,7 +39,7 @@ public class OperacionesCliente extends javax.swing.JFrame {
      * @param clienteDAO
      * @param cuentaDAO 
      */
-    public OperacionesCliente(Frame menu, Cliente cliente, IClienteDAO clienteDAO, ICuentaDAO cuentaDAO, IDepositoDAO depositoDAO) {
+    public OperacionesClienteDlg(Frame menu, Cliente cliente, IClienteDAO clienteDAO, ICuentaDAO cuentaDAO, IDepositoDAO depositoDAO) {
         this.menu = menu;
         this.cliente = cliente;
         this.clienteDAO = clienteDAO;
@@ -75,6 +75,7 @@ public class OperacionesCliente extends javax.swing.JFrame {
         btnModificarDatos = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
         btnDepositar = new javax.swing.JButton();
+        btnCrearCuentaNueva = new javax.swing.JButton();
         btnHistorialMovimientos = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         btnCerrarSesion = new javax.swing.JButton();
@@ -144,6 +145,14 @@ public class OperacionesCliente extends javax.swing.JFrame {
             }
         });
 
+        btnCrearCuentaNueva.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnCrearCuentaNueva.setText("Crear Cuenta Nueva");
+        btnCrearCuentaNueva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearCuentaNuevaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -161,7 +170,10 @@ public class OperacionesCliente extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(labelNombreCuenta)
                                     .addComponent(boxNumeroCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(btnModificarDatos))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnModificarDatos)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnCrearCuentaNueva)))
                         .addGap(102, 102, 102)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnTransferencia)
@@ -196,7 +208,8 @@ public class OperacionesCliente extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnModificarDatos)
-                    .addComponent(btnTransferencia))
+                    .addComponent(btnTransferencia)
+                    .addComponent(btnCrearCuentaNueva))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnDepositar)
                 .addContainerGap())
@@ -265,13 +278,13 @@ public class OperacionesCliente extends javax.swing.JFrame {
 
     private void btnGenerarRetiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarRetiroActionPerformed
         this.setVisible(false);
-        GenerarRetiroSinCuenta generarRetiroSinCuenta = new GenerarRetiroSinCuenta(this, cuenta, cuentaDAO);
+        GenerarRetiroSinCuentaDlg generarRetiroSinCuenta = new GenerarRetiroSinCuentaDlg(this, cuenta, cuentaDAO);
     }//GEN-LAST:event_btnGenerarRetiroActionPerformed
 
     private void btnHistorialMovimientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialMovimientosActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        HistorialMovimientosCuenta historialMovimientosCuenta = new HistorialMovimientosCuenta(this,cuenta, cuentaDAO);
+        HistorialMovimientosCuentaDlg historialMovimientosCuenta = new HistorialMovimientosCuentaDlg(this,cuenta, cuentaDAO);
     }//GEN-LAST:event_btnHistorialMovimientosActionPerformed
 
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
@@ -295,12 +308,16 @@ public class OperacionesCliente extends javax.swing.JFrame {
     private void btnModificarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarDatosActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        EditarDatosCliente editarDatos = new EditarDatosCliente(this, cliente, clienteDAO);
+        EditarDatosClienteDlg editarDatos = new EditarDatosClienteDlg(this, cliente, clienteDAO);
     }//GEN-LAST:event_btnModificarDatosActionPerformed
 
     private void btnDepositarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDepositarActionPerformed
         DepositarDlg despositar = new DepositarDlg(this, cuenta, cuentaDAO, depositoDAO);
     }//GEN-LAST:event_btnDepositarActionPerformed
+
+    private void btnCrearCuentaNuevaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearCuentaNuevaActionPerformed
+        GenerarCuentaNuevaDlg generarCuentaNueva = new GenerarCuentaNuevaDlg(this, cuentaDAO, cliente);
+    }//GEN-LAST:event_btnCrearCuentaNuevaActionPerformed
 
     private void llenarComboBox(){
         try {
@@ -309,7 +326,7 @@ public class OperacionesCliente extends javax.swing.JFrame {
                 boxNumeroCuenta.addItem(listaCuentas.get(i));
             }
         } catch (PersistenciaException ex) {
-            Logger.getLogger(OperacionesCliente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OperacionesClienteDlg.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -318,7 +335,7 @@ public class OperacionesCliente extends javax.swing.JFrame {
         try {
             cuenta = cuentaDAO.consultarCuenta(select);
         } catch (PersistenciaException ex) {
-            Logger.getLogger(OperacionesCliente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OperacionesClienteDlg.class.getName()).log(Level.SEVERE, null, ex);
         }
         labelMonto.setText("$" + cuenta.getSaldo());
     }
@@ -327,6 +344,7 @@ public class OperacionesCliente extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> boxNumeroCuenta;
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnCerrarSesion;
+    private javax.swing.JButton btnCrearCuentaNueva;
     private javax.swing.JButton btnDepositar;
     private javax.swing.JButton btnGenerarRetiro;
     private javax.swing.JButton btnHistorialMovimientos;

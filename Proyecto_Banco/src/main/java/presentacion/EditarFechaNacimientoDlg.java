@@ -8,16 +8,13 @@ import dominio.Cliente;
 import excepciones.PersistenciaException;
 import interfaces.IClienteDAO;
 import java.awt.Frame;
-import java.sql.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Edgar Emir Borbon Jimenez 00000233184
  */
-public class EditarFechaNacimiento extends javax.swing.JFrame {
+public class EditarFechaNacimientoDlg extends javax.swing.JFrame {
 
     Frame editarDatosCliente;
     Cliente cliente;
@@ -26,7 +23,7 @@ public class EditarFechaNacimiento extends javax.swing.JFrame {
     /**
      * Creates new form EditarFechaNacimiento
      */
-    public EditarFechaNacimiento(Frame editarDatosCliente, Cliente cliente, IClienteDAO clienteDAO) {
+    public EditarFechaNacimientoDlg(Frame editarDatosCliente, Cliente cliente, IClienteDAO clienteDAO) {
         this.editarDatosCliente = editarDatosCliente;
         this.cliente = cliente;
         this.clienteDAO = clienteDAO;
@@ -172,13 +169,14 @@ public class EditarFechaNacimiento extends javax.swing.JFrame {
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         // TODO add your handling code here:
         if (actulizar()) {
-            editarDatosCliente.setEnabled(true);
+            editarDatosCliente.setVisible(true);
             dispose();
         }
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
-        // TODO add your handling code here:
+        editarDatosCliente.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnAtrasActionPerformed
 
 

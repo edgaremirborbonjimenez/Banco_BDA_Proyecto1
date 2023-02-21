@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  *
  * @author Usuario
  */
-public class Menu extends javax.swing.JFrame {
+public class MenuDlg extends javax.swing.JFrame {
 
     private final IClienteDAO clienteDAO;
     private final ICuentaDAO cuentaDAO;
@@ -28,7 +28,7 @@ public class Menu extends javax.swing.JFrame {
     /**
      * Creates new form Menu
      */
-    public Menu(IClienteDAO clienteDAO, ICuentaDAO cuentaDAO, IDireccionesDAO direccionesDAO, IDepositoDAO depositoDAO) {
+    public MenuDlg(IClienteDAO clienteDAO, ICuentaDAO cuentaDAO, IDireccionesDAO direccionesDAO, IDepositoDAO depositoDAO) {
         this.cuentaDAO = cuentaDAO;
         this.clienteDAO = clienteDAO;
         this.direccionesDAO = direccionesDAO;
@@ -210,15 +210,15 @@ public class Menu extends javax.swing.JFrame {
                     + "Con ese número", "Error", JOptionPane.ERROR_MESSAGE);
         } else if (contrasenaDesencriptada.equals(contrasenaOptenida)) {
             this.setVisible(false);
-            OperacionesCliente operacionesCliente = new OperacionesCliente(this, cliente, clienteDAO, cuentaDAO, depositoDAO);
+            OperacionesClienteDlg operacionesCliente = new OperacionesClienteDlg(this, cliente, clienteDAO, cuentaDAO, depositoDAO);
         } else {
             JOptionPane.showMessageDialog(null, "Contraseña Incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        this.setEnabled(false);
-        RegistrarCliente registrarCliente = new RegistrarCliente(this, direccionesDAO, clienteDAO);
+        this.setVisible(false);
+        RegistrarClienteDlg registrarCliente = new RegistrarClienteDlg(this, direccionesDAO, clienteDAO);
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed

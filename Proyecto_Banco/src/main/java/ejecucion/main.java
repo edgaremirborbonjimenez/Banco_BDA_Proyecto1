@@ -13,7 +13,7 @@ import interfaces.IClienteDAO;
 import interfaces.IConexionBD;
 import interfaces.ICuentaDAO;
 import java.sql.Date;
-import presentacion.Menu;
+import presentacion.MenuDlg;
 import dominio.*;
 import interfaces.IDepositoDAO;
 import interfaces.IDireccionesDAO;
@@ -29,14 +29,14 @@ public class main {
      */
     public static void main(String[] args) throws PersistenciaException {
         // TODO code application logic here
-        IConexionBD bd = new ConexionBD("jdbc:mysql://localhost/banco", "root", "bone770115");
+        IConexionBD bd = new ConexionBD("jdbc:mysql://localhost/banco", "root", "14584Pen");
         IClienteDAO clienteDao = new ClienteDAO(bd);
         ICuentaDAO cuentaDao = new CuentaDAO(bd);
         IDireccionesDAO direccionDAO = new DireccionDAO(bd);
         IDepositoDAO depositoDAO = new DepositoDAO(bd);
         //Cliente cliente = new Cliente("Daniel", "Peña", "García", "2002-11-10", "6441942558", "14584Pen");
    
-        Menu menu = new Menu(clienteDao, cuentaDao, direccionDAO, depositoDAO);
+        MenuDlg menu = new MenuDlg(clienteDao, cuentaDao, direccionDAO, depositoDAO);
         menu.setVisible(true);
     }
 

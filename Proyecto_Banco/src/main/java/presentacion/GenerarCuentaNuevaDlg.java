@@ -9,15 +9,14 @@ import dominio.Cuenta;
 import excepciones.PersistenciaException;
 import interfaces.ICuentaDAO;
 import java.awt.Frame;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Edgar Emir Borbon Jimenez 00000233184
+ * @author Daniel Armando Peña García 000000229185 
  */
-public class GenerarCuentaNueva extends javax.swing.JFrame {
+public class GenerarCuentaNuevaDlg extends javax.swing.JFrame {
 
     Frame operacionesCliente;
     ICuentaDAO cuentaDAO;
@@ -25,9 +24,12 @@ public class GenerarCuentaNueva extends javax.swing.JFrame {
     Cuenta cuenta;
 
     /**
-     * Creates new form GenerarCuentaNueva
+     * 
+     * @param operacionesCliente
+     * @param cuentaDAO
+     * @param cliente 
      */
-    public GenerarCuentaNueva(Frame operacionesCliente, ICuentaDAO cuentaDAO, Cliente cliente) {
+    public GenerarCuentaNuevaDlg(Frame operacionesCliente, ICuentaDAO cuentaDAO, Cliente cliente) {
         this.operacionesCliente = operacionesCliente;
         this.cuentaDAO = cuentaDAO;
         this.cliente = cliente;
@@ -36,6 +38,10 @@ public class GenerarCuentaNueva extends javax.swing.JFrame {
         this.setVisible(true);
     }
 
+    /**
+     * 
+     * @return 
+     */
     public Double recolecarDatos() {
         String monto = this.txtMonto.getText();
         boolean validacion = monto.matches("[0-9]{1,11}[.]?[0-9]{0,2}");
@@ -45,9 +51,12 @@ public class GenerarCuentaNueva extends javax.swing.JFrame {
         } else {
             return null;
         }
-
     }
 
+    /**
+     * 
+     * @return 
+     */
     private boolean generar() {
         Double saldo = recolecarDatos();
         if (saldo != null) {
@@ -76,6 +85,7 @@ public class GenerarCuentaNueva extends javax.swing.JFrame {
         btnAtras = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtMonto = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -96,8 +106,11 @@ public class GenerarCuentaNueva extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setText("Monto Inicial de la Cuenta");
 
-        txtMonto.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        txtMonto.setText("$00.00");
+        txtMonto.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        txtMonto.setText("00.00");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setText("$");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -109,7 +122,9 @@ public class GenerarCuentaNueva extends javax.swing.JFrame {
                         .addGap(44, 44, 44)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
+                        .addGap(53, 53, 53)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnAtras)
@@ -124,7 +139,9 @@ public class GenerarCuentaNueva extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCrear)
@@ -135,18 +152,26 @@ public class GenerarCuentaNueva extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * 
+     * @param evt 
+     */
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         // TODO add your handling code here:
         if (generar()) {
             JOptionPane.showMessageDialog(this, "Cuenta generada con exito el numero de cuenta es: " + this.cuenta.getNumCuenta(), "Generacion de Cuenta", JOptionPane.INFORMATION_MESSAGE);
-            operacionesCliente.setEnabled(true);
+            operacionesCliente.setVisible(true);
             dispose();
         }
     }//GEN-LAST:event_btnCrearActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     */
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         // TODO add your handling code here:
-        operacionesCliente.setEnabled(true);
+        operacionesCliente.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnAtrasActionPerformed
 
@@ -155,6 +180,7 @@ public class GenerarCuentaNueva extends javax.swing.JFrame {
     private javax.swing.JButton btnAtras;
     private javax.swing.JButton btnCrear;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField txtMonto;
     // End of variables declaration//GEN-END:variables
 }

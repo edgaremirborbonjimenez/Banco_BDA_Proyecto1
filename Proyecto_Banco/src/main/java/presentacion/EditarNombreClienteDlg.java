@@ -8,15 +8,13 @@ import dominio.Cliente;
 import excepciones.PersistenciaException;
 import interfaces.IClienteDAO;
 import java.awt.Frame;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Edgar Emir Borbon Jimenez 00000233184
  */
-public class EditarNombreCliente extends javax.swing.JFrame {
+public class EditarNombreClienteDlg extends javax.swing.JFrame {
 
     Frame editarDatosCliente;
     IClienteDAO clienteDAO;
@@ -25,7 +23,7 @@ public class EditarNombreCliente extends javax.swing.JFrame {
     /**
      * Creates new form EditarNombreCliente
      */
-    public EditarNombreCliente(Frame editarDatosCliente, IClienteDAO clienteDAO, Cliente cliente) {
+    public EditarNombreClienteDlg(Frame editarDatosCliente, IClienteDAO clienteDAO, Cliente cliente) {
         this.editarDatosCliente = editarDatosCliente;
         this.clienteDAO = clienteDAO;
         this.cliente = cliente;
@@ -188,13 +186,13 @@ public class EditarNombreCliente extends javax.swing.JFrame {
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         // TODO add your handling code here:
         cambiarNombre();
-        editarDatosCliente.setEnabled(true);
+        editarDatosCliente.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         // TODO add your handling code here:
-        editarDatosCliente.setEnabled(true);
+        editarDatosCliente.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnAtrasActionPerformed
 
