@@ -158,7 +158,7 @@ public class ClienteDAO implements IClienteDAO {
     @Override
     public int actualizarContrasena(Integer id, String contrasena) throws PersistenciaException {
         String update = "UPDATE CLIENTES "
-                + "SET contraseña = ?"
+                + "SET contrasena = ?"
                 + "WHERE id = ?";
         try (
                 Connection conexion = generadorConexiones.crearConexion(); PreparedStatement comando = conexion.prepareStatement(update);) {
