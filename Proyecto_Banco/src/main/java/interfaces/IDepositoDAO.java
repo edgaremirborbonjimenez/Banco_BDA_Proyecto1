@@ -17,5 +17,4 @@ import excepciones.PersistenciaException;
 public interface IDepositoDAO {
 
     Deposito ingresarDeposito(Cuenta cuenta, double monto) throws PersistenciaException;
-    Deposito consultarDeposito(Deposito deposito) throws PersistenciaException;
 }

@@ -30,11 +30,23 @@ public class DireccionDAO implements IDireccionesDAO {
 
     private final IConexionBD generadorConexiones;
 
+    /**
+     * Cronstructor que inicializa la conexión con la BD
+     *
+     * @param generadorConexiones Conexión a la base de datos
+     */
     public DireccionDAO(IConexionBD generadorConexiones) {
         this.generadorConexiones = generadorConexiones;
     }
 
 
+    /**
+     * Ingresa en la BD una direccion
+     * 
+     * @param direccion Direccion
+     * @return Un objeto de tipo Direccion
+     * @throws PersistenciaException En caso de que haya algun error
+     */
     @Override
     public Direcciones insertarDireccion(Direcciones direccion) throws PersistenciaException {
         Direcciones regresaDireccion = null;
