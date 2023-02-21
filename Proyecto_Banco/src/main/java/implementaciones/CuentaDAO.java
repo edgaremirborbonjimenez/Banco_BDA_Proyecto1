@@ -41,6 +41,7 @@ public class CuentaDAO implements ICuentaDAO {
     private final IConexionBD generadorConexiones;
 
     /**
+     * Constructor que inicializa la conexion con la BD
      *
      * @param generadorConexiones
      */

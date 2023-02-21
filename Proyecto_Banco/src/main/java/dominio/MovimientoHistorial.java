@@ -4,7 +4,8 @@ import java.sql.Timestamp;
 
 /**
  *
- * @author trinu
+ * @author Edgar Emir Borbon Jimenez 00000233184
+ * @author Daniel Armando Peña García 000000229185
  */
 public class MovimientoHistorial {
 

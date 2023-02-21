@@ -29,7 +29,7 @@ public class main {
      */
     public static void main(String[] args) throws PersistenciaException {
         // TODO code application logic here
-        IConexionBD bd = new ConexionBD("jdbc:mysql://localhost/banco", "root", "bone770115");
+        IConexionBD bd = new ConexionBD("jdbc:mysql://localhost/banco", "root", "14584Pen");
         IClienteDAO clienteDao = new ClienteDAO(bd);
         ICuentaDAO cuentaDao = new CuentaDAO(bd);
         IDireccionesDAO direccionDAO = new DireccionDAO(bd);
