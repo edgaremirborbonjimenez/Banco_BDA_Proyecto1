@@ -34,7 +34,6 @@ public class GenerarCuentaNuevaDlg extends javax.swing.JFrame {
         this.cuentaDAO = cuentaDAO;
         this.cliente = cliente;
         initComponents();
-        operacionesCliente.setEnabled(false);
         this.setVisible(true);
     }
 
