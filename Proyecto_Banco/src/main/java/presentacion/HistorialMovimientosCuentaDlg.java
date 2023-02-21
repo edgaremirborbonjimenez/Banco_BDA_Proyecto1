@@ -14,8 +14,10 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
+ * Formulario que muestra el historial de movimientos de la cuenta
  *
- * @author trinu
+ * @author Edgar Emir Borbon Jimenez 00000233184
+ * @author Daniel Armando Peña García 000000229185
  */
 public class HistorialMovimientosCuentaDlg extends javax.swing.JFrame {
 
@@ -24,7 +26,11 @@ public class HistorialMovimientosCuentaDlg extends javax.swing.JFrame {
     ICuentaDAO cuentaDAO;
 
     /**
-     * Creates new form HistorialMovimientosCuenta
+     * Contructor
+     *
+     * @param operacionCliente ventana por la que fue invocada
+     * @param cuenta cuenta a consultar movimientos
+     * @param cuentaDAO control cuentaDAO
      */
     public HistorialMovimientosCuentaDlg(Frame operacionCliente, Cuenta cuenta, ICuentaDAO cuentaDAO) {
         this.operacionCliente = operacionCliente;
@@ -35,6 +41,9 @@ public class HistorialMovimientosCuentaDlg extends javax.swing.JFrame {
         this.setVisible(true);
     }
 
+    /**
+     * Carga la tablade movmientos
+     */
     private void cargarTablaHisotrialMovimientos() {
         try {
             List<MovimientoHistorial> historial = this.cuentaDAO.hisotrialMovimientos(this.cuenta);
@@ -176,6 +185,10 @@ public class HistorialMovimientosCuentaDlg extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Regresa a la ventana anterior
+     * @param evt 
+     */
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         // TODO add your handling code here:
         operacionCliente.setVisible(true);

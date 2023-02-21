@@ -15,8 +15,10 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
+ * IFormulario que contiene el menu inicio del sistema
  *
- * @author Usuario
+ * @author Edgar Emir Borbon Jimenez 00000233184
+ * @author Daniel Armando Peña García 000000229185
  */
 public class MenuDlg extends javax.swing.JFrame {
 
@@ -26,7 +28,12 @@ public class MenuDlg extends javax.swing.JFrame {
     private final IDepositoDAO depositoDAO;
 
     /**
-     * Creates new form Menu
+     * Contructor
+     *
+     * @param clienteDAO control clienteDAO
+     * @param cuentaDAO control cuentaDAO
+     * @param direccionesDAO control direccionesDAO
+     * @param depositoDAO control depostioDAO
      */
     public MenuDlg(IClienteDAO clienteDAO, ICuentaDAO cuentaDAO, IDireccionesDAO direccionesDAO, IDepositoDAO depositoDAO) {
         this.cuentaDAO = cuentaDAO;
@@ -34,6 +41,52 @@ public class MenuDlg extends javax.swing.JFrame {
         this.direccionesDAO = direccionesDAO;
         this.depositoDAO = depositoDAO;
         initComponents();
+    }
+
+    private void iniciarSesior() {
+        String celular = txtTelefono.getText();
+        char[] contrasena = passContrasena.getPassword();
+        String contrasenaOptenida = new String(contrasena);
+        Cliente cliente = null;
+        try {
+            cliente = clienteDAO.iniciaCliente(celular);
+        } catch (PersistenciaException ex) {
+            Logger.getLogger("Error: " + ex.getMessage());
+        }
+
+        Encriptador encriptador = new Encriptador();
+
+        String contrasenaDesencriptada = encriptador.desencriptar(cliente.getContrasena());
+
+        if (cliente == null) {
+            JOptionPane.showMessageDialog(null, "No hay ningún usuario\n"
+                    + "Con ese número", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (contrasenaDesencriptada.equals(contrasenaOptenida)) {
+            this.setVisible(false);
+            OperacionesClienteDlg operacionesCliente = new OperacionesClienteDlg(this, cliente, clienteDAO, cuentaDAO, depositoDAO);
+        } else {
+            JOptionPane.showMessageDialog(null, "Contraseña Incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void retirar() {
+        String texto = this.txtFolio.getText();
+
+        if (texto.matches("[0-9]*")) {
+            Integer folio = Integer.parseInt(texto);
+            String contrasena = this.txtConstrasenaRetiro.getText();
+            try {
+                boolean r = cuentaDAO.procederRetiro(folio, contrasena);
+                if (r) {
+                    JOptionPane.showMessageDialog(this, "Retiro con exito", "", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } catch (PersistenciaException ex) {
+                JOptionPane.showMessageDialog(this, "No se pudo hacer el retiro, " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Folio invalido, revisa que nomas contenga numeros", "Error", JOptionPane.WARNING_MESSAGE);
+
+        }
     }
 
     /**
@@ -190,32 +243,20 @@ public class MenuDlg extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Boton que inicia sesion
+     *
+     * @param evt
+     */
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
-        String celular = txtTelefono.getText();
-        char[] contrasena = passContrasena.getPassword();
-        String contrasenaOptenida = new String(contrasena);
-        Cliente cliente = null;
-        try {
-            cliente = clienteDAO.iniciaCliente(celular);
-        } catch (PersistenciaException ex) {
-            Logger.getLogger("Error: " + ex.getMessage());
-        }
-        
-        Encriptador encriptador = new Encriptador();
-        
-        String contrasenaDesencriptada = encriptador.desencriptar(cliente.getContrasena());
-
-        if (cliente == null) {
-            JOptionPane.showMessageDialog(null, "No hay ningún usuario\n"
-                    + "Con ese número", "Error", JOptionPane.ERROR_MESSAGE);
-        } else if (contrasenaDesencriptada.equals(contrasenaOptenida)) {
-            this.setVisible(false);
-            OperacionesClienteDlg operacionesCliente = new OperacionesClienteDlg(this, cliente, clienteDAO, cuentaDAO, depositoDAO);
-        } else {
-            JOptionPane.showMessageDialog(null, "Contraseña Incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
-        }
+        iniciarSesior();
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
+    /**
+     * Boton que abre el fomulario de registrarse
+     *
+     * @param evt ...
+     */
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         this.setVisible(false);
         RegistrarClienteDlg registrarCliente = new RegistrarClienteDlg(this, direccionesDAO, clienteDAO);
@@ -225,25 +266,13 @@ public class MenuDlg extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTelefonoActionPerformed
 
+    /**
+     * Boton que ejecuta el retirar dinero
+     * @param evt 
+     */
     private void btnRetirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetirarActionPerformed
         // TODO add your handling code here:
-        String texto = this.txtFolio.getText();
-
-        if (texto.matches("[0-9]*")) {
-            Integer folio = Integer.parseInt(texto);
-            String contrasena = this.txtConstrasenaRetiro.getText();
-            try {
-                boolean r = cuentaDAO.procederRetiro(folio, contrasena);
-                if (r) {
-                    JOptionPane.showMessageDialog(this, "Retiro con exito", "", JOptionPane.INFORMATION_MESSAGE);
-                }
-            } catch (PersistenciaException ex) {
-                JOptionPane.showMessageDialog(this, "No se pudo hacer el retiro, "+ ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Folio invalido, revisa que nomas contenga numeros", "Error", JOptionPane.WARNING_MESSAGE);
-
-        }
+        retirar();
     }//GEN-LAST:event_btnRetirarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -11,8 +11,11 @@ import java.awt.Frame;
 import javax.swing.JOptionPane;
 
 /**
+ * Formulario que edita el nombre del cliente
  *
  * @author Edgar Emir Borbon Jimenez 00000233184
+ * @author Daniel Armando Peña García 000000229185
+ *
  */
 public class EditarNombreClienteDlg extends javax.swing.JFrame {
 
@@ -21,7 +24,11 @@ public class EditarNombreClienteDlg extends javax.swing.JFrame {
     Cliente cliente;
 
     /**
-     * Creates new form EditarNombreCliente
+     * Contructor
+     *
+     * @param editarDatosCliente formulario por el que fue invocado
+     * @param clienteDAO control del clienteDAO
+     * @param cliente cliente a actualizar
      */
     public EditarNombreClienteDlg(Frame editarDatosCliente, IClienteDAO clienteDAO, Cliente cliente) {
         this.editarDatosCliente = editarDatosCliente;
@@ -31,6 +38,11 @@ public class EditarNombreClienteDlg extends javax.swing.JFrame {
         this.setVisible(true);
     }
 
+    /**
+     * Revolecta los datos del formulario y los valida
+     *
+     * @return un objeto Clietne con los nombres asignados
+     */
     private Cliente recojerDatos() {
         String nombre = this.fieldNombre.getText();
         String apelldiP = this.fieldAP.getText();
@@ -49,21 +61,28 @@ public class EditarNombreClienteDlg extends javax.swing.JFrame {
             cliente.setApellidoPaterno(apelldiP);
             cliente.setApellidoMaterno(apelldiM);
             return cliente;
-        }else{
-        JOptionPane.showMessageDialog(this, "Asegurate de no ingresar ningun caracter especial", "Error", JOptionPane.ERROR_MESSAGE);
-        return null;
+        } else {
+            JOptionPane.showMessageDialog(this, "Asegurate de no ingresar ningun caracter especial", "Error", JOptionPane.ERROR_MESSAGE);
+            return null;
         }
 
     }
 
-    private void cambiarNombre() {
+    /**
+     * Actualiza el nombre del cliente
+     *
+     * @return true si se actualizo, fales en caso contrario
+     */
+    private boolean cambiarNombre() {
         Cliente cliente = recojerDatos();
         try {
             clienteDAO.actualizarNombreCliente(cliente.getId(), cliente.getNombre(), cliente.getApellidoPaterno(), cliente.getApellidoMaterno());
             JOptionPane.showMessageDialog(this, "Se actualizo con exito", "Actualizado", JOptionPane.INFORMATION_MESSAGE);
+            return true;
         } catch (PersistenciaException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+        return false;
     }
 
     /**
@@ -182,13 +201,22 @@ public class EditarNombreClienteDlg extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_fieldAMActionPerformed
 
+    /**
+     * Boton que ejectua la actualizacion
+     * @param evt ...
+     */
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         // TODO add your handling code here:
-        cambiarNombre();
-        editarDatosCliente.setVisible(true);
-        dispose();
+        if (cambiarNombre()) {
+            editarDatosCliente.setVisible(true);
+            dispose();
+        }
     }//GEN-LAST:event_btnActualizarActionPerformed
 
+    /**
+     * Boton que regresa a la ventana anterior
+     * @param evt ...
+     */
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         // TODO add your handling code here:
         editarDatosCliente.setVisible(true);

@@ -40,7 +40,8 @@ public class EditarFechaNacimientoDlg extends javax.swing.JFrame {
 
     /**
      * Recolecta los datos del formulario
-     * @return una cadena con la fecha
+     *
+     * @return una cadena con la fecha de nacimiento
      */
     private String recojerDatos() {
         String fecha = "";
@@ -54,6 +55,11 @@ public class EditarFechaNacimientoDlg extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Actualiza los datos del cliente
+     *
+     * @return true si se pudo actualizar, false en caso contrario
+     */
     private boolean actulizar() {
         String nacimiento = recojerDatos();
         if (nacimiento != null) {
@@ -176,6 +182,10 @@ public class EditarFechaNacimientoDlg extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtAñoActionPerformed
 
+    /**
+     * Boton que ejectua la actualizacion
+     * @param evt ...
+     */
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         // TODO add your handling code here:
         if (actulizar()) {
@@ -184,6 +194,10 @@ public class EditarFechaNacimientoDlg extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnActualizarActionPerformed
 
+    /**
+     * Boton que regresa a la ventana anterior
+     * @param evt ...
+     */
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         editarDatosCliente.setVisible(true);
         dispose();
