@@ -8,6 +8,7 @@ package presentacion;
 
 import dominio.Cuenta;
 import dominio.Retiros;
+import encriptador.Encriptador;
 import excepciones.PersistenciaException;
 import interfaces.ICuentaDAO;
 import java.awt.Frame;
@@ -52,7 +53,7 @@ public class GenerarRetiroSinCuenta extends javax.swing.JFrame {
         btnGenerarRetiro = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         labelContrasena = new javax.swing.JLabel();
-        txtContrasena = new javax.swing.JTextField();
+        passContrasena = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -85,8 +86,7 @@ public class GenerarRetiroSinCuenta extends javax.swing.JFrame {
         labelContrasena.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         labelContrasena.setText("Contraseña: ");
 
-        txtContrasena.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        txtContrasena.setText("123456789");
+        passContrasena.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -95,10 +95,10 @@ public class GenerarRetiroSinCuenta extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(labelContrasena)
                         .addGap(18, 18, 18)
-                        .addComponent(txtContrasena))
+                        .addComponent(passContrasena))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnCancelar)
                         .addGap(44, 44, 44)
@@ -122,7 +122,7 @@ public class GenerarRetiroSinCuenta extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelContrasena)
-                    .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(passContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar)
@@ -147,7 +147,7 @@ public class GenerarRetiroSinCuenta extends javax.swing.JFrame {
 
     private void btnGenerarRetiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarRetiroActionPerformed
         double monto = Double.parseDouble(txtMonto.getText());
-        String contrasena = txtContrasena.getText();
+        String contrasena = encriptar();
         try {
             retiro = cuentaDAO.generarRetiro(cuenta, monto, contrasena);
         } catch (PersistenciaException ex) {
@@ -160,6 +160,12 @@ public class GenerarRetiroSinCuenta extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private String encriptar(){
+        char[] arrayPass = passContrasena.getPassword();
+        Encriptador encriptador = new Encriptador();
+        String passCadena = new String(arrayPass);
+        return encriptador.encriptar(passCadena);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
@@ -168,7 +174,7 @@ public class GenerarRetiroSinCuenta extends javax.swing.JFrame {
     private javax.swing.JLabel label$;
     private javax.swing.JLabel labelContrasena;
     private javax.swing.JLabel labelMonto;
-    private javax.swing.JTextField txtContrasena;
+    private javax.swing.JPasswordField passContrasena;
     private javax.swing.JTextField txtMonto;
     // End of variables declaration//GEN-END:variables
 

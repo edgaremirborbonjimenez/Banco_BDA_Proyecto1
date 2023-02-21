@@ -37,8 +37,8 @@ public class ClienteDAO implements IClienteDAO {
     public Cliente registrarCliente(Cliente cliente)
             throws PersistenciaException {
         String insert = "INSERT INTO CLIENTES(nombre, apellidoP, apellidoM, "
-                + "fechaNacimiento, celular, contraseña)"
-                + "VALUES(?,?,?,?,?,?);";
+                + "fechaNacimiento, celular, contrasena, idDireccion)"
+                + "VALUES(?,?,?,?,?,?,?);";
 
         Cliente regresaCliente = null;
         try (
@@ -51,6 +51,7 @@ public class ClienteDAO implements IClienteDAO {
             comando.setString(4, cliente.getFechaNacimiento().toString());
             comando.setString(5, cliente.getCelular());
             comando.setString(6, cliente.getContrasena());
+            comando.setInt(7, cliente.getIdDireccion());
             comando.executeUpdate();
             ResultSet resultado = comando.getGeneratedKeys();
             if (resultado.next()) {
@@ -60,7 +61,8 @@ public class ClienteDAO implements IClienteDAO {
                         cliente.getApellidoPaterno(),
                         cliente.getApellidoMaterno(),
                         cliente.getFechaNacimiento(), cliente.getCelular(),
-                        cliente.getContrasena());
+                        cliente.getContrasena(),
+                        cliente.getIdDireccion());
                 return regresaCliente;
             }
             LOG.log(Level.WARNING, "Se insertó el cliente pero no se generó id");
@@ -88,7 +90,8 @@ public class ClienteDAO implements IClienteDAO {
                 String apellidoM = resultado.getString("apellidoM");
                 Date fechaNacimiento = resultado.getDate("fechaNacimiento");
                 String contrasena = resultado.getString("Contrasena");
-                Cliente cliente = new Cliente(id, nombre, apellidoP, apellidoM, fechaNacimiento, celular, contrasena);
+                Integer direccion = resultado.getInt("idDireccion");
+                Cliente cliente = new Cliente(id, nombre, apellidoP, apellidoM, fechaNacimiento, celular, contrasena, direccion);
                 return cliente;
             }
             LOG.log(Level.WARNING, "Alguno de los datos está incorrecto");

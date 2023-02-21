@@ -18,6 +18,7 @@ import java.sql.Date;
 public class Cliente {
     
     private Integer id;
+    private Integer idDireccion;
     private String nombre;
     private String apellidoPaterno;
     private String apellidoMaterno;
@@ -34,7 +35,7 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(Integer id, String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaNacimiento, String celular, String contrasena) {
+    public Cliente(Integer id, String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaNacimiento, String celular, String contrasena, Integer idDireccion) {
         this.id = id;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
@@ -42,18 +43,26 @@ public class Cliente {
         this.fechaNacimiento = fechaNacimiento;
         this.celular = celular;
         this.contrasena = contrasena;
+        this.idDireccion = idDireccion;
     }
 
-    public Cliente(String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaNacimiento, String celular, String contrasena) {
+    public Cliente(String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaNacimiento, String celular, String contrasena, Integer idDireccion) {
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.fechaNacimiento = fechaNacimiento;
         this.celular = celular;
         this.contrasena = contrasena;
+        this.idDireccion = idDireccion;
     }
-    
-    
+
+    public Integer getIdDireccion() {
+        return idDireccion;
+    }
+
+    public void setIdDireccion(Integer idDireccion) {
+        this.idDireccion = idDireccion;
+    }
     
     public void calcularEdad(String fechaNacimiento){
         

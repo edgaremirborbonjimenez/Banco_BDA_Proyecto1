@@ -82,7 +82,7 @@ public class HistorialMovimientosCuenta extends javax.swing.JFrame {
         labelCuenta.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         labelCuenta.setText("Cuenta:");
 
-        lblNumCuenta.setText("000000000000000000000000000000");
+        lblNumCuenta.setText(cuenta.getNumCuenta());
 
         tblHistorial.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -151,14 +151,12 @@ public class HistorialMovimientosCuenta extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(68, 68, 68)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(labelHistorial)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(labelHistorial)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(labelCuenta)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblNumCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(76, 76, 76))))
+                        .addComponent(lblNumCuenta)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

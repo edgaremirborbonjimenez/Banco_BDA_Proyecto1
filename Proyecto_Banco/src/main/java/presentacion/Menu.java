@@ -8,6 +8,7 @@ import dominio.Cliente;
 import excepciones.PersistenciaException;
 import interfaces.IClienteDAO;
 import interfaces.ICuentaDAO;
+import interfaces.IDireccionesDAO;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
@@ -19,13 +20,15 @@ public class Menu extends javax.swing.JFrame {
 
     private final IClienteDAO clienteDAO;
     private final ICuentaDAO cuentaDAO;
+    private final IDireccionesDAO direccionesDAO;
 
     /**
      * Creates new form Menu
      */
-    public Menu(IClienteDAO clienteDAO, ICuentaDAO cuentaDAO) {
+    public Menu(IClienteDAO clienteDAO, ICuentaDAO cuentaDAO, IDireccionesDAO direccionesDAO) {
         this.cuentaDAO = cuentaDAO;
         this.clienteDAO = clienteDAO;
+        this.direccionesDAO = direccionesDAO;
         initComponents();
     }
 
@@ -208,7 +211,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         this.setEnabled(false);
-        RegistrarCliente registrarCliente = new RegistrarCliente(this);
+        RegistrarCliente registrarCliente = new RegistrarCliente(this, direccionesDAO, clienteDAO);
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
