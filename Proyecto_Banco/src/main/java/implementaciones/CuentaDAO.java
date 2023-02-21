@@ -6,7 +6,6 @@ package implementaciones;
 
 import dominio.Cliente;
 import dominio.Cuenta;
-import dominio.Movimiento;
 import dominio.MovimientoHistorial;
 import dominio.Retiros;
 import dominio.Transferencia;
@@ -33,6 +32,7 @@ import java.util.LinkedList;
 /**
  *
  * @author Edgar Emir Borbon Jimenez 00000233184
+ * @author Daniel Armando Peña García 000000229185
  */
 public class CuentaDAO implements ICuentaDAO {
 
@@ -40,10 +40,21 @@ public class CuentaDAO implements ICuentaDAO {
 
     private final IConexionBD generadorConexiones;
 
+    /**
+     * 
+     * @param generadorConexiones 
+     */
     public CuentaDAO(IConexionBD generadorConexiones) {
         this.generadorConexiones = generadorConexiones;
     }
 
+    /**
+     * 
+     * @param cliente
+     * @param montoInicial
+     * @return
+     * @throws PersistenciaException 
+     */
     @Override
     public Cuenta generarCuenta(Cliente cliente, double montoInicial) throws PersistenciaException {
         try (
@@ -81,11 +92,24 @@ public class CuentaDAO implements ICuentaDAO {
         }
     }
 
+    /**
+     * 
+     * @return
+     * @throws PersistenciaException 
+     */
     @Override
     public List<Cuenta> consultarCuentas() throws PersistenciaException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    /**
+     * 
+     * @param cuentaUsuario
+     * @param cuentaDestino
+     * @param monto
+     * @return
+     * @throws PersistenciaException 
+     */
     @Override
     public Transferencia tranferencia(Cuenta cuentaUsuario, Cuenta cuentaDestino, double monto) throws PersistenciaException {
         BigDecimal saldo = new BigDecimal(0.0);
@@ -194,6 +218,14 @@ public class CuentaDAO implements ICuentaDAO {
 
     }
 
+    /**
+     * 
+     * @param cuenta
+     * @param monto
+     * @param contrasena
+     * @return
+     * @throws PersistenciaException 
+     */
     @Override
     public Retiros generarRetiro(Cuenta cuenta, double monto, String contrasena) throws PersistenciaException {
         SecureRandom numRandom = new SecureRandom();
@@ -258,6 +290,12 @@ public class CuentaDAO implements ICuentaDAO {
 
     }
 
+    /**
+     * 
+     * @param cuenta
+     * @return
+     * @throws PersistenciaException 
+     */
     @Override
     public List<MovimientoHistorial> hisotrialMovimientos(Cuenta cuenta) throws PersistenciaException {
         ArrayList<MovimientoHistorial> historial = new ArrayList<>();
@@ -333,6 +371,13 @@ public class CuentaDAO implements ICuentaDAO {
 
     }
 
+    /**
+     * 
+     * @param folio
+     * @param contrasena
+     * @return
+     * @throws PersistenciaException 
+     */
     @Override
     public boolean procederRetiro(Integer folio, String contrasena) throws PersistenciaException {
         Encriptador en = new Encriptador();
@@ -400,6 +445,12 @@ public class CuentaDAO implements ICuentaDAO {
 
     }
     
+    /**
+     * 
+     * @param cliente
+     * @return
+     * @throws PersistenciaException 
+     */
     @Override
     public LinkedList<String> listaCuentas(Cliente cliente) throws PersistenciaException {
 
@@ -424,6 +475,11 @@ public class CuentaDAO implements ICuentaDAO {
         return null;
     }
 
+    /**
+     * 
+     * @param numCuenta
+     * @return 
+     */
     @Override
     public Cuenta consultarCuenta(String numCuenta) {
         String consulta = "SELECT * FROM Cuentas "

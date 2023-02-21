@@ -15,9 +15,9 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- * Descripción de la clase:
  *
- * @author Daniel Armando Peña Garcia ID:229185
+ * @author Edgar Emir Borbon Jimenez 00000233184
+ * @author Daniel Armando Peña García 000000229185
  */
 public class TransferenciaDlg extends javax.swing.JFrame {
 
@@ -26,7 +26,10 @@ public class TransferenciaDlg extends javax.swing.JFrame {
     Cuenta cuenta;
 
     /**
-     * Creates new form transferencia
+     * 
+     * @param operacionCliente
+     * @param cuenta
+     * @param cuentaDAO 
      */
     public TransferenciaDlg(Frame operacionCliente, Cuenta cuenta, ICuentaDAO cuentaDAO) {
         this.operacionCliente = operacionCliente;
@@ -134,6 +137,10 @@ public class TransferenciaDlg extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * 
+     * @param evt 
+     */
     private void btnTransferirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransferirActionPerformed
         // TODO add your handling code here:
         String numCuentaRecibe = txtNumeroCuenta.getText();
@@ -155,9 +162,12 @@ public class TransferenciaDlg extends javax.swing.JFrame {
                 operacionCliente.setVisible(true);
                 dispose();
             }
-
     }//GEN-LAST:event_btnTransferirActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     */
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         operacionCliente.setVisible(true);
         dispose();

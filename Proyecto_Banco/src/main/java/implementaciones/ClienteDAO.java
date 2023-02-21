@@ -29,10 +29,22 @@ public class ClienteDAO implements IClienteDAO {
 
     private final IConexionBD generadorConexiones;
 
+    /**
+     * Constructor que genera la conexión con la base de datos
+     * 
+     * @param generadorConexiones 
+     */
     public ClienteDAO(IConexionBD generadorConexiones) {
         this.generadorConexiones = generadorConexiones;
     }
 
+    /**
+     * Método que registra a clientes en la BD
+     * 
+     * @param cliente Cliente que se va a registrar
+     * @return Cliente que se registó
+     * @throws PersistenciaException En caso de que haya un posible error
+     */
     @Override
     public Cliente registrarCliente(Cliente cliente)
             throws PersistenciaException {
@@ -73,6 +85,13 @@ public class ClienteDAO implements IClienteDAO {
         }
     }
 
+    /**
+     * Consulta al cliente dependiendo su número celular
+     * 
+     * @param celular Celular del cliente
+     * @return Cliente que se consultó
+     * @throws PersistenciaException En caso de que haya un posible error
+     */
     @Override
     public Cliente iniciaCliente(String celular) throws PersistenciaException {
         String consulta = "SELECT *"
@@ -101,6 +120,16 @@ public class ClienteDAO implements IClienteDAO {
         }
     }
 
+    /**
+     * Actualiza en la BD el cliente, por su id
+     * 
+     * @param id Id del cliente
+     * @param nombre Nuevo nombre del cliente
+     * @param apellidoP Nuevo apellido paterno del cliente
+     * @param apellidoM Nuevo apellido materno del cliente
+     * @return El número de arrenglones alterados
+     * @throws PersistenciaException En caso de que haya un posible error
+     */
     @Override
     public int actualizarNombreCliente(Integer id, String nombre, String apellidoP, String apellidoM) throws PersistenciaException {
         String update = "UPDATE CLIENTES "
@@ -120,6 +149,14 @@ public class ClienteDAO implements IClienteDAO {
         }
     }
 
+    /**
+     * Actualizar la fecha de nacimiento del cliente
+     * 
+     * @param id Id del cliente
+     * @param fechaNacimiento Nueva fecha de nacimiento
+     * @return Numero de filas afectadas
+     * @throws PersistenciaException En caso de que haya un posible error
+     */
     @Override
     public int actualizarFechaNacimiento(Integer id, String fechaNacimiento) throws PersistenciaException {
         String update = "UPDATE CLIENTES "
@@ -137,6 +174,14 @@ public class ClienteDAO implements IClienteDAO {
         }
     }
 
+    /**
+     * Actualizar el celular del cliente, por su id
+     * 
+     * @param id Id del cliente
+     * @param celular Nuevo celular del cliente
+     * @return Numero de filas afectadas
+     * @throws PersistenciaException En caso de que haya un posible error
+     */
     @Override
     public int actualizarCelular(Integer id, String celular) throws PersistenciaException {
         String update = "UPDATE CLIENTES "
@@ -154,6 +199,14 @@ public class ClienteDAO implements IClienteDAO {
         }
     }
 
+    /**
+     * Actualiza su contraseña por su id
+     * 
+     * @param id Id del cliente
+     * @param contrasena Contraseña nueva
+     * @return Numero de filas afectadas
+     * @throws PersistenciaException En caso de que haya un posible error
+     */
     @Override
     public int actualizarContrasena(Integer id, String contrasena) throws PersistenciaException {
         String update = "UPDATE CLIENTES "
