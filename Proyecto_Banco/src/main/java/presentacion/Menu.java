@@ -99,6 +99,11 @@ public class Menu extends javax.swing.JFrame {
         txtConstrasenaRetiro.setBackground(new java.awt.Color(255, 255, 255));
 
         btnRetirar.setText("Retirar");
+        btnRetirar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRetirarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
@@ -191,7 +196,7 @@ public class Menu extends javax.swing.JFrame {
         } catch (PersistenciaException ex) {
             Logger.getLogger("Error: " + ex.getMessage());
         }
-        
+
         if (cliente == null) {
             JOptionPane.showMessageDialog(null, "No hay ningún usuario\n"
                     + "Con ese número", "Error", JOptionPane.ERROR_MESSAGE);
@@ -214,6 +219,27 @@ public class Menu extends javax.swing.JFrame {
     private void txtContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContrasenaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtContrasenaActionPerformed
+
+    private void btnRetirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetirarActionPerformed
+        // TODO add your handling code here:
+        String texto = this.txtFolio.getText();
+
+        if (texto.matches("[0-9]*")) {
+            Integer folio = Integer.parseInt(texto);
+            String contrasena = this.txtConstrasenaRetiro.getText();
+            try {
+                boolean r = cuentaDAO.procederRetiro(folio, contrasena);
+                if (r) {
+                    JOptionPane.showMessageDialog(this, "Retiro con exito", "", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } catch (PersistenciaException ex) {
+                JOptionPane.showMessageDialog(this, "No se pudo hacer el retiro, "+ ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Folio invalido, revisa que nomas contenga numeros", "Error", JOptionPane.WARNING_MESSAGE);
+
+        }
+    }//GEN-LAST:event_btnRetirarActionPerformed
 
     public boolean verificaContrasena(String contrasenaGuardada) {
         return txtContrasena.getText() == contrasenaGuardada;

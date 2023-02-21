@@ -8,6 +8,7 @@ import dominio.MovimientoHistorial;
 import dominio.Retiros;
 import dominio.Transferencia;
 import excepciones.PersistenciaException;
+import java.time.LocalDateTime;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 
@@ -23,4 +24,5 @@ public interface ICuentaDAO {
     Retiros generarRetiro(Cuenta cuenta,double monto,String contrasena) throws PersistenciaException;
     List<MovimientoHistorial> hisotrialMovimientos(Cuenta cuenta)throws PersistenciaException;
     DefaultComboBoxModel<Cuenta> listaCuentas(Cliente cliente) throws PersistenciaException;
+    boolean procederRetiro(Integer folio,String contrasena)throws PersistenciaException;
 }

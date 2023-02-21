@@ -25,6 +25,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import javax.swing.DefaultComboBoxModel;
@@ -184,13 +185,7 @@ public class CuentaDAO implements ICuentaDAO {
         int folio;
         BigDecimal mont = new BigDecimal(monto);
         try (
-                 Connection con = this.generadorConexiones.crearConexion();  
-                PreparedStatement commStart = con.prepareStatement("start transaction");  
-                PreparedStatement commCommit = con.prepareStatement("COMMIT");  
-                PreparedStatement commRollback = con.prepareStatement("ROLLBACK");  
-                PreparedStatement commSelect = con.prepareStatement("select* from cuentas where numCuenta =?"); 
-                PreparedStatement commSelect2 = con.prepareStatement("select* from retiros where id =?");  
-                PreparedStatement commInsertRetiro = con.prepareStatement("insert into retiros(idCuenta,monto,folio,contrasena,disponible) value(?,?,?,?,?)",
+                 Connection con = this.generadorConexiones.crearConexion();  PreparedStatement commStart = con.prepareStatement("start transaction");  PreparedStatement commCommit = con.prepareStatement("COMMIT");  PreparedStatement commRollback = con.prepareStatement("ROLLBACK");  PreparedStatement commSelect = con.prepareStatement("select* from cuentas where numCuenta =?");  PreparedStatement commSelect2 = con.prepareStatement("select* from retiros where id =?");  PreparedStatement commInsertRetiro = con.prepareStatement("insert into retiros(idCuenta,monto,folio,contrasena,disponible) value(?,?,?,?,?)",
                 Statement.RETURN_GENERATED_KEYS);) {
 
             commStart.execute();
@@ -250,56 +245,52 @@ public class CuentaDAO implements ICuentaDAO {
 
     @Override
     public List<MovimientoHistorial> hisotrialMovimientos(Cuenta cuenta) throws PersistenciaException {
-        ArrayList <MovimientoHistorial> historial = new ArrayList<>();
+        ArrayList<MovimientoHistorial> historial = new ArrayList<>();
         try (
-            Connection con = this.generadorConexiones.crearConexion();
-            PreparedStatement commSR = con.prepareStatement(
-                    "select R.id,R.idCuenta,C.numCuenta,R.monto,R.folio,R.disponible,R.fechaRetirado from retiros R "
-                    + "inner join cuentas C on C.id=R.idCuenta "
-                    + "WHERE C.id = ? and disponible=\"retirado\"");
-            PreparedStatement commSTransferenciaEnviado = con.prepareStatement(
-                    "select T.id,T.idCuentaUsuario,T.idCuentaDestino,C.numCuenta,T.monto,T.fecha from transferencias T"
-                            + " inner join cuentas C on C.id=T.idCuentaDestino "
-                            + "where T.idCuentaUsuario = ?");
-            PreparedStatement commSTransferenciaRecivida = con.prepareStatement(
-                    "select T.id,T.idCuentaUsuario,C.numCuenta,T.idCuentaDestino,T.monto,T.fecha from transferencias T "
-                            + "inner join cuentas C on C.id=T.idCuentaUsuario "
-                            + "where T.idCuentaDestino = ?");
-                ) {
-            
+                 Connection con = this.generadorConexiones.crearConexion();  PreparedStatement commSR = con.prepareStatement(
+                "select R.id,R.idCuenta,C.numCuenta,R.monto,R.folio,R.disponible,R.fechaRetirado from retiros R "
+                + "inner join cuentas C on C.id=R.idCuenta "
+                + "WHERE C.id = ? and disponible=\"retirado\"");  PreparedStatement commSTransferenciaEnviado = con.prepareStatement(
+                        "select T.id,T.idCuentaUsuario,T.idCuentaDestino,C.numCuenta,T.monto,T.fecha from transferencias T"
+                        + " inner join cuentas C on C.id=T.idCuentaDestino "
+                        + "where T.idCuentaUsuario = ?");  PreparedStatement commSTransferenciaRecivida = con.prepareStatement(
+                        "select T.id,T.idCuentaUsuario,C.numCuenta,T.idCuentaDestino,T.monto,T.fecha from transferencias T "
+                        + "inner join cuentas C on C.id=T.idCuentaUsuario "
+                        + "where T.idCuentaDestino = ?");) {
+
             commSR.setInt(1, cuenta.getId());
             ResultSet resultados = commSR.executeQuery();
             MovimientoHistorial h = null;
-            while(resultados.next()){
-            String numCuenta = resultados.getString("numCuenta");
-            BigDecimal monto = resultados.getBigDecimal("monto");
-            Timestamp fecha = resultados.getTimestamp("fechaRetirado");
-             h = new MovimientoHistorial("Retiraste", numCuenta, monto.doubleValue(), fecha);
-            historial.add(h);
+            while (resultados.next()) {
+                String numCuenta = resultados.getString("numCuenta");
+                BigDecimal monto = resultados.getBigDecimal("monto");
+                Timestamp fecha = resultados.getTimestamp("fechaRetirado");
+                h = new MovimientoHistorial("Retiraste", numCuenta, monto.doubleValue(), fecha);
+                historial.add(h);
             }
-            
+
             commSTransferenciaEnviado.setInt(1, cuenta.getId());
             resultados = commSTransferenciaEnviado.executeQuery();
-            
-            while(resultados.next()){
-            String numCuenta = resultados.getString("numCuenta");
-            BigDecimal monto = resultados.getBigDecimal("monto");
-            Timestamp fecha = resultados.getTimestamp("fecha");
-             h = new MovimientoHistorial("Enviaste", numCuenta, monto.doubleValue(), fecha);
-             historial.add(h);
+
+            while (resultados.next()) {
+                String numCuenta = resultados.getString("numCuenta");
+                BigDecimal monto = resultados.getBigDecimal("monto");
+                Timestamp fecha = resultados.getTimestamp("fecha");
+                h = new MovimientoHistorial("Enviaste", numCuenta, monto.doubleValue(), fecha);
+                historial.add(h);
             }
-            
+
             commSTransferenciaRecivida.setInt(1, cuenta.getId());
             resultados = commSTransferenciaRecivida.executeQuery();
-            while(resultados.next()){
-            String numCuenta = resultados.getString("numCuenta");
-            BigDecimal monto = resultados.getBigDecimal("monto");
-            Timestamp fecha = resultados.getTimestamp("fecha");
-             h = new MovimientoHistorial("Recibiste", numCuenta, monto.doubleValue(), fecha);
-             historial.add(h);
+            while (resultados.next()) {
+                String numCuenta = resultados.getString("numCuenta");
+                BigDecimal monto = resultados.getBigDecimal("monto");
+                Timestamp fecha = resultados.getTimestamp("fecha");
+                h = new MovimientoHistorial("Recibiste", numCuenta, monto.doubleValue(), fecha);
+                historial.add(h);
             }
             return historial;
-            
+
         } catch (SQLException e) {
             LOG.log(Level.SEVERE, "No se pudo consultar el historial de movimientos: " + e.getMessage());
             throw new PersistenciaException("No se pudo consultar el historial de movimientos");
@@ -333,6 +324,72 @@ public class CuentaDAO implements ICuentaDAO {
 
         }
         return null;
+    }
+
+    @Override
+    public boolean procederRetiro(Integer folio, String contrasena) throws PersistenciaException {
+        try (
+                 Connection con = this.generadorConexiones.crearConexion();
+                PreparedStatement commSRetiro = con.prepareStatement("select id,idCuenta,monto,fecha,folio,contrasena,disponible,fechaRetirado from retiros where folio = ? and contrasena=?");
+                PreparedStatement commSCuenta = con.prepareStatement("select id,numCuenta,fechaApertura,saldo,idCliente from cuentas where id=?");
+                PreparedStatement commUCuenta = con.prepareStatement("update cuentas set saldo=saldo-? where id=?");
+                PreparedStatement commURetiro = con.prepareStatement("update retiros set disponible=\"retirado\", fechaRetirado = curtime() where id=?");
+             ) {
+            commSRetiro.setInt(1, folio);
+            commSRetiro.setString(2, contrasena);
+            ResultSet resultado = commSRetiro.executeQuery();
+            Retiros retiro = null;
+            if (resultado.next()) {
+                retiro = new Retiros(
+                        resultado.getInt("id"),
+                        resultado.getInt("idCuenta"),
+                        resultado.getBigDecimal("monto").doubleValue(),
+                        resultado.getInt("folio"),
+                        resultado.getString("contrasena"),
+                        resultado.getString("disponible"),
+                        resultado.getTimestamp("fechaRetirado"),
+                        resultado.getTimestamp("fecha"));
+            } else {
+                throw new PersistenciaException("Folio o contrasena incoerentes");
+            }
+            Timestamp curdateTime = Timestamp.valueOf(LocalDateTime.now());
+            long restaMilisegundos = curdateTime.getTime() - retiro.getFechaGenerada().getTime();
+            long minutos = restaMilisegundos / (60 * 1000);
+            System.out.println("MINUTOS: " + minutos);
+            if (minutos > 10.0) {
+                throw new PersistenciaException("Excedio el limite de tiempo");
+            }
+            if (retiro.getDisponible().compareTo("cancelado") == 0 || retiro.getDisponible().compareTo("retirado") == 0) {
+                throw new PersistenciaException("Retiro no disponible");
+            }
+            commSCuenta.setInt(1, retiro.getCuenta());
+            resultado = commSCuenta.executeQuery();
+            double saldo = 0.0;
+            if (resultado.next()) {
+                saldo = resultado.getBigDecimal("saldo").doubleValue();
+            }
+
+            if (saldo < retiro.getMonto()) {
+                throw new PersistenciaException("Saldo de cuenta insuficiente");
+            }
+
+            commUCuenta.setDouble(1, retiro.getMonto());
+            commUCuenta.setInt(2, retiro.getCuenta());
+            int cambios = commUCuenta.executeUpdate();
+
+            if (cambios == 0) {
+                throw new PersistenciaException("No se pudo proceder el retiro");
+
+            }
+            commURetiro.setInt(1, retiro.getId());
+            commURetiro.executeUpdate();
+            return true;
+
+        } catch (SQLException e) {
+            LOG.log(Level.SEVERE, "No se pudo proceder el retiro: " + e.getMessage());
+            throw new PersistenciaException("No se pudo proceder el retiro");
+        }
+
     }
 
 }
