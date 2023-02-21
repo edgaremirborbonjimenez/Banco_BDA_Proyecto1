@@ -157,8 +157,6 @@ public class GenerarRetiroSinCuentaDlg extends javax.swing.JFrame {
             dispose();
         } catch (PersistenciaException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            operacionCliente.setVisible(true);
-            dispose();
         }
     }//GEN-LAST:event_btnGenerarRetiroActionPerformed
 

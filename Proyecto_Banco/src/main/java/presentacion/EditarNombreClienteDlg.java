@@ -28,7 +28,6 @@ public class EditarNombreClienteDlg extends javax.swing.JFrame {
         this.clienteDAO = clienteDAO;
         this.cliente = cliente;
         initComponents();
-        editarDatosCliente.setEnabled(false);
         this.setVisible(true);
     }
 

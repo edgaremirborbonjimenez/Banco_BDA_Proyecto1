@@ -13,8 +13,10 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Formulario que se encarga de editar el celular del cliente
  * @author Edgar Emir Borbon Jimenez 00000233184
+ * @author Daniel Armando Peña García 000000229185
+ *
  */
 public class EditarCelularClienteDlg extends javax.swing.JFrame {
 
@@ -23,17 +25,23 @@ public class EditarCelularClienteDlg extends javax.swing.JFrame {
     Frame editarDatosCliente;
 
     /**
-     * Creates new form EditarCelularCliente
+     * Constructor
+     * @param editarDatosCliente el formulario por el que fue llamado
+     * @param cliente cliente al que se le modificara
+     * @param clienteDAO objeto que contiene el control del clienteDAO
      */
     public EditarCelularClienteDlg(Frame editarDatosCliente, Cliente cliente, IClienteDAO clienteDAO) {
         this.editarDatosCliente = editarDatosCliente;
         this.cliente = cliente;
         this.clienteDAO = clienteDAO;
         initComponents();
-        editarDatosCliente.setEnabled(false);
         this.setVisible(true);
     }
 
+    /**
+     * Se encarga de recolectar lo datos del fromulario, comprueba si es un numero
+     * @return le numero del campo de texto
+     */
     private String recojerDatos() {
 
         String numero = this.txtNumero.getText();
@@ -46,10 +54,15 @@ public class EditarCelularClienteDlg extends javax.swing.JFrame {
 
     }
 
+    /**
+     * Metodo que procesa la actualizacion
+     * @return true si se pudo actualizar, false en caso contrario;
+     */
     public boolean actualizar() {
         String celular = recojerDatos();
         if (celular != null) {
             try {
+                System.out.println(celular);
                 clienteDAO.actualizarCelular(cliente.getId(), celular);
                 return true;
             } catch (PersistenciaException ex) {
@@ -57,7 +70,7 @@ public class EditarCelularClienteDlg extends javax.swing.JFrame {
             }
 
         }
-        JOptionPane.showMessageDialog(this, "Error no se pudo actualizar", "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Error no se pudo actualizar, Probablemente este celular ya esta registrado, favor de ingresar otro numero", "Error", JOptionPane.ERROR_MESSAGE);
         return false;
 
     }
@@ -137,6 +150,10 @@ public class EditarCelularClienteDlg extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Botbon que se encarga de regresar a la ventana anterior
+     * @param evt ...
+     */
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         // TODO add your handling code here:
         editarDatosCliente.setVisible(true);
@@ -147,6 +164,10 @@ public class EditarCelularClienteDlg extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNumeroActionPerformed
 
+    /**
+     * Boton que se encarga de ejectuar la actualizacion
+     * @param evt ...
+     */
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         // TODO add your handling code here:    
         if (actualizar()) {

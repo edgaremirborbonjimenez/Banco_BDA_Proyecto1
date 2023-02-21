@@ -11,8 +11,11 @@ import java.awt.Frame;
 import javax.swing.JOptionPane;
 
 /**
+ * Formulario que se encarga de actaulizar la fecha de nacimiento
  *
  * @author Edgar Emir Borbon Jimenez 00000233184
+ * @author Daniel Armando Peña García 000000229185
+ *
  */
 public class EditarFechaNacimientoDlg extends javax.swing.JFrame {
 
@@ -21,17 +24,24 @@ public class EditarFechaNacimientoDlg extends javax.swing.JFrame {
     IClienteDAO clienteDAO;
 
     /**
-     * Creates new form EditarFechaNacimiento
+     * Contructor
+     *
+     * @param editarDatosCliente ventana por la que se invoco
+     * @param cliente cliente a actualizar
+     * @param clienteDAO control clienteDAO
      */
     public EditarFechaNacimientoDlg(Frame editarDatosCliente, Cliente cliente, IClienteDAO clienteDAO) {
         this.editarDatosCliente = editarDatosCliente;
         this.cliente = cliente;
         this.clienteDAO = clienteDAO;
         initComponents();
-        editarDatosCliente.setEnabled(false);
         this.setVisible(true);
     }
 
+    /**
+     * Recolecta los datos del formulario
+     * @return una cadena con la fecha
+     */
     private String recojerDatos() {
         String fecha = "";
         boolean valida = this.txtAño.getText().matches("[0-9]{4}");

@@ -5,6 +5,8 @@ import interfaces.IClienteDAO;
 import java.awt.Frame;
 
 /**
+ * Formulario que se encarga de contener las opciones de editar datos del
+ * cliente
  *
  * @author Edgar Emir Borbon Jimenez 00000233184
  * @author Daniel Armando Peña García 000000229185
@@ -13,20 +15,20 @@ public class EditarDatosClienteDlg extends javax.swing.JFrame {
 
     Frame operacionesCliente;
     Cliente cliente;
-    IClienteDAO  clienteDAO;
+    IClienteDAO clienteDAO;
 
     /**
-     * 
-     * @param operacionesCliente
-     * @param cliente
-     * @param clienteDAO 
+     * Contructor
+     *
+     * @param operacionesCliente ventana por la que fue invocado
+     * @param cliente cliente al que se le actualizara
+     * @param clienteDAO control de clienteDAO
      */
-    public EditarDatosClienteDlg(Frame operacionesCliente,Cliente cliente,IClienteDAO clienteDAO) {
+    public EditarDatosClienteDlg(Frame operacionesCliente, Cliente cliente, IClienteDAO clienteDAO) {
         this.operacionesCliente = operacionesCliente;
-        this.cliente=cliente;
-        this.clienteDAO=clienteDAO;
+        this.cliente = cliente;
+        this.clienteDAO = clienteDAO;
         initComponents();
-        operacionesCliente.setEnabled(false);
         this.setVisible(true);
     }
 
@@ -134,8 +136,9 @@ public class EditarDatosClienteDlg extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * 
-     * @param evt 
+     * Boton que abre la ventana EditarFechaNacimiento
+     *
+     * @param evt..
      */
     private void btnFechaNacimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFechaNacimientoActionPerformed
         this.setVisible(false);
@@ -143,8 +146,9 @@ public class EditarDatosClienteDlg extends javax.swing.JFrame {
     }//GEN-LAST:event_btnFechaNacimientoActionPerformed
 
     /**
-     * 
-     * @param evt 
+     * Boton que abre la ventana EditarContrasena
+     *
+     * @param evt...
      */
     private void btnPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPasswordActionPerformed
         this.setVisible(false);
@@ -152,17 +156,19 @@ public class EditarDatosClienteDlg extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPasswordActionPerformed
 
     /**
-     * 
-     * @param evt 
+     * Boton que abre la ventana EditarNombre
+     *
+     * @param evt...
      */
     private void btnNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNombreActionPerformed
         this.setVisible(false);
-        EditarNombreClienteDlg editarNombre = new EditarNombreClienteDlg(this,clienteDAO,cliente);
+        EditarNombreClienteDlg editarNombre = new EditarNombreClienteDlg(this, clienteDAO, cliente);
     }//GEN-LAST:event_btnNombreActionPerformed
 
     /**
-     * 
-     * @param evt 
+     * Boton que abre la ventana EditarCelular
+     *
+     * @param evt ...
      */
     private void btnCelularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCelularActionPerformed
         this.setVisible(false);
@@ -170,8 +176,9 @@ public class EditarDatosClienteDlg extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCelularActionPerformed
 
     /**
-     * 
-     * @param evt 
+     * Boton que regresa a la ventana anterior
+     *
+     * @param evt...
      */
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         // TODO add your handling code here:
