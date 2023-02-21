@@ -301,6 +301,7 @@ public class OperacionesClienteDlg extends javax.swing.JFrame {
     }//GEN-LAST:event_boxNumeroCuentaActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        llenarComboBox();
         consultarItemSelectComboBox();
         labelNombreCuenta.setText(cliente.getNombre() + " " + cliente.getApellidoPaterno());
     }//GEN-LAST:event_btnActualizarActionPerformed
@@ -316,6 +317,7 @@ public class OperacionesClienteDlg extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDepositarActionPerformed
 
     private void btnCrearCuentaNuevaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearCuentaNuevaActionPerformed
+        this.setVisible(false);
         GenerarCuentaNuevaDlg generarCuentaNueva = new GenerarCuentaNuevaDlg(this, cuentaDAO, cliente);
     }//GEN-LAST:event_btnCrearCuentaNuevaActionPerformed
 

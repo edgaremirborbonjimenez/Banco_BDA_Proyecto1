@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package presentacion;
 
 import dominio.Cliente;
@@ -11,6 +7,7 @@ import java.awt.Frame;
 /**
  *
  * @author Edgar Emir Borbon Jimenez 00000233184
+ * @author Daniel Armando Peña García 000000229185
  */
 public class EditarDatosClienteDlg extends javax.swing.JFrame {
 
@@ -19,7 +16,10 @@ public class EditarDatosClienteDlg extends javax.swing.JFrame {
     IClienteDAO  clienteDAO;
 
     /**
-     * Creates new form EditarDatosCliente
+     * 
+     * @param operacionesCliente
+     * @param cliente
+     * @param clienteDAO 
      */
     public EditarDatosClienteDlg(Frame operacionesCliente,Cliente cliente,IClienteDAO clienteDAO) {
         this.operacionesCliente = operacionesCliente;
@@ -133,26 +133,46 @@ public class EditarDatosClienteDlg extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * 
+     * @param evt 
+     */
     private void btnFechaNacimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFechaNacimientoActionPerformed
         this.setVisible(false);
         EditarFechaNacimientoDlg editarNacimiento = new EditarFechaNacimientoDlg(this, cliente, clienteDAO);
     }//GEN-LAST:event_btnFechaNacimientoActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     */
     private void btnPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPasswordActionPerformed
         this.setVisible(false);
         EditarContrasenaClienteDlg editarContrasena = new EditarContrasenaClienteDlg(this, clienteDAO, cliente);
     }//GEN-LAST:event_btnPasswordActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     */
     private void btnNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNombreActionPerformed
         this.setVisible(false);
         EditarNombreClienteDlg editarNombre = new EditarNombreClienteDlg(this,clienteDAO,cliente);
     }//GEN-LAST:event_btnNombreActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     */
     private void btnCelularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCelularActionPerformed
         this.setVisible(false);
         EditarCelularClienteDlg editarCelular = new EditarCelularClienteDlg(this, cliente, clienteDAO);
     }//GEN-LAST:event_btnCelularActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     */
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         // TODO add your handling code here:
         operacionesCliente.setVisible(true);
