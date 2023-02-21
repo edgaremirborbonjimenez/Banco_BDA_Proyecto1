@@ -25,4 +25,5 @@ public interface ICuentaDAO {
     boolean procederRetiro(Integer folio,String contrasena)throws PersistenciaException;
     LinkedList<String> listaCuentas(Cliente cliente) throws PersistenciaException;
     Cuenta consultarCuenta(String numCuenta) throws PersistenciaException;
+    
 }

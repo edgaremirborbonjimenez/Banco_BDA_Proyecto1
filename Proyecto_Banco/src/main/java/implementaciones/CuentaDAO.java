@@ -10,6 +10,7 @@ import dominio.Movimiento;
 import dominio.MovimientoHistorial;
 import dominio.Retiros;
 import dominio.Transferencia;
+import encriptador.Encriptador;
 import excepciones.PersistenciaException;
 import interfaces.IConexionBD;
 import interfaces.ICuentaDAO;
@@ -299,6 +300,7 @@ public class CuentaDAO implements ICuentaDAO {
 
     @Override
     public boolean procederRetiro(Integer folio, String contrasena) throws PersistenciaException {
+        Encriptador en = new Encriptador();
         try (
                  Connection con = this.generadorConexiones.crearConexion();
                 PreparedStatement commSRetiro = con.prepareStatement("select id,idCuenta,monto,fecha,folio,contrasena,disponible,fechaRetirado from retiros where folio = ? and contrasena=?");
@@ -307,7 +309,7 @@ public class CuentaDAO implements ICuentaDAO {
                 PreparedStatement commURetiro = con.prepareStatement("update retiros set disponible=\"retirado\", fechaRetirado = curtime() where id=?");
              ) {
             commSRetiro.setInt(1, folio);
-            commSRetiro.setString(2, contrasena);
+            commSRetiro.setString(2, en.encriptar(contrasena));
             ResultSet resultado = commSRetiro.executeQuery();
             Retiros retiro = null;
             if (resultado.next()) {
