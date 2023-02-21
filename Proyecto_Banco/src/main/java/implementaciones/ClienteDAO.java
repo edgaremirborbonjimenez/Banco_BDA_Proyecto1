@@ -111,7 +111,7 @@ public class ClienteDAO implements IClienteDAO {
                 Connection conexion = generadorConexiones.crearConexion(); PreparedStatement comando = conexion.prepareStatement(update);) {
             comando.setString(1, nombre);
             comando.setString(2, apellidoP);
-            comando.setString(3, apellidoP);
+            comando.setString(3, apellidoM);
             comando.setInt(4, id);
             int afectados = comando.executeUpdate();
             return afectados;

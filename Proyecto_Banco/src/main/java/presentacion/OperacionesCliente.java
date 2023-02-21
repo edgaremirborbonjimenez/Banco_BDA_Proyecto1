@@ -143,6 +143,11 @@ public class OperacionesCliente extends javax.swing.JFrame {
 
         btnModificarDatos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnModificarDatos.setText("Modificar Datos Personales");
+        btnModificarDatos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarDatosActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Actualizar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -264,6 +269,11 @@ public class OperacionesCliente extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         consultarItemSelectComboBox();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnModificarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarDatosActionPerformed
+        // TODO add your handling code here:
+        EditarDatosCliente editarDatos = new EditarDatosCliente(this, cliente, clienteDAO);
+    }//GEN-LAST:event_btnModificarDatosActionPerformed
 
     private void llenarComboBox(){
         try {
