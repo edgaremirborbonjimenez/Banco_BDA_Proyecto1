@@ -5,6 +5,7 @@
 package presentacion;
 
 import dominio.Cliente;
+import encriptador.Encriptador;
 import excepciones.PersistenciaException;
 import interfaces.IClienteDAO;
 import interfaces.ICuentaDAO;
@@ -198,11 +199,16 @@ public class Menu extends javax.swing.JFrame {
         } catch (PersistenciaException ex) {
             Logger.getLogger("Error: " + ex.getMessage());
         }
+        
+        Encriptador encriptador = new Encriptador();
+        
+        String contrasenaDesencriptada = encriptador.desencriptar(cliente.getContrasena());
 
         if (cliente == null) {
             JOptionPane.showMessageDialog(null, "No hay ningún usuario\n"
                     + "Con ese número", "Error", JOptionPane.ERROR_MESSAGE);
-        } else if (cliente.getContrasena().equals(txtContrasena.getText())) {
+        } else if (contrasenaDesencriptada.equals(txtContrasena.getText())) {
+            this.setVisible(false);
             OperacionesCliente operacionesCliente = new OperacionesCliente(this, cliente, clienteDAO, cuentaDAO);
         } else {
             JOptionPane.showMessageDialog(null, "Contraseña Incorrecta", "Error", JOptionPane.ERROR_MESSAGE);

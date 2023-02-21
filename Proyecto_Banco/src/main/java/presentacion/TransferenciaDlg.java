@@ -151,19 +151,18 @@ public class TransferenciaDlg extends javax.swing.JFrame {
         }
         if (transferencia == null) {
                 JOptionPane.showMessageDialog(null, "Transferencia sin éxito", "Error", JOptionPane.ERROR_MESSAGE);
-                operacionCliente.setEnabled(true);
+                operacionCliente.setVisible(true);
                 dispose();
             }else{
                 JOptionPane.showMessageDialog(null, "Transferencia exitosa", "Transferencia", JOptionPane.PLAIN_MESSAGE);
-                operacionCliente.setEnabled(true);
-                actualiza = true;
+                operacionCliente.setVisible(true);
                 dispose();
             }
 
     }//GEN-LAST:event_btnTransferirActionPerformed
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
-        operacionCliente.setEnabled(true);
+        operacionCliente.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnAtrasActionPerformed
 

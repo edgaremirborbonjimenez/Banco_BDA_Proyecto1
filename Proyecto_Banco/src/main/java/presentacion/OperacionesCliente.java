@@ -65,15 +65,16 @@ public class OperacionesCliente extends javax.swing.JFrame {
         labelBienvenido = new javax.swing.JLabel();
         boxNumeroCuenta = new javax.swing.JComboBox<>();
         labelSeleccionaTuCuenta = new javax.swing.JLabel();
-        btnCerrarSesion = new javax.swing.JButton();
         labelMontoEnLaCuenta = new javax.swing.JLabel();
         labelMonto = new javax.swing.JLabel();
         btnTransferencia = new javax.swing.JButton();
         btnGenerarRetiro = new javax.swing.JButton();
+        btnModificarDatos = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
+        btnDepositar = new javax.swing.JButton();
         btnHistorialMovimientos = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
-        btnModificarDatos = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnCerrarSesion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -94,14 +95,6 @@ public class OperacionesCliente extends javax.swing.JFrame {
 
         labelSeleccionaTuCuenta.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         labelSeleccionaTuCuenta.setText("Selecciona tu Cuenta");
-
-        btnCerrarSesion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnCerrarSesion.setText("Cerrar Sesión");
-        btnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCerrarSesionActionPerformed(evt);
-            }
-        });
 
         labelMontoEnLaCuenta.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         labelMontoEnLaCuenta.setText("Monto en la Cuenta");
@@ -125,22 +118,6 @@ public class OperacionesCliente extends javax.swing.JFrame {
             }
         });
 
-        btnHistorialMovimientos.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnHistorialMovimientos.setText("Historial de Movimientos");
-        btnHistorialMovimientos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHistorialMovimientosActionPerformed(evt);
-            }
-        });
-
-        btnSalir.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnSalir.setText("Salir");
-        btnSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalirActionPerformed(evt);
-            }
-        });
-
         btnModificarDatos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnModificarDatos.setText("Modificar Datos Personales");
         btnModificarDatos.addActionListener(new java.awt.event.ActionListener() {
@@ -149,12 +126,15 @@ public class OperacionesCliente extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Actualizar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnActualizarActionPerformed(evt);
             }
         });
+
+        btnDepositar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnDepositar.setText("Depositar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -173,31 +153,27 @@ public class OperacionesCliente extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(labelNombreCuenta)
                                     .addComponent(boxNumeroCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(btnModificarDatos)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnCerrarSesion)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnSalir)))
+                            .addComponent(btnModificarDatos))
                         .addGap(102, 102, 102)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnHistorialMovimientos)
                             .addComponent(btnTransferencia)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(labelMontoEnLaCuenta)
                                 .addGap(18, 18, 18)
                                 .addComponent(labelMonto))
-                            .addComponent(btnGenerarRetiro))
-                        .addGap(0, 57, Short.MAX_VALUE))
+                            .addComponent(btnGenerarRetiro)
+                            .addComponent(btnDepositar))
+                        .addGap(0, 72, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addComponent(btnActualizar)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
+                .addComponent(btnActualizar)
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelNombreCuenta)
@@ -213,23 +189,61 @@ public class OperacionesCliente extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnModificarDatos)
                     .addComponent(btnTransferencia))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnHistorialMovimientos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCerrarSesion))
-                .addGap(15, 15, 15))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnDepositar)
+                .addContainerGap())
         );
+
+        btnHistorialMovimientos.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnHistorialMovimientos.setText("Historial de Movimientos");
+        btnHistorialMovimientos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHistorialMovimientosActionPerformed(evt);
+            }
+        });
+
+        btnSalir.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+
+        btnCerrarSesion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnCerrarSesion.setText("Cerrar Sesión");
+        btnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarSesionActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(4, 4, 4)
+                .addComponent(btnCerrarSesion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSalir)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnHistorialMovimientos)
+                .addGap(61, 61, 61))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnHistorialMovimientos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCerrarSesion))
+                .addContainerGap())
         );
 
         pack();
@@ -237,24 +251,24 @@ public class OperacionesCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTransferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransferenciaActionPerformed
-        this.setEnabled(false);
+        this.setVisible(false);
         boolean actualiza = false;
         TransferenciaDlg transferencia = new TransferenciaDlg(this, cuenta, cuentaDAO, actualiza);
     }//GEN-LAST:event_btnTransferenciaActionPerformed
 
     private void btnGenerarRetiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarRetiroActionPerformed
-        this.setEnabled(false);
+        this.setVisible(false);
         GenerarRetiroSinCuenta generarRetiroSinCuenta = new GenerarRetiroSinCuenta(this, cuenta, cuentaDAO);
     }//GEN-LAST:event_btnGenerarRetiroActionPerformed
 
     private void btnHistorialMovimientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialMovimientosActionPerformed
         // TODO add your handling code here:
-        this.setEnabled(false);
+        this.setVisible(false);
         HistorialMovimientosCuenta historialMovimientosCuenta = new HistorialMovimientosCuenta(this,cuenta, cuentaDAO);
     }//GEN-LAST:event_btnHistorialMovimientosActionPerformed
 
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
-        menu.setEnabled(true);
+        menu.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
@@ -266,12 +280,14 @@ public class OperacionesCliente extends javax.swing.JFrame {
         consultarItemSelectComboBox();
     }//GEN-LAST:event_boxNumeroCuentaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         consultarItemSelectComboBox();
-    }//GEN-LAST:event_jButton1ActionPerformed
+        labelNombreCuenta.setText(cliente.getNombre() + " " + cliente.getApellidoPaterno());
+    }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnModificarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarDatosActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
         EditarDatosCliente editarDatos = new EditarDatosCliente(this, cliente, clienteDAO);
     }//GEN-LAST:event_btnModificarDatosActionPerformed
 
@@ -298,13 +314,14 @@ public class OperacionesCliente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> boxNumeroCuenta;
+    private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnCerrarSesion;
+    private javax.swing.JButton btnDepositar;
     private javax.swing.JButton btnGenerarRetiro;
     private javax.swing.JButton btnHistorialMovimientos;
     private javax.swing.JButton btnModificarDatos;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnTransferencia;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelBienvenido;
     private javax.swing.JLabel labelMonto;
