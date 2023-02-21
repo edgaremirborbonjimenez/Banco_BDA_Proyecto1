@@ -9,15 +9,13 @@ import encriptador.Encriptador;
 import excepciones.PersistenciaException;
 import interfaces.IClienteDAO;
 import java.awt.Frame;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Edgar Emir Borbon Jimenez 00000233184
  */
-public class EditarContrasenaCliente extends javax.swing.JFrame {
+public class EditarContrasenaClienteDlg extends javax.swing.JFrame {
 
     Frame editarDatosCliente;
     IClienteDAO clienteDAO;
@@ -27,7 +25,7 @@ public class EditarContrasenaCliente extends javax.swing.JFrame {
     /**
      * Creates new form EditarContrasenaCliente
      */
-    public EditarContrasenaCliente(Frame editarDatosCliente, IClienteDAO clienteDAO, Cliente cliente) {
+    public EditarContrasenaClienteDlg(Frame editarDatosCliente, IClienteDAO clienteDAO, Cliente cliente) {
         this.editarDatosCliente = editarDatosCliente;
         this.clienteDAO = clienteDAO;
         this.cliente = cliente;
@@ -152,12 +150,13 @@ public class EditarContrasenaCliente extends javax.swing.JFrame {
 
     private void txtCon2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCon2ActionPerformed
         // TODO add your handling code here:
-        editarDatosCliente.setEnabled(true);
+        editarDatosCliente.setVisible(true);
         dispose();
     }//GEN-LAST:event_txtCon2ActionPerformed
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
-        // TODO add your handling code here:
+        editarDatosCliente.setVisible(true);
+        dispose();
 
     }//GEN-LAST:event_btnAtrasActionPerformed
 

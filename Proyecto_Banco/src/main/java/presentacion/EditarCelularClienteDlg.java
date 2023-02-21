@@ -6,7 +6,6 @@ package presentacion;
 
 import dominio.Cliente;
 import excepciones.PersistenciaException;
-import implementaciones.ClienteDAO;
 import interfaces.IClienteDAO;
 import java.awt.Frame;
 import java.util.logging.Level;
@@ -17,7 +16,7 @@ import javax.swing.JOptionPane;
  *
  * @author Edgar Emir Borbon Jimenez 00000233184
  */
-public class EditarCelularCliente extends javax.swing.JFrame {
+public class EditarCelularClienteDlg extends javax.swing.JFrame {
 
     Cliente cliente;
     IClienteDAO clienteDAO;
@@ -26,7 +25,7 @@ public class EditarCelularCliente extends javax.swing.JFrame {
     /**
      * Creates new form EditarCelularCliente
      */
-    public EditarCelularCliente(Frame editarDatosCliente, Cliente cliente, IClienteDAO clienteDAO) {
+    public EditarCelularClienteDlg(Frame editarDatosCliente, Cliente cliente, IClienteDAO clienteDAO) {
         this.editarDatosCliente = editarDatosCliente;
         this.cliente = cliente;
         this.clienteDAO = clienteDAO;
@@ -54,7 +53,7 @@ public class EditarCelularCliente extends javax.swing.JFrame {
                 clienteDAO.actualizarCelular(cliente.getId(), celular);
                 return true;
             } catch (PersistenciaException ex) {
-                Logger.getLogger(EditarCelularCliente.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(EditarCelularClienteDlg.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
@@ -140,7 +139,7 @@ public class EditarCelularCliente extends javax.swing.JFrame {
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         // TODO add your handling code here:
-        editarDatosCliente.setEnabled(true);
+        editarDatosCliente.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnAtrasActionPerformed
 
@@ -152,7 +151,7 @@ public class EditarCelularCliente extends javax.swing.JFrame {
         // TODO add your handling code here:    
         if (actualizar()) {
             JOptionPane.showMessageDialog(this, "Actualizacion exitosa", "Acutalizado", JOptionPane.INFORMATION_MESSAGE);
-            editarDatosCliente.setEnabled(true);
+            editarDatosCliente.setVisible(true);
             dispose();
         }
     }//GEN-LAST:event_btnActualizarActionPerformed

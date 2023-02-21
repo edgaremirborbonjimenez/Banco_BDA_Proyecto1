@@ -16,9 +16,9 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- * Descripción de la clase:
  *
- * @author Daniel Armando Peña Garcia ID:229185
+ * @author Edgar Emir Borbon Jimenez 00000233184
+ * @author Daniel Armando Peña García 000000229185
  */
 public class DepositarDlg extends javax.swing.JFrame {
 
@@ -162,7 +162,7 @@ public class DepositarDlg extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
-                frame.setEnabled(true);
+        frame.setEnabled(true);
         dispose();
     }//GEN-LAST:event_btnAtrasActionPerformed
 

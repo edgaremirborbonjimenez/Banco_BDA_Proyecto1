@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author trinu
  */
-public class HistorialMovimientosCuenta extends javax.swing.JFrame {
+public class HistorialMovimientosCuentaDlg extends javax.swing.JFrame {
 
     Frame operacionCliente;
     Cuenta cuenta;
@@ -26,7 +26,7 @@ public class HistorialMovimientosCuenta extends javax.swing.JFrame {
     /**
      * Creates new form HistorialMovimientosCuenta
      */
-    public HistorialMovimientosCuenta(Frame operacionCliente, Cuenta cuenta, ICuentaDAO cuentaDAO) {
+    public HistorialMovimientosCuentaDlg(Frame operacionCliente, Cuenta cuenta, ICuentaDAO cuentaDAO) {
         this.operacionCliente = operacionCliente;
         this.cuenta = cuenta;
         this.cuentaDAO = cuentaDAO;
@@ -178,7 +178,7 @@ public class HistorialMovimientosCuenta extends javax.swing.JFrame {
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         // TODO add your handling code here:
-        operacionCliente.setEnabled(true);
+        operacionCliente.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnAtrasActionPerformed
 

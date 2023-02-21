@@ -112,10 +112,8 @@
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="labelError" pref="120" max="32767" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="passContrasena" max="32767" attributes="0"/>
-                                          <Component id="passConfirmarContrasena" pref="120" max="32767" attributes="0"/>
-                                      </Group>
+                                      <Component id="passContrasena" max="32767" attributes="0"/>
+                                      <Component id="passConfirmarContrasena" pref="120" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">

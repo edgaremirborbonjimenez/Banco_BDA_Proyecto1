@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  *
  * @author Usuario
  */
-public class RegistrarCliente extends javax.swing.JFrame {
+public class RegistrarClienteDlg extends javax.swing.JFrame {
 
     Frame menu;
     Cliente cliente = null;
@@ -30,7 +30,7 @@ public class RegistrarCliente extends javax.swing.JFrame {
     /**
      * Creates new form RegistrarCliente
      */
-    public RegistrarCliente(Frame menu, IDireccionesDAO direccionesDAO, IClienteDAO clienteDAO) {
+    public RegistrarClienteDlg(Frame menu, IDireccionesDAO direccionesDAO, IClienteDAO clienteDAO) {
         this.menu = menu;
         this.direccionesDAO = direccionesDAO;
         this.clientesDAO = clienteDAO;
@@ -304,9 +304,8 @@ public class RegistrarCliente extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(labelError, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(passContrasena)
-                                        .addComponent(passConfirmarContrasena, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)))
+                                    .addComponent(passContrasena)
+                                    .addComponent(passConfirmarContrasena, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(checkVerConstrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -426,9 +425,9 @@ public class RegistrarCliente extends javax.swing.JFrame {
                 cliente = new Cliente(nombre, apellidoP, apellidoM, fechaNacimiento, celular, contrasenaEncriptada, direcciones.getId());
                 Cliente nuevoCliente = clientesDAO.registrarCliente(cliente);
             } catch (PersistenciaException ex) {
-                Logger.getLogger(RegistrarCliente.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(RegistrarClienteDlg.class.getName()).log(Level.SEVERE, null, ex);
             }
-            menu.setEnabled(true);
+            menu.setVisible(true);
             dispose();
         }else if(txtCelular.getText().length() != 10){
             JOptionPane.showMessageDialog(null, "El número celular debe ser\n"
@@ -441,7 +440,7 @@ public class RegistrarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        menu.setEnabled(true);
+        menu.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
