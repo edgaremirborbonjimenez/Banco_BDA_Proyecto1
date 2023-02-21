@@ -45,7 +45,6 @@ public class Menu extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         labelIniciarSesion = new javax.swing.JLabel();
         txtTelefono = new javax.swing.JTextField();
-        txtContrasena = new javax.swing.JTextField();
         btnIniciarSesion = new javax.swing.JButton();
         btnRegistrar = new javax.swing.JButton();
         labelRetiroSinCuenta = new javax.swing.JLabel();
@@ -54,6 +53,7 @@ public class Menu extends javax.swing.JFrame {
         btnRetirar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        passContrasena = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema Bancario");
@@ -69,13 +69,6 @@ public class Menu extends javax.swing.JFrame {
         txtTelefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTelefonoActionPerformed(evt);
-            }
-        });
-
-        txtContrasena.setBackground(new java.awt.Color(255, 255, 255));
-        txtContrasena.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtContrasenaActionPerformed(evt);
             }
         });
 
@@ -116,6 +109,9 @@ public class Menu extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Contraseña: ");
 
+        passContrasena.setBackground(new java.awt.Color(255, 255, 255));
+        passContrasena.setForeground(new java.awt.Color(0, 0, 0));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -123,12 +119,12 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(62, 62, 62)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtContrasena, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtTelefono, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnIniciarSesion)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnRegistrar)))
+                        .addComponent(btnRegistrar))
+                    .addComponent(passContrasena))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -165,9 +161,9 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtConstrasenaRetiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(passContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnIniciarSesion)
@@ -193,6 +189,8 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
         String celular = txtTelefono.getText();
+        char[] contrasena = passContrasena.getPassword();
+        String contrasenaOptenida = new String(contrasena);
         Cliente cliente = null;
         try {
             cliente = clienteDAO.iniciaCliente(celular);
@@ -207,7 +205,7 @@ public class Menu extends javax.swing.JFrame {
         if (cliente == null) {
             JOptionPane.showMessageDialog(null, "No hay ningún usuario\n"
                     + "Con ese número", "Error", JOptionPane.ERROR_MESSAGE);
-        } else if (contrasenaDesencriptada.equals(txtContrasena.getText())) {
+        } else if (contrasenaDesencriptada.equals(contrasenaOptenida)) {
             this.setVisible(false);
             OperacionesCliente operacionesCliente = new OperacionesCliente(this, cliente, clienteDAO, cuentaDAO);
         } else {
@@ -223,10 +221,6 @@ public class Menu extends javax.swing.JFrame {
     private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTelefonoActionPerformed
-
-    private void txtContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContrasenaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtContrasenaActionPerformed
 
     private void btnRetirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetirarActionPerformed
         // TODO add your handling code here:
@@ -249,9 +243,6 @@ public class Menu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnRetirarActionPerformed
 
-    public boolean verificaContrasena(String contrasenaGuardada) {
-        return txtContrasena.getText() == contrasenaGuardada;
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIniciarSesion;
@@ -262,8 +253,8 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelIniciarSesion;
     private javax.swing.JLabel labelRetiroSinCuenta;
+    private javax.swing.JPasswordField passContrasena;
     private javax.swing.JTextField txtConstrasenaRetiro;
-    private javax.swing.JTextField txtContrasena;
     private javax.swing.JTextField txtFolio;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables

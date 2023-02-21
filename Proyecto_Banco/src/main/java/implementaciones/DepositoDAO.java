@@ -8,6 +8,7 @@ package implementaciones;
 
 import dominio.Deposito;
 import excepciones.PersistenciaException;
+import interfaces.IConexionBD;
 import interfaces.IDepositoDAO;
 
 /**
@@ -17,9 +18,10 @@ import interfaces.IDepositoDAO;
  */
 public class DepositoDAO implements IDepositoDAO{
 
-    //Constructor por omisión
-    public DepositoDAO(){
+    private final IConexionBD generadorConexiones;
 
+    public DepositoDAO(IConexionBD generadorConexiones) {
+        this.generadorConexiones = generadorConexiones;
     }
 
     @Override

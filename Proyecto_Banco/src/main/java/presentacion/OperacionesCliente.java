@@ -252,8 +252,7 @@ public class OperacionesCliente extends javax.swing.JFrame {
 
     private void btnTransferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransferenciaActionPerformed
         this.setVisible(false);
-        boolean actualiza = false;
-        TransferenciaDlg transferencia = new TransferenciaDlg(this, cuenta, cuentaDAO, actualiza);
+        TransferenciaDlg transferencia = new TransferenciaDlg(this, cuenta, cuentaDAO);
     }//GEN-LAST:event_btnTransferenciaActionPerformed
 
     private void btnGenerarRetiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarRetiroActionPerformed

@@ -8,7 +8,6 @@ package presentacion;
 import dominio.Cuenta;
 import dominio.Transferencia;
 import excepciones.PersistenciaException;
-import interfaces.IClienteDAO;
 import interfaces.ICuentaDAO;
 import java.awt.Frame;
 import java.util.logging.Level;
@@ -25,16 +24,14 @@ public class TransferenciaDlg extends javax.swing.JFrame {
     Frame operacionCliente;
     ICuentaDAO cuentaDAO;
     Cuenta cuenta;
-    boolean actualiza;
 
     /**
      * Creates new form transferencia
      */
-    public TransferenciaDlg(Frame operacionCliente, Cuenta cuenta, ICuentaDAO cuentaDAO, boolean actualiza) {
+    public TransferenciaDlg(Frame operacionCliente, Cuenta cuenta, ICuentaDAO cuentaDAO) {
         this.operacionCliente = operacionCliente;
         this.cuentaDAO = cuentaDAO;
         this.cuenta = cuenta;
-        this.actualiza = actualiza;
         initComponents();
         this.setVisible(true);
     }
